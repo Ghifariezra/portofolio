@@ -1,5 +1,5 @@
 "use client";
-import Navbar from "@/app/components/common/navbar/navbar";
+import Navbar from "@/app/_components/common/navbar/navbar";
 import { useMenu } from "@/hooks/useMenu";
 
 export default function Header() {

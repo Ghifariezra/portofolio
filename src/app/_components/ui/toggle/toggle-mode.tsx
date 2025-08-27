@@ -1,7 +1,7 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { Button } from "@/app/components/ui/button";
+import { Button } from "@/app/_components/ui/button";
 import { useThemes } from "@/hooks/useThemes";
 import { AnimatePresence, motion } from "motion/react";
 import { memo } from "react";

@@ -1,6 +1,6 @@
-import Hero from "@/app/components/common/sections/hero";
-import About from "@/app/components/common/sections/about";
-import Project from "@/app/components/common/sections/project";
+import Hero from "@/app/_components/common/sections/hero";
+import About from "@/app/_components/common/sections/about";
+import Project from "@/app/_components/common/sections/project";
 
 export default function Home() {
 	return (

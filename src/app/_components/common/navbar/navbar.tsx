@@ -1,9 +1,9 @@
 "use client";
 import { memo } from "react";
-import { Menu } from "@/app/components/common/menu/menu";
-import ModeToggle from "@/app/components/ui/toggle/toggle-mode";
-import MenuToggle from "@/app/components/ui/toggle/toggle-menu";
-import Logo from "@/app/components/ui/logo/logo";
+import { Menu } from "@/app/_components/common/menu/menu";
+import ModeToggle from "@/app/_components/ui/toggle/toggle-mode";
+import MenuToggle from "@/app/_components/ui/toggle/toggle-menu";
+import Logo from "@/app/_components/ui/logo/logo";
 import { useMenu } from "@/hooks/useMenu";
 import { motion } from "motion/react";
 

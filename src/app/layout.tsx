@@ -1,9 +1,9 @@
 import { geistMono } from "@/utilities/layout/fonts";
 import { metaData } from "@/utilities/layout/metadata";
-import { ThemeProvider } from "@/app/components/providers/theme-provider";
-import Header from "@/app/components/templates/header";
+import { ThemeProvider } from "@/app/_components/providers/theme-provider";
+import Header from "@/app/_components/templates/header";
 import type { ChildrenProps } from "@/types/props/children";
-import QueryProvider from "@/app/components/providers/query-provider";
+import QueryProvider from "@/app/_components/providers/query-provider";
 import "./globals.css";
 
 export const metadata = metaData;
