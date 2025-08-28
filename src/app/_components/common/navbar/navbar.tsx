@@ -23,10 +23,10 @@ function Navbar() {
 				ref={navRef}
 				className={`flex flex-col md:flex-row gap-6 transition-all duration-500 ease-in-out ${
 					scrolled
-						? "py-4 px-6 bg-slate-100/30 dark:bg-slate-700/30 backdrop-blur-md border border-slate-700/10 dark:border-slate-100/10"
+						? "py-4 px-6 glassess border-glassess"
 						: `${
 								menuOpen
-									? "py-4 px-6 bg-slate-100/30 dark:bg-slate-700/30 backdrop-blur-md border border-slate-700/10 dark:border-slate-100/10"
+									? "py-4 px-6 glassess border-glassess"
 									: ""
 						  }`
 				}`}
@@ -45,7 +45,7 @@ function Navbar() {
 				</div>
 				{menuOpen && (
 					<>
-						<motion.hr className="border-slate-700/10 dark:border-slate-100/10" />
+						<motion.hr className="border-glassess" />
 						<motion.div
 							className="flex flex-col gap-4"
 							variants={toggleMotion}

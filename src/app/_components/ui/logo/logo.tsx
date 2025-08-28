@@ -1,5 +1,4 @@
 "use client";
-import LogoImg from "@/public/logo.webp";
 import { useLogo } from "@/hooks/useLogo";
 import { motion, AnimatePresence } from "motion/react";
 import { useDirect } from "@/hooks/useDirect";
@@ -25,7 +24,15 @@ function Logo() {
 				animate="visible"
 				exit="hidden"
 				className="aspect-square w-8 h-8 rounded-full overflow-hidden border border-slate-700/10 dark:border-slate-100/10 relative">
-				<Image src={LogoImg} alt="logo" priority placeholder="blur" />
+				<Image
+					src="https://fegnkzxvhxnbvqkhuzfo.supabase.co/storage/v1/object/public/Portofolio/profile/logo.webp"
+					width={500}
+					height={500}
+					alt="logo"
+					priority
+					placeholder="blur"
+					blurDataURL="data:image/webp;base64,UklGRhIAAABXRUJQVlA4TAYAAAAvAAAAAAfQ//73v/+BiOh/AAA="
+				/>
 			</motion.div>
 			<motion.div className="relative hidden sm:block sm:break-all">
 				<AnimatePresence mode="sync" initial={true}>

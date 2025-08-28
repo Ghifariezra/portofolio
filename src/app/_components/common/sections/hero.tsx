@@ -1,38 +1,25 @@
 "use client";
-import Image from "next/image";
-import Profile from "@/public/profile/profile.png";
 import { motion } from "motion/react";
 import { useHero } from "@/hooks/home/useHero";
 
 export default function Hero() {
-	const { imageMotion } = useHero();
+	const { containerMotion, quoteMotion, quoteTransform } = useHero();
 
 	return (
-		<section
+		<motion.section
 			id="hero"
-			className="flex flex-col sm:flex-row items-center justify-center gap-6 min-h-screen">
-			<div className="flex flex-col items-center">
-				<motion.div
-					variants={imageMotion}
-					initial="hidden"
-					animate="visible"
-					className="relative aspect-square size-3/4  overflow-hidden bg-slate-700/40 dark:bg-slate-100/40 rounded-full">
-					<Image
-						src={Profile}
-						alt="avatar"
-						priority
-						placeholder="blur"
-					/>
-				</motion.div>
-			</div>
-			<motion.div className="flex flex-col gap-2 w-full">
-				<motion.h1 className="text-3xl font-bold">
-					Hi, I&apos;m Ghifari Ezra Ramadhan
-				</motion.h1>
-				<motion.h2 className="text-2xl font-semibold">
-					Fullstack Developer
-				</motion.h2>
+			className="flex items-center justify-center gap-6 min-h-screen mask-b-from-0% p-15 sm:p-8"
+			variants={containerMotion}
+			initial="hidden"
+			animate="visible">
+			<motion.div className="flex flex-col gap-8 max-w-2xl lg:max-w-4xl">
+				<motion.span
+					variants={quoteMotion}
+					style={{ ...quoteTransform }}
+					className="text-2xl sm:text-4xl md:text-7xl">
+					Building responsive and scalable web applications.
+				</motion.span>
 			</motion.div>
-		</section>
+		</motion.section>
 	);
 }

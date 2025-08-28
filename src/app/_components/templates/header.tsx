@@ -7,9 +7,7 @@ export default function Header() {
 	return (
 		<header
 			className={`block py-6 px-6 fixed top-0 left-0 w-full z-50 ${
-				scrolled
-					? ""
-					: "border-b border-slate-700/10 dark:border-slate-100/10"
+				scrolled ? "" : "border-b border-glassess"
 			}`}>
 			<Navbar />
 		</header>
