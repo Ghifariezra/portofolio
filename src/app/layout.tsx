@@ -1,4 +1,4 @@
-import { geistMono, libertinusSerif } from "@/utilities/layout/fonts";
+import { libertinusSerif } from "@/utilities/layout/fonts";
 import { metaData } from "@/utilities/layout/metadata";
 import { ThemeProvider } from "@/app/_components/providers/theme-provider";
 import Header from "@/app/_components/templates/header";
@@ -12,7 +12,7 @@ export default function RootLayout({ children }: Readonly<ChildrenProps>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${geistMono.variable} ${libertinusSerif.variable} antialiased  font-headline`}>
+				className={`${libertinusSerif.variable} antialiased  font-headline`}>
 				<QueryProvider>
 					<ThemeProvider
 						attribute="class"

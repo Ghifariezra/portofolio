@@ -113,7 +113,6 @@
 }
 
 @theme inline {
-	--font-main: var(--font-geist-mono);
 	--font-headline: var(--font-libertinus-serif);
 }
 

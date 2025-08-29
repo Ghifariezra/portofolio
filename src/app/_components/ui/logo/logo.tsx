@@ -4,9 +4,18 @@ import { motion, AnimatePresence } from "motion/react";
 import { useDirect } from "@/hooks/useDirect";
 import Image from "next/image";
 import { memo } from "react";
+import { LogoSkeleton } from "@/app/_components/common/skeleton/logo";
 
 function Logo() {
-	const { containerMotion, logoName, nameMotion, imageMotion } = useLogo();
+	const {
+		containerMotion,
+		nameMotion,
+		logoName,
+		imageMotion,
+		logo,
+		blurDataLogo,
+		isProfileLoading,
+	} = useLogo();
 	const { goHome } = useDirect();
 
 	return (
@@ -24,15 +33,22 @@ function Logo() {
 				animate="visible"
 				exit="hidden"
 				className="aspect-square w-8 h-8 rounded-full overflow-hidden border border-slate-700/10 dark:border-slate-100/10 relative">
-				<Image
-					src="https://fegnkzxvhxnbvqkhuzfo.supabase.co/storage/v1/object/public/Portofolio/profile/logo.webp"
-					width={500}
-					height={500}
-					alt="logo"
-					priority
-					placeholder="blur"
-					blurDataURL="data:image/webp;base64,UklGRhIAAABXRUJQVlA4TAYAAAAvAAAAAAfQ//73v/+BiOh/AAA="
-				/>
+				{isProfileLoading ? (
+					<LogoSkeleton />
+				) : (
+					logo &&
+					blurDataLogo && (
+						<Image
+							src={logo}
+							width={500}
+							height={500}
+							alt="logo"
+							priority
+							placeholder="blur"
+							blurDataURL={blurDataLogo}
+						/>
+					)
+				)}
 			</motion.div>
 			<motion.div className="relative hidden sm:block sm:break-all">
 				<AnimatePresence mode="sync" initial={true}>
