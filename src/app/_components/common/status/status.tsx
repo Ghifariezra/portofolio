@@ -10,7 +10,7 @@ import {
 } from "@/app/_components/common/skeleton/socials";
 import { SocialItems } from "@/utilities/socials/socials";
 import Link from "next/link";
-import { DownloadCv } from "@/app/_components/ui/download/button";
+import { DownloadCv } from "@/app/_components/ui/buttons/download";
 
 export function ProfileStatus() {
 	const {
@@ -33,24 +33,18 @@ export function ProfileStatus() {
 				className="col-span-2 sm:order-1 flex flex-col-reverse sm:flex-col gap-4 h-full">
 				<motion.div className="flex flex-wrap lg:flex-nowrap flex-col sm:flex-row gap-2">
 					<CardStatus check="available">
-						{available &&
-							available.split(" ").map((word, index) => (
-								<motion.strong
-									key={index}
-									variants={childMotion}>
-									{word}
-								</motion.strong>
-							))}
+						{available && (
+							<motion.strong variants={childMotion}>
+								{available}
+							</motion.strong>
+						)}
 					</CardStatus>
 					<CardStatus check="location">
-						{location &&
-							location.split(" ").map((word, index) => (
-								<motion.strong
-									key={index}
-									variants={childMotion}>
-									{word}
-								</motion.strong>
-							))}
+						{location && (
+							<motion.strong variants={childMotion}>
+								{location}
+							</motion.strong>
+						)}
 					</CardStatus>
 					<CardStatus check="social-media">
 						<strong>Social Media:</strong>

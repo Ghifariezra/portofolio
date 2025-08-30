@@ -39,6 +39,9 @@ export const useMenu = () => {
             x: 10,
             transition: { duration: 0.2, ease: easeInOut },
         },
+        tap: {
+            scale: 0.9,
+        }
     };
 
     useMotionValueEvent(scrollY, "change", (y) => {

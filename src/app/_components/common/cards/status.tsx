@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useHomeContext } from "@/app/_components/providers/home-provider";
 import type { ChildrenProps } from "@/types/props/children";
@@ -22,7 +22,7 @@ export function CardStatus({ children, check }: Readonly<ChildrenProps>) {
 							variants={childMotion}
 							className="relative w-4 h-4 bg-green-500 rounded-full"
 						/>
-						<div className="flex gap-1 items-center">
+						<div className="flex gap-2 items-center">
 							{children}
 						</div>
 					</>
@@ -32,7 +32,7 @@ export function CardStatus({ children, check }: Readonly<ChildrenProps>) {
 						<motion.div variants={childMotion}>
 							<MapPinned size={20} strokeWidth={2} />
 						</motion.div>
-						<div className="flex gap-1 items-center">
+						<div className="flex gap-2 items-center">
 							{children}
 						</div>
 					</>

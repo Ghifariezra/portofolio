@@ -7,7 +7,7 @@ import {
 	NoSkillsSkeleton,
 } from "@/app/_components/common/skeleton/skills";
 import { ProfileSkeleton } from "@/app/_components/common/skeleton/profile";
-import { DownloadCv } from "@/app/_components/ui/download/button";
+import { DownloadCv } from "@/app/_components/ui/buttons/download";
 import { useHomeContext } from "@/app/_components/providers/home-provider";
 
 export function CardAbout({
