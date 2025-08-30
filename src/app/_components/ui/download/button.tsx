@@ -2,13 +2,18 @@
 import { motion } from "motion/react";
 import { CloudDownload } from "lucide-react";
 import type { ClassNameProps } from "@/types/props/className";
-import { useAbout } from "@/hooks/about/useAbout";
+import { useHomeContext } from "@/app/_components/providers/home-provider";
 import { Button } from "@/app/_components/ui/button";
 
 export function DownloadCv({ className }: ClassNameProps) {
 	const cv =
 		"https://drive.google.com/uc?export=download&id=1YCvYiw2lnNKDihbfp6BYJa5MTZllUPCU";
-	const { handleDownload, loadDownload, downloadContainerMotion } = useAbout();
+
+	const { 
+		handleDownload, 
+		loadDownload, 
+		downloadContainerMotion 
+	} = useHomeContext();
 
 	return (
 		<motion.div

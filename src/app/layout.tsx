@@ -1,8 +1,8 @@
 import { libertinusSerif } from "@/utilities/layout/fonts";
 import { metaData } from "@/utilities/layout/metadata";
 import { ThemeProvider } from "@/app/_components/providers/theme-provider";
-import Header from "@/app/_components/templates/header";
 import type { ChildrenProps } from "@/types/props/children";
+import Layout from "@/app/_components/layout/layout";
 import QueryProvider from "@/app/_components/providers/query-provider";
 import "./globals.css";
 
@@ -18,8 +18,7 @@ export default function RootLayout({ children }: Readonly<ChildrenProps>) {
 						attribute="class"
 						defaultTheme="dark"
 						enableSystem={false}>
-						<Header />
-						{children}
+						<Layout>{children}</Layout>
 					</ThemeProvider>
 				</QueryProvider>
 			</body>

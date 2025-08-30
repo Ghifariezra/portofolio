@@ -1,15 +1,14 @@
 "use client";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { useAbout } from "@/hooks/about/useAbout";
 import { Replace } from "lucide-react";
-import { useLogo } from "@/hooks/useLogo";
 import {
 	SkillsSkeleton,
 	NoSkillsSkeleton,
 } from "@/app/_components/common/skeleton/skills";
 import { ProfileSkeleton } from "@/app/_components/common/skeleton/profile";
 import { DownloadCv } from "@/app/_components/ui/download/button";
+import { useHomeContext } from "@/app/_components/providers/home-provider";
 
 export function CardAbout({
 	checkDesc,
@@ -34,8 +33,9 @@ export function CardAbout({
 		blurDataSkills,
 		skills,
 		skillsMotion,
-	} = useAbout();
-	const { logo, profile, blurDataLogo, isProfileLoading } = useLogo();
+		logoData,
+	} = useHomeContext();
+	const { logo, profile, blurDataLogo, isProfileLoading } = logoData;
 
 	return (
 		<>

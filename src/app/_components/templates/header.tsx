@@ -11,7 +11,7 @@ export default function Header() {
 				scrolled ? "" : "border-b border-glassess"
 			}`}>
 			<Navbar />
-			<Toaster position="top-center"  />
+			<Toaster position="top-center" />
 		</header>
 	);
 }

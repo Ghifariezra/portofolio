@@ -1,5 +1,6 @@
 "use client";
-import { useLogo } from "@/hooks/useLogo";
+
+import { useHomeContext } from "@/app/_components/providers/home-provider";
 import { motion, AnimatePresence } from "motion/react";
 import { useDirect } from "@/hooks/useDirect";
 import Image from "next/image";
@@ -7,6 +8,7 @@ import { memo } from "react";
 import { LogoSkeleton, NoLogoSkeleton } from "@/app/_components/common/skeleton/logo";
 
 function Logo() {
+	const { logoData } = useHomeContext();
 	const {
 		containerMotion,
 		nameMotion,
@@ -15,7 +17,8 @@ function Logo() {
 		logo,
 		blurDataLogo,
 		isProfileLoading,
-	} = useLogo();
+	} = logoData;
+	
 	const { goHome } = useDirect();
 
 	return (

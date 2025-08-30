@@ -1,9 +1,12 @@
-import { useAbout } from "@/hooks/about/useAbout";
+'use client';
+
+import { useHomeContext } from "@/app/_components/providers/home-provider";
 import type { ChildrenProps } from "@/types/props/children";
 import { MapPinned } from "lucide-react";
 import { motion } from "motion/react";
+
 export function CardStatus({ children, check }: Readonly<ChildrenProps>) {
-	const { imageContainerMotion, childMotion } = useAbout();
+	const { imageContainerMotion, childMotion } = useHomeContext();
 
 	return (
 		<motion.div

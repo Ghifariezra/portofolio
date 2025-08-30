@@ -1,3 +1,4 @@
+"use client";
 import Hero from "@/app/_components/common/sections/hero";
 import About from "@/app/_components/common/sections/about";
 import Project from "@/app/_components/common/sections/project";

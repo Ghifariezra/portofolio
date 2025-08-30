@@ -1,4 +1,5 @@
 "use client";
+
 import { memo } from "react";
 import { Menu } from "@/app/_components/common/menu/menu";
 import ModeToggle from "@/app/_components/ui/toggle/toggle-mode";

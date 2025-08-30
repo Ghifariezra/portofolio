@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useAbout } from "@/hooks/about/useAbout";
+import { useHomeContext } from "@/app/_components/providers/home-provider";
 import { motion, AnimatePresence } from "motion/react";
 import { CardAbout } from "@/app/_components/common/cards/about";
 import { CardStatus } from "@/app/_components/common/cards/status";
@@ -22,7 +22,7 @@ export function ProfileStatus() {
 		blurDataSocial,
 		socials,
 		socialMotion,
-	} = useAbout();
+	} = useHomeContext();
 
 	return (
 		<>
