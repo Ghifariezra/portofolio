@@ -9,7 +9,7 @@ const Pattern = ({ children }: Readonly<ChildrenProps>) => {
 const StyledWrapper = styled.section`
 	position: relative;
 	width: 100%;
-	min-height: 100vh; /* ✅ selalu penuh layar */
+	min-height: 100vh;
 	background-color: #111111;
 	background-image: linear-gradient(
 		32deg,

@@ -1,4 +1,5 @@
 import Loader from "@/app/_components/ui/loaders/skeleton";
+import { OctagonX } from "lucide-react";
 
 export function SkillsSkeleton() {
 	return (
@@ -11,7 +12,7 @@ export function SkillsSkeleton() {
 export function NoSkillsSkeleton() {
 	return (
 		<div className="w-12 h-12 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center text-xs text-gray-500 font-bold">
-			No skill
+			<OctagonX />
 		</div>
 	);
 }

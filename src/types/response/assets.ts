@@ -20,6 +20,7 @@ export type SocialsResponse = {
     };
 };
 
-export type Profile = ProfileResponse["assets"]["profile"][0]["url"];
+export type Profile = ProfileResponse["assets"]["profile"][0]["url"] | null;
 export type Skills = SkillsResponse["assets"]["skills"];
 export type Socials = SocialsResponse["assets"]["social-media"];
+export type csrfToken = string | null;

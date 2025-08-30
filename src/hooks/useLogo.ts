@@ -1,31 +1,23 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { easeIn, easeOut } from "motion/react";
-import { useProfileMutation } from "@/hooks/mutations/useAssetsMutation";
+import { useProfileQuery } from "@/hooks/query/useAssetsQuery";
 import { toBase64 } from "@/utilities/base64/base64";
-import type { Profile } from "@/types/response/assets";
+import { Profile } from "@/types/response/assets";
 
 export function useLogo() {
     const logoName = "Ghifari Ezra Ramadhan";
-    const { mutate, isLoading: isProfileLoading } = useProfileMutation();
-    const [logo, setLogo] = useState<Profile | null>(null);
-    const [profile, setProfile] = useState<Profile | null>(null);
-    const [blurDataLogo, setBlurDataURL] = useState<string | null>(null);
+    const { data, isLoading: isProfileLoading } = useProfileQuery();
+
+    const logo = data?.assets.profile?.[0]?.url ?? null;
+    const profile = data?.assets.profile?.[1]?.url ?? null;
+
+    // ⬇️ state untuk blur
+    const [blurDataLogo, setBlurDataLogo] = useState<Profile>(null);
 
     useEffect(() => {
-        mutate(undefined, {
-            onSuccess: (res) => {
-                setLogo(res.assets.profile[0].url);
-                setProfile(res.assets.profile[1].url);
-
-                // generate blur data URL
-                const logoBase64 = toBase64(res.assets.profile[0].url);
-                logoBase64.then((base64) => setBlurDataURL(base64));
-            },
-            onError: (error) => {
-                console.log(error);
-            },
-        });
-    }, [mutate]);
+        if (!logo) return;
+        toBase64(logo).then((res) => setBlurDataLogo(res));
+    }, [logo]);
 
     // Motion Config
     const containerMotion = {

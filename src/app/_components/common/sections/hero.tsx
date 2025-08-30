@@ -13,12 +13,12 @@ export default function Hero() {
 			initial="hidden"
 			animate="visible">
 			<motion.div className="flex flex-col gap-8 max-w-2xl lg:max-w-4xl">
-				<motion.span
+				<motion.h1
 					variants={quoteMotion}
 					style={{ ...quoteTransform }}
 					className="text-2xl sm:text-4xl md:text-7xl">
 					Building responsive and scalable web applications.
-				</motion.span>
+				</motion.h1>
 			</motion.div>
 		</motion.section>
 	);

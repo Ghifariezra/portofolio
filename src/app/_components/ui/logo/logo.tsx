@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useDirect } from "@/hooks/useDirect";
 import Image from "next/image";
 import { memo } from "react";
-import { LogoSkeleton } from "@/app/_components/common/skeleton/logo";
+import { LogoSkeleton, NoLogoSkeleton } from "@/app/_components/common/skeleton/logo";
 
 function Logo() {
 	const {
@@ -37,7 +37,7 @@ function Logo() {
 					<LogoSkeleton />
 				) : (
 					logo &&
-					blurDataLogo && (
+					blurDataLogo ? (
 						<Image
 							src={logo}
 							width={500}
@@ -47,6 +47,8 @@ function Logo() {
 							placeholder="blur"
 							blurDataURL={blurDataLogo}
 						/>
+					): (
+						<NoLogoSkeleton />
 					)
 				)}
 			</motion.div>

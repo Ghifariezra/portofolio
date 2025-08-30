@@ -1,48 +1,65 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { easeInOut } from "motion/react";
-import { useSkillsMutation, useSocialMutation } from "@/hooks/mutations/useAssetsMutation";
-import type { Skills, Socials } from "@/types/response/assets";
+import { useSkillsQuery, useSocialQuery } from "@/hooks/query/useAssetsQuery";
 import { toBase64 } from "@/utilities/base64/base64";
+import { Skills, Socials } from "@/types/response/assets";
+import { toast } from "sonner"
 
 export const useAbout = () => {
     const available = "Available for project";
     const location = "Jakarta, Indonesia";
-    const { mutate: mutateSkills, isLoading: isSkillsLoading } = useSkillsMutation();
-    const { mutate: mutateSocial, isLoading: isSocialLoading } = useSocialMutation();
+
     const [change, setChange] = useState(false);
-    const [skills, setSkills] = useState<Skills>([]);
-    const [socials, setSocial] = useState<Socials>([]);
+    const [loadDownload, setLoadDownload] = useState(false);
+
+    const { data: skillsData, isLoading: isSkillsLoading } = useSkillsQuery();
+    const { data: socialsData, isLoading: isSocialLoading } = useSocialQuery();
+
+    const skills: Skills = useMemo(() => skillsData?.assets?.skills ?? [], [skillsData]);
+    const socials: Socials = useMemo(() => socialsData?.assets?.["social-media"] ?? [], [socialsData]);
+
     const [blurDataSkills, setBlurDataSkills] = useState<string[]>([]);
     const [blurDataSocial, setBlurDataSocial] = useState<string[]>([]);
 
     useEffect(() => {
-        mutateSkills(undefined, {
-            onSuccess: (res) => {
-                setSkills(res.assets.skills);
-            },
-            onError: (error) => {
-                console.log(error);
-            },
-        });
-        mutateSocial(undefined, {
-            onSuccess: (res) => {
-                setSocial(res.assets["social-media"]);
-            },
-            onError: (error) => {
-                console.log(error);
-            },
-        });
-    }, [mutateSkills, mutateSocial]);
+        let mounted = true;
+        if (skills.length > 0) {
+            Promise.all(skills.map((item) => toBase64(item.url))).then((res) => {
+                if (mounted) setBlurDataSkills(res);
+            });
+        }
+        return () => { mounted = false; };
+    }, [skills]);
 
     useEffect(() => {
-        if (skills.length > 0 && socials.length > 0) {
-            const skillsPromises = skills.map((item) => toBase64(item.url));
-            const socialsPromises = socials.map((item) => toBase64(item.url));
-
-            Promise.all(skillsPromises).then((data) => setBlurDataSkills(data));
-            Promise.all(socialsPromises).then((data) => setBlurDataSocial(data));
+        let mounted = true;
+        if (socials.length > 0) {
+            Promise.all(socials.map((item) => toBase64(item.url))).then((res) => {
+                if (mounted) setBlurDataSocial(res);
+            });
         }
-    }, [skills, socials]);
+        return () => { mounted = false; };
+    }, [socials]);
+
+
+    const changeProfile = useCallback(() => {
+        setChange((prev) => !prev);
+    }, []);
+
+    const handleDownload = useCallback((cv: string) => {
+        setLoadDownload((prev) => !prev);
+
+        const link = document.createElement("a");
+        link.href = cv;
+        link.download = "My_CV.pdf";
+        link.click();
+        link.remove();
+
+        setTimeout(() => {
+            setLoadDownload((prev) => !prev);
+            toast.success("CV berhasil dibuka 🎉");
+        }, 3000);
+    }, []);
 
     const containerMotion = {
         hidden: {},
@@ -55,7 +72,7 @@ export const useAbout = () => {
 
     const imageContainerMotion = {
         hidden: {
-            y: 50,
+            y: 30,
             opacity: 0,
             transition: {
                 duration: 0.5,
@@ -73,7 +90,7 @@ export const useAbout = () => {
     }
 
     const imageMotion = {
-        hidden: { y: 60, opacity: 0 },
+        hidden: { y: -60, opacity: 0 },
         inView: {
             y: 0, opacity: 1, transition: {
                 duration: 0.7,
@@ -84,20 +101,31 @@ export const useAbout = () => {
 
 
     const containerTitleMotion = {
-        hidden: {},
-        inView: {
+        hidden: {
+            y: -30,
+            opacity: 0,
             transition: {
+                duration: 0.5,
+                ease: easeInOut,
+            }
+        },
+        inView: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                duration: 1,
                 staggerChildren: 0.2,
             },
-        },
+        }
     };
 
     const childMotion = {
-        hidden: { opacity: 0, y: 50 },
+        hidden: { y: -50, opacity: 0 },
         inView: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.5, ease: easeInOut },
+            y: 0, opacity: 1, transition: {
+                duration: 0.7,
+                ease: easeInOut,
+            }
         },
     };
 
@@ -118,22 +146,31 @@ export const useAbout = () => {
     }
 
     const skillsMotion = {
-        hidden: { opacity: 0, y: 20 },
+        hidden: { opacity: 0, y: -20 },
         inView: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeInOut } },
         hover: { scale: 1.1, rotate: 10, transition: { duration: 0.3 } }
     };
 
 
     const socialMotion = {
-        hidden: { opacity: 0, y: 20 },
+        hidden: { opacity: 0, y: -20 },
         inView: { opacity: 1, y: 0, transition: { duration: 0.5 } },
         hover: { scale: 1.2, rotate: 10, transition: { duration: 0.3 } }
     };
 
+    const downloadContainerMotion = {
+        hidden: { opacity: 0, y: -30 },
+        inView: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                ease: easeInOut,
+                staggerChildren: 0.2,
+            },
+        },
+    };
 
-    const changeProfile = useCallback(() => {
-        setChange(!change);
-    }, [change, setChange]);
 
     return {
         available,
@@ -152,6 +189,9 @@ export const useAbout = () => {
         isSocialLoading,
         blurDataSocial,
         socials,
-        socialMotion
+        socialMotion,
+        handleDownload,
+        loadDownload,
+        downloadContainerMotion
     };
 };

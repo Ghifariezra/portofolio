@@ -1,6 +1,7 @@
 "use client";
 import Navbar from "@/app/_components/common/navbar/navbar";
 import { useMenu } from "@/hooks/useMenu";
+import { Toaster } from "sonner";
 
 export default function Header() {
 	const { scrolled } = useMenu();
@@ -10,6 +11,7 @@ export default function Header() {
 				scrolled ? "" : "border-b border-glassess"
 			}`}>
 			<Navbar />
+			<Toaster position="top-center"  />
 		</header>
 	);
 }

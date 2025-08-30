@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { verifyCsrfToken } from "@/utilities/csrf/csrf";
 import { StorageService } from "@/services/db/storage";
 
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
     const csrfToken = (await cookies()).get("csrfToken")?.value || "";
 
     if (!csrfToken) {
@@ -17,10 +17,11 @@ export async function POST(req: NextRequest) {
     }
 
     const storage = await new StorageService();
-    const { folder } = await req.json();
+    const { searchParams } = new URL(req.url);
+    const folder = searchParams.get("folder");
 
     if (!folder) {
-        return NextResponse.json({ error: "Missing profile or skills" }, { status: 400 });
+        return NextResponse.json({ error: "Missing folder" }, { status: 400 });
     }
 
     const data = await storage.getFilesWithSignedUrl(folder);

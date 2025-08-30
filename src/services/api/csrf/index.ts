@@ -1,5 +1,6 @@
 import axios from "axios";
 
 export const CsrfRequest = async () => {
-    return await axios.get("/api/csrf", { withCredentials: true });
+    const res = await axios.get("/api/csrf", { withCredentials: true });
+    return res.data;
 };

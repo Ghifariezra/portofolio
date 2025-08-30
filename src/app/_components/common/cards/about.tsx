@@ -9,6 +9,7 @@ import {
 	NoSkillsSkeleton,
 } from "@/app/_components/common/skeleton/skills";
 import { ProfileSkeleton } from "@/app/_components/common/skeleton/profile";
+import { DownloadCv } from "@/app/_components/ui/download/button";
 
 export function CardAbout({
 	checkDesc,
@@ -99,7 +100,6 @@ export function CardAbout({
 											initial="hidden"
 											whileInView="inView"
 											whileHover="hover"
-                                            transition={{ delay: index * 0.3 }}
 											className="w-12 h-12 bg-slate-300/30  rounded-full overflow-hidden cursor-pointer">
 											<Image
 												src={skill.url}
@@ -146,10 +146,15 @@ export function CardAbout({
 								!isProfileLoading && (
 									<Image
 										src={change ? profile : logo}
-										width={1000}
-										height={1000}
+										width={500}
+										height={500}
+										style={{
+											objectFit: "cover",
+											width: "100%",
+											height: "100%",
+										}}
+										priority
 										alt="avatar"
-										className="object-cover w-full h-full"
 										placeholder="blur"
 										blurDataURL={blurDataLogo}
 									/>
@@ -164,7 +169,7 @@ export function CardAbout({
 							whileInView="inView">
 							<motion.h1
 								variants={childMotion}
-								className="text-xl font-bold text-center">
+								className="text-xl font-bold text-center sm:text-left">
 								Hi, I&apos;m Ghifari Ezra Ramadhan
 							</motion.h1>
 							<motion.h2
@@ -173,6 +178,7 @@ export function CardAbout({
 								Fullstack Developer
 							</motion.h2>
 						</motion.div>
+						<DownloadCv className="sm:hidden flex pb-4" />
 					</>
 				)}
 			</motion.div>
