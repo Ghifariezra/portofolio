@@ -1,15 +1,12 @@
 "use client";
-import Image from "next/image";
 import { useHomeContext } from "@/app/_components/providers/home-provider";
 import { motion, AnimatePresence } from "motion/react";
 import { CardAbout } from "@/app/_components/common/cards/about";
 import { CardStatus } from "@/app/_components/common/cards/status";
 import {
 	SocialsSkeleton,
-	NoSocialsSkeleton,
 } from "@/app/_components/common/skeleton/socials";
-import { SocialItems } from "@/utilities/socials/socials";
-import Link from "next/link";
+import { ToolBox } from "@/app/_components/common/cards/toolbox";
 import { DownloadCv } from "@/app/_components/ui/buttons/download";
 
 export function ProfileStatus() {
@@ -21,7 +18,6 @@ export function ProfileStatus() {
 		isSocialLoading,
 		blurDataSocial,
 		socials,
-		socialMotion,
 	} = useHomeContext();
 
 	return (
@@ -50,46 +46,15 @@ export function ProfileStatus() {
 						<strong>Social Media:</strong>
 						{isSocialLoading ? (
 							<SocialsSkeleton />
-						) : socials &&
-						  socials.length > 0 &&
-						  blurDataSocial.length > 0 ? (
-							<AnimatePresence mode="sync">
-								{socials.map((social, index) => (
-									<motion.div
-										key={social.name}
-										variants={socialMotion}
-										initial="hidden"
-										whileInView="inView"
-										whileHover="hover"
-										className="w-8 h-8 bg-slate-300/30  rounded-full overflow-hidden">
-										{SocialItems &&
-											SocialItems[index].name ===
-												social.name && (
-												<Link
-													href={
-														SocialItems[index].href
-													}
-													target="_blank">
-													<Image
-														src={social.url}
-														alt="Logo"
-														width={100}
-														height={100}
-														placeholder="blur"
-														blurDataURL={
-															blurDataSocial[
-																index
-															]
-														}
-														className="scale-60"
-													/>
-												</Link>
-											)}
-									</motion.div>
-								))}
-							</AnimatePresence>
 						) : (
-							<NoSocialsSkeleton />
+							<AnimatePresence mode="sync">
+								<ToolBox
+									data={socials}
+									blurData={blurDataSocial}
+									check="social-media"
+									className="w-8 h-8 bg-slate-300/30  rounded-full overflow-hidden"
+								/>
+							</AnimatePresence>
 						)}
 					</CardStatus>
 				</motion.div>

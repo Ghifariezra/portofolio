@@ -30,7 +30,10 @@ export function Menu({ className }: ClassNameProps) {
 							</motion.li>
 						) : (
 							<ContactButton>
-								<Link href={item.href} scroll={true}>
+								<Link
+									href={item.href}
+									scroll={true}
+									target="_blank">
 									{item.name}
 								</Link>
 							</ContactButton>

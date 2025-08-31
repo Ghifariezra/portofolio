@@ -4,8 +4,8 @@ import { motion } from "motion/react";
 import { Replace } from "lucide-react";
 import {
 	SkillsSkeleton,
-	NoSkillsSkeleton,
 } from "@/app/_components/common/skeleton/skills";
+import { ToolBox } from "@/app/_components/common/cards/toolbox";
 import { ProfileSkeleton } from "@/app/_components/common/skeleton/profile";
 import { DownloadCv } from "@/app/_components/ui/buttons/download";
 import { useHomeContext } from "@/app/_components/providers/home-provider";
@@ -32,7 +32,6 @@ export function CardAbout({
 		isSkillsLoading,
 		blurDataSkills,
 		skills,
-		skillsMotion,
 		logoData,
 	} = useHomeContext();
 	const { logo, profile, blurDataLogo, isProfileLoading } = logoData;
@@ -90,33 +89,13 @@ export function CardAbout({
 							className="flex flex-wrap gap-2">
 							{isSkillsLoading ? (
 								<SkillsSkeleton />
-							) : skills.length > 0 &&
-							  blurDataSkills.length > 0 ? (
-								<>
-									{skills.map((skill, index) => (
-										<motion.div
-											key={skill.name}
-											variants={skillsMotion}
-											initial="hidden"
-											whileInView="inView"
-											whileHover="hover"
-											className="w-12 h-12 bg-slate-300/30  rounded-full overflow-hidden cursor-pointer">
-											<Image
-												src={skill.url}
-												alt="Logo"
-												width={100}
-												height={100}
-												placeholder="blur"
-												blurDataURL={
-													blurDataSkills[index]
-												}
-												className="scale-60"
-											/>
-										</motion.div>
-									))}
-								</>
 							) : (
-								<NoSkillsSkeleton />
+								<ToolBox
+									check="skills"
+									data={skills}
+									blurData={blurDataSkills}
+									className="w-12 h-12 bg-slate-300/30  rounded-full overflow-hidden cursor-pointer"
+								/>
 							)}
 						</motion.div>
 					</motion.div>
