@@ -1,7 +1,7 @@
 import csrfInterceptor from "@/services/api/csrf/interceptor";
 import type { 
     ProfileResponse, 
-    ProjectResponse, 
+    ProjectResponse,
     SkillsResponse, 
     SocialsResponse 
 } from "@/types/response/assets";
@@ -31,9 +31,7 @@ export const SocialRequest = async (): Promise<SocialsResponse> => {
 };
 
 export const ProjectRequest = async (): Promise<ProjectResponse> => {
-    const res = await csrfInterceptor.get("/api/assets", {
-        params: { folder: "projects" },
-    });
+    const res = await csrfInterceptor.get("/api/projects");
 
     return res.data;
 };

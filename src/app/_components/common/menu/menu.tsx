@@ -24,7 +24,7 @@ export function Menu({ className }: ClassNameProps) {
 							<motion.li
 								variants={itemMotion}
 								className="md:hover:border-b md:hover:border-slate-700 md:dark:hover:border-slate-100 font-semibold">
-								<Link href={item.href} scroll={true}>
+								<Link href={item.href} scroll={true} prefetch={item.name === "Projects"}>
 									{item.name}
 								</Link>
 							</motion.li>

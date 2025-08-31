@@ -1,9 +1,9 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { verifyCsrfToken } from "@/utilities/csrf/csrf";
 import { PortfolioService } from "@/services/db";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
     const csrfToken = (await cookies()).get("csrfToken")?.value || "";
 
     if (!csrfToken) {
@@ -17,18 +17,7 @@ export async function GET(req: NextRequest) {
     }
 
     const storage = await new PortfolioService();
-    const { searchParams } = new URL(req.url);
-    const folder = searchParams.get("folder");
+    const data = await storage.getProjects();
 
-    if (!folder) {
-        return NextResponse.json({ error: "Missing folder" }, { status: 400 });
-    }
-
-    const data = await storage.getFilesWithSignedUrl(folder);
-
-    return NextResponse.json({
-        assets: {
-            [folder]: data
-        }
-    });
+    return NextResponse.json({ projects: data });
 }

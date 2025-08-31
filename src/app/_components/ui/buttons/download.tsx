@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "motion/react";
-import { CloudDownload } from "lucide-react";
+import { CloudDownload, Loader } from "lucide-react";
 import type { ClassNameProps } from "@/types/props/className";
 import { useHomeContext } from "@/app/_components/providers/home-provider";
 import { Button } from "@/app/_components/ui/button";
@@ -25,8 +25,17 @@ export function DownloadCv({ className }: ClassNameProps) {
 				onClick={() => handleDownload(cv)}
 				disabled={loadDownload}
 				className="flex items-center justify-center gap-2 font-bold w-fit sm:w-full cursor-pointer">
-				<CloudDownload />
-				{loadDownload ? "Loading..." : "Download CV"}
+				{loadDownload ? (
+					<>
+						<Loader className="animate-spin" />
+						Loading...
+					</>
+				) : (
+					<>
+						<CloudDownload />
+						Download CV
+					</>
+				)}
 			</Button>
 		</motion.div>
 	);

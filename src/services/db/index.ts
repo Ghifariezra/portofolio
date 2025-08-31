@@ -1,6 +1,6 @@
 import { supabase } from "@/utilities/supabase/client";
 
-export class StorageService {
+export class PortfolioService {
     private client;
     private bucket = "Portofolio";
     private expiresIn = 60 * 60 * 24 * 365; // 1 tahun
@@ -44,6 +44,24 @@ export class StorageService {
                     name: file.name.split(".")[0],
                     url,
                 };
+            })
+        );
+
+        return signedUrls;
+    }
+
+    // Project
+    async getProjects() {
+        const { data, error } = await this.client
+            .from("projects")
+            .select("*");
+
+        if (error) throw new Error(error.message);
+
+        const signedUrls = await Promise.all(
+            data.map(async (project) => {
+                const url = await this.getSignedUrl(project.image);
+                return { ...project, image: url };
             })
         );
 

@@ -1,20 +1,38 @@
-import { useEffect, useMemo, useState, useCallback } from "react";
+import {
+    useEffect,
+    useMemo,
+    useState,
+    useCallback,
+    useRef
+} from "react";
 import { useProjectQuery } from "@/hooks/query/useAssetsQuery";
 import { easeIn, easeOut } from "motion/react";
 import { toBase64 } from "@/utilities/base64/base64";
 import { Projects } from "@/types/response/assets";
 
-export function useProject () {
+export function useProject() {
     const titleSection = "Projects";
-    
+
     const [open, setOpen] = useState(false);
     const [defaultOpen, setDefaultOpen] = useState("Default");
+    const [dropDownData] = useState<string[]>([
+        "Default",
+        "Individual",
+        "Collaboration",
+    ]);
+    const dropDownRef = useRef<HTMLDivElement>(null);
 
     const { data, isLoading: isProjectLoading } = useProjectQuery();
 
     const projects: Projects = useMemo(() => {
-        return data?.assets.projects ?? [];
-    }, [data]);
+        if (!data) return [];
+
+        const status = defaultOpen.toLowerCase();
+
+        if (status === "default") return data.projects;
+
+        return data.projects.filter((item) => item.status.toLowerCase() === status);
+    }, [data, defaultOpen]);
 
     const [blurDataProjects, setBlurDataProjects] = useState<string[]>([]);
 
@@ -22,7 +40,7 @@ export function useProject () {
         let mounted = true;
 
         if (projects.length > 0) {
-            Promise.all(projects.map((item) => toBase64(item.url))).then((res) => {
+            Promise.all(projects.map((item) => toBase64(item.image))).then((res) => {
                 if (mounted) setBlurDataProjects(res);
             });
         }
@@ -33,6 +51,19 @@ export function useProject () {
     const handleDropdown = useCallback(() => {
         setOpen(!open);
     }, [open]);
+
+    useEffect(() => {
+        const handleClick = (e: MouseEvent) => {
+            if (dropDownRef.current && !dropDownRef.current.contains(e.target as Node)) {
+                setOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClick);
+        return () => {
+            document.removeEventListener("mousedown", handleClick);
+        };
+    }, []); // cukup kosong
+
 
     const containerMotion = {
         hidden: { opacity: 0 },
@@ -63,9 +94,9 @@ export function useProject () {
     };
 
 
-    return { 
-        titleSection, 
-        containerMotion, 
+    return {
+        titleSection,
+        containerMotion,
         childMotion,
         projects,
         isProjectLoading,
@@ -73,6 +104,8 @@ export function useProject () {
         open,
         handleDropdown,
         defaultOpen,
-        setDefaultOpen
-     };
+        setDefaultOpen,
+        dropDownRef,
+        dropDownData
+    };
 }

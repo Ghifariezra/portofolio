@@ -7,4 +7,5 @@ export const supabase = () =>
     createBrowserClient(
         supabaseUrl!,
         supabaseKey!,
+        { db: { schema: "portfolio" } }
     );

@@ -2,7 +2,7 @@ import {
     ProfileRequest,
     SkillsRequest,
     SocialRequest,
-    ProjectRequest
+    ProjectRequest,
 } from "@/services/api/storage/assets";
 import type {
     SkillsResponse,
