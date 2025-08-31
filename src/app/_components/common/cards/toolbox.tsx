@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useHomeContext } from "@/app/_components/providers/home-provider";
 import { SocialItems } from "@/utilities/socials/socials";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,11 +18,6 @@ export function ToolBox({
 	data: { name: string; url: string }[];
 	blurData: string[];
 }>) {
-	const { 
-        socialMotion,
-        skillsMotion
-     } = useHomeContext();
-
 	if (check == "skills") {
 		return (
 			<>
@@ -32,9 +26,6 @@ export function ToolBox({
 						{data.map((dt, index) => (
 							<motion.div
 								key={dt.name}
-								variants={skillsMotion}
-								initial="hidden"
-								whileInView="inView"
 								whileHover="hover"
 								className={className}>
 								<Image
@@ -67,9 +58,6 @@ export function ToolBox({
 					{data.map((dt, index) => (
 						<motion.div
 							key={dt.name}
-							variants={socialMotion}
-							initial="hidden"
-							whileInView="inView"
 							whileHover="hover"
 							className={className}>
 							{SocialItems &&

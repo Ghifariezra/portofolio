@@ -22,11 +22,6 @@ export function CardAbout({
 	className?: string;
 }) {
 	const {
-		imageMotion,
-		containerTitleMotion,
-		childMotion,
-		imageContainerMotion,
-		replaceMotion,
 		changeProfile,
 		change,
 		isSkillsLoading,
@@ -40,24 +35,15 @@ export function CardAbout({
 		<>
 			{/* Card */}
 			<motion.div
-				initial="hidden"
-				whileInView="inView"
-				viewport={{ once: false, amount: 0.1 }}
-				variants={imageContainerMotion}
 				className={`flex flex-col items-center glassess border-glassess gap-4 rounded-2xl ${className}`}>
 				{checkDesc && (
 					<motion.div
-						className="flex flex-col items-center sm:items-start gap-3 w-full pb-2"
-						variants={containerTitleMotion}
-						initial="hidden"
-						whileInView="inView">
+						className="flex flex-col items-center sm:items-start gap-3 w-full pb-2">
 						<motion.h1
-							variants={childMotion}
 							className="text-3xl font-semibold">
 							About Me
 						</motion.h1>
 						<motion.p
-							variants={childMotion}
 							className="text-sm sm:text-base text-justify">
 							I&apos;m a university student at Universitas
 							Pancasila, currently exploring the world of
@@ -75,17 +61,12 @@ export function CardAbout({
 
 				{checkSkills && (
 					<motion.div
-						className="flex flex-col items-center sm:items-start gap-3 w-full pb-2"
-						variants={containerTitleMotion}
-						initial="hidden"
-						whileInView="inView">
+						className="flex flex-col items-center sm:items-start gap-3 w-full pb-2">
 						<motion.h1
-							variants={childMotion}
 							className="text-2xl sm:text-3xl font-semibold">
 							Toolbox
 						</motion.h1>
 						<motion.div
-							variants={childMotion}
 							className="flex flex-wrap gap-2">
 							{isSkillsLoading ? (
 								<SkillsSkeleton />
@@ -105,15 +86,8 @@ export function CardAbout({
 					<>
 						{/* Profile */}
 						<motion.div
-							className="relative aspect-square overflow-hidden bg-slate-700/40 dark:bg-slate-100/40 rounded-2xl w-full h-full"
-							variants={imageMotion}
-							initial="hidden"
-							whileInView="inView">
+							className="relative aspect-square overflow-hidden bg-slate-700/40 dark:bg-slate-100/40 rounded-2xl w-full h-full">
 							<motion.div
-								variants={replaceMotion}
-								initial="initial"
-								whileHover="hover"
-								whileTap="tap"
 								className="absolute -bottom-2 -right-2 -translate-x-1/2 -translate-y-1/2 glassess border-glassess p-2 rounded-2xl cursor-pointer text-white"
 								onClick={changeProfile}>
 								<Replace size={20} className="rotate-90" />
@@ -142,17 +116,12 @@ export function CardAbout({
 
 						{/* Name & Title */}
 						<motion.div
-							className="flex flex-col items-center sm:items-start gap-1 w-full pb-2"
-							variants={containerTitleMotion}
-							initial="hidden"
-							whileInView="inView">
+							className="flex flex-col items-center sm:items-start gap-1 w-full pb-2">
 							<motion.h1
-								variants={childMotion}
 								className="text-xl font-bold text-center sm:text-left">
 								Hi, I&apos;m Ghifari Ezra Ramadhan
 							</motion.h1>
 							<motion.h2
-								variants={childMotion}
 								className="text-lg font-semibold">
 								Fullstack Developer
 							</motion.h2>

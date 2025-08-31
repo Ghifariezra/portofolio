@@ -61,45 +61,6 @@ export const useAbout = () => {
         }, 3000);
     }, []);
 
-    const containerMotion = {
-        hidden: {},
-        inView: {
-            transition: {
-                staggerChildren: 0.15, // lebih natural
-            },
-        },
-    };
-
-    const imageContainerMotion = {
-        hidden: {
-            y: 30,
-            opacity: 0,
-            transition: {
-                duration: 0.5,
-                ease: easeInOut,
-            }
-        },
-        inView: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                duration: 1,
-                staggerChildren: 0.2,
-            },
-        }
-    }
-
-    const imageMotion = {
-        hidden: { y: -60, opacity: 0 },
-        inView: {
-            y: 0, opacity: 1, transition: {
-                duration: 0.7,
-                ease: easeInOut,
-            }
-        },
-    };
-
-
     const containerTitleMotion = {
         hidden: {
             y: -30,
@@ -119,79 +80,19 @@ export const useAbout = () => {
         }
     };
 
-    const childMotion = {
-        hidden: { y: -50, opacity: 0 },
-        inView: {
-            y: 0, opacity: 1, transition: {
-                duration: 0.7,
-                ease: easeInOut,
-            }
-        },
-    };
-
-    const replaceMotion = {
-        initial: { opacity: 1, rotate: -90 },
-        hover: {
-            scale: 0.95,
-            opacity: 1,
-            x: 0,
-            transition: { duration: 0.5, ease: easeInOut },
-        },
-        tap: {
-            scale: 0.90,
-            opacity: 1,
-            x: 0,
-            transition: { duration: 0.5, ease: easeInOut }
-        }
-    }
-
-    const skillsMotion = {
-        hidden: { opacity: 0, y: -20 },
-        inView: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeInOut } },
-        hover: { scale: 1.1, rotate: 10, transition: { duration: 0.3 } }
-    };
-
-
-    const socialMotion = {
-        hidden: { opacity: 0, y: -20 },
-        inView: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-        hover: { scale: 1.2, rotate: 10, transition: { duration: 0.3 } }
-    };
-
-    const downloadContainerMotion = {
-        hidden: { opacity: 0, y: -30 },
-        inView: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.6,
-                ease: easeInOut,
-                staggerChildren: 0.2,
-            },
-        },
-    };
-
-
     return {
         available,
         location,
-        imageMotion,
         containerTitleMotion,
-        childMotion, imageContainerMotion,
-        containerMotion,
-        replaceMotion,
         changeProfile,
         change,
         isSkillsLoading,
         blurDataSkills,
         skills,
-        skillsMotion,
         isSocialLoading,
         blurDataSocial,
         socials,
-        socialMotion,
         handleDownload,
         loadDownload,
-        downloadContainerMotion
     };
 };

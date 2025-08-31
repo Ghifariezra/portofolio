@@ -12,14 +12,10 @@ export function DownloadCv({ className }: ClassNameProps) {
 	const { 
 		handleDownload, 
 		loadDownload, 
-		downloadContainerMotion 
 	} = useHomeContext();
 
 	return (
 		<motion.div
-            variants={downloadContainerMotion}
-            initial="hidden"
-            whileInView="inView"
 			whileTap={{
 				scale: loadDownload ? 1 : 0.9,
 			}}

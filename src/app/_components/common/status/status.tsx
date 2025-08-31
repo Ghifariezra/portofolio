@@ -13,8 +13,6 @@ export function ProfileStatus() {
 	const {
 		available,
 		location,
-		childMotion,
-		containerTitleMotion,
 		isSocialLoading,
 		blurDataSocial,
 		socials,
@@ -23,27 +21,24 @@ export function ProfileStatus() {
 	return (
 		<>
 			<motion.div
-				initial="hidden"
-				whileInView="inView"
-				variants={containerTitleMotion}
 				className="col-span-2 sm:order-1 flex flex-col-reverse sm:flex-col gap-4 h-full">
 				<motion.div className="flex flex-wrap lg:flex-nowrap flex-col sm:flex-row gap-2">
 					<CardStatus check="available">
 						{available && (
-							<motion.strong variants={childMotion}>
+							<motion.strong>
 								{available}
 							</motion.strong>
 						)}
 					</CardStatus>
 					<CardStatus check="location">
 						{location && (
-							<motion.strong variants={childMotion}>
+							<motion.strong>
 								{location}
 							</motion.strong>
 						)}
 					</CardStatus>
 					<CardStatus check="social-media">
-						<strong>Social Media:</strong>
+						<motion.strong>Social Media:</motion.strong>
 						{isSocialLoading ? (
 							<SocialsSkeleton />
 						) : (
