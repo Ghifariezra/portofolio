@@ -35,7 +35,7 @@ export default function Project() {
 			</motion.h1>
 			<motion.div
 				variants={childMotion}
-				className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+				className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
 				{isProjectLoading ? (
 					<ProjectSkeleton length={projects.length} />
 				) : !isProjectLoading &&
@@ -69,12 +69,12 @@ export default function Project() {
 								<motion.div className="flex flex-col gap-1">
 									<motion.h1
 										variants={childMotion}
-										className="text-base sm:text-lg font-semibold">
+										className="text-lg sm:text-xl font-bold">
 										{project.name}
 									</motion.h1>
 									<motion.p
 										variants={childMotion}
-										className="text-xs sm:text-sm">
+										className="text-sm">
 											Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt omnis voluptas reiciendis minima similique fuga repellat qui blanditiis aliquid voluptatum!
 									</motion.p>
 								</motion.div>
