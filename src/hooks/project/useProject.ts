@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useProjectQuery } from "@/hooks/query/useAssetsQuery";
 import { easeIn, easeOut } from "motion/react";
 import { toBase64 } from "@/utilities/base64/base64";
@@ -7,6 +7,9 @@ import { Projects } from "@/types/response/assets";
 export function useProject () {
     const titleSection = "Projects";
     
+    const [open, setOpen] = useState(false);
+    const [defaultOpen, setDefaultOpen] = useState("Default");
+
     const { data, isLoading: isProjectLoading } = useProjectQuery();
 
     const projects: Projects = useMemo(() => {
@@ -26,6 +29,10 @@ export function useProject () {
 
         return () => { mounted = false; };
     }, [projects]);
+
+    const handleDropdown = useCallback(() => {
+        setOpen(!open);
+    }, [open]);
 
     const containerMotion = {
         hidden: { opacity: 0 },
@@ -62,6 +69,10 @@ export function useProject () {
         childMotion,
         projects,
         isProjectLoading,
-        blurDataProjects
+        blurDataProjects,
+        open,
+        handleDropdown,
+        defaultOpen,
+        setDefaultOpen
      };
 }
