@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { easeIn, easeOut } from "motion/react";
 import { useProfileQuery } from "@/hooks/query/useAssetsQuery";
 import { toBase64 } from "@/utilities/base64/base64";
@@ -8,8 +8,13 @@ export function useLogo() {
     const logoName = "Ghifari Ezra Ramadhan";
     const { data, isLoading: isProfileLoading } = useProfileQuery();
 
-    const logo = data?.assets.profile?.[0]?.url ?? null;
-    const profile = data?.assets.profile?.[1]?.url ?? null;
+    const logo = useMemo(()=> {
+        return data?.assets.profile?.[0]?.url ?? null;
+    }, [data]);
+
+    const profile = useMemo(() => {
+        return data?.assets.profile?.[1]?.url ?? null;
+    }, [data]);
 
     // ⬇️ state untuk blur
     const [blurDataLogo, setBlurDataLogo] = useState<Profile>(null);

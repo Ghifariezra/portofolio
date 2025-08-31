@@ -12,7 +12,7 @@ export default function RootLayout({ children }: Readonly<ChildrenProps>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${libertinusSerif.variable} antialiased  font-headline`}>
+				className={`${libertinusSerif.variable} antialiased font-headline tracking-tight`}>
 				<QueryProvider>
 					<ThemeProvider
 						attribute="class"

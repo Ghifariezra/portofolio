@@ -42,6 +42,7 @@ export function ToolBox({
 									alt="Logo"
 									width={100}
 									height={100}
+									priority
 									placeholder="blur"
 									blurDataURL={blurData[index]}
 									className="scale-60"
@@ -81,6 +82,7 @@ export function ToolBox({
 											alt="Logo"
 											width={100}
 											height={100}
+											priority
 											placeholder="blur"
 											blurDataURL={blurData[index]}
 											className="scale-60"

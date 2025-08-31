@@ -1,5 +1,15 @@
-import { ProfileRequest, SkillsRequest, SocialRequest } from "@/services/api/storage/assets";
-import { SkillsResponse, SocialsResponse, ProfileResponse } from "@/types/response/assets";
+import {
+    ProfileRequest,
+    SkillsRequest,
+    SocialRequest,
+    ProjectRequest
+} from "@/services/api/storage/assets";
+import type {
+    SkillsResponse,
+    SocialsResponse,
+    ProfileResponse,
+    ProjectResponse
+} from "@/types/response/assets";
 import { useQuery } from "@tanstack/react-query";
 
 export const useProfileQuery = () => {
@@ -40,6 +50,21 @@ export const useSocialQuery = () => {
 
     return {
         data: query.data as SocialsResponse,
+        isLoading: query.isLoading,
+        isError: query.isError,
+        error: query.error,
+        refetch: query.refetch,
+    };
+};
+
+export const useProjectQuery = () => {
+    const query = useQuery({
+        queryKey: ["projects"],
+        queryFn: ProjectRequest,
+    });
+
+    return {
+        data: query.data as ProjectResponse,
         isLoading: query.isLoading,
         isError: query.isError,
         error: query.error,
