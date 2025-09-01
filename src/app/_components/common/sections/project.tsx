@@ -7,11 +7,7 @@ import { CardProjects } from "@/app/_components/common/cards/projects";
 
 export default function Project() {
 	const { projectData } = useHomeContext();
-	const { 
-		titleSection, 
-		containerMotion, 
-		childMotion 
-	} = projectData;
+	const { titleSection, containerMotion, childMotion } = projectData;
 
 	return (
 		<motion.section
@@ -26,9 +22,12 @@ export default function Project() {
 				className="text-xl sm:text-2xl font-semibold">
 				{titleSection}
 			</motion.h1>
-			<motion.div variants={childMotion} className="flex flex-col gap-4">
-				{/* Dropdown */}
-				<StatusProject />
+			<motion.div variants={childMotion} className="flex flex-col gap-8">
+				<motion.div className="flex gap-4 justify-between">
+					{/* Dropdown */}
+					<StatusProject check="status" />
+					<StatusProject check="category" />
+				</motion.div>
 				{/* Projects */}
 				<CardProjects />
 			</motion.div>

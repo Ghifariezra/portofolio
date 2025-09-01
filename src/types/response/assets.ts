@@ -25,6 +25,7 @@ export type ProjectResponse = {
     projects: Array<{
         uuid: string;
         title: string;
+        category: string;
         description: string;
         slug: string;
         partner_team: string[];

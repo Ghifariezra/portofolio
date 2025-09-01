@@ -13,26 +13,41 @@ import { Projects } from "@/types/response/assets";
 export function useProject() {
     const titleSection = "Projects";
 
-    const [open, setOpen] = useState(false);
-    const [defaultOpen, setDefaultOpen] = useState("Default");
-    const [dropDownData] = useState<string[]>([
-        "Default",
-        "Individual",
-        "Collaboration",
-    ]);
-    const dropDownRef = useRef<HTMLDivElement>(null);
+    const [defaultStatus, setDefaultStatus] = useState("Default");
+    const [defaultCategory, setDefaultCategory] = useState("Default");
+    const [openStatus, setOpenStatus] = useState(false);
+    const [openCategory, setOpenCategory] = useState(false);
+    const dropDownData = useCallback((check: string): string[] => {
+        if (check === "status") return ["Default", "Individual", "Collaboration"];
+        if (check === "category") return ["Default", "Web", "Data"];
+        return [];
+    }, []);
+    const dropDownStatusRef = useRef<HTMLDivElement>(null);
+    const dropDownCategoryRef = useRef<HTMLDivElement>(null);
+
 
     const { data, isLoading: isProjectLoading } = useProjectQuery();
 
     const projects: Projects = useMemo(() => {
         if (!data) return [];
 
-        const status = defaultOpen.toLowerCase();
+        let filtered = data.projects;
 
-        if (status === "default") return data.projects;
+        if (defaultStatus.toLowerCase() !== "default") {
+            filtered = filtered.filter(
+                (item) => item.status.toLowerCase() === defaultStatus.toLowerCase()
+            );
+        }
 
-        return data.projects.filter((item) => item.status.toLowerCase() === status);
-    }, [data, defaultOpen]);
+        if (defaultCategory.toLowerCase() !== "default") {
+            filtered = filtered.filter(
+                (item) => item.category.toLowerCase() === defaultCategory.toLowerCase()
+            );
+        }
+
+        return filtered;
+    }, [data, defaultStatus, defaultCategory]);
+
 
     const [blurDataProjects, setBlurDataProjects] = useState<string[]>([]);
 
@@ -48,21 +63,31 @@ export function useProject() {
         return () => { mounted = false; };
     }, [projects]);
 
-    const handleDropdown = useCallback(() => {
-        setOpen(!open);
-    }, [open]);
+    const handleDropdownStatus = useCallback(() => {
+        setOpenStatus(!openStatus);
+    }, [openStatus]);
+    const handleDropdownCategory = useCallback(() => {
+        setOpenCategory(!openCategory);
+    }, [openCategory]);
 
     useEffect(() => {
         const handleClick = (e: MouseEvent) => {
-            if (dropDownRef.current && !dropDownRef.current.contains(e.target as Node)) {
-                setOpen(false);
+            if (
+                dropDownStatusRef.current &&
+                !dropDownStatusRef.current.contains(e.target as Node)
+            ) {
+                setOpenStatus(false);
+            }
+            if (
+                dropDownCategoryRef.current &&
+                !dropDownCategoryRef.current.contains(e.target as Node)
+            ) {
+                setOpenCategory(false);
             }
         };
         document.addEventListener("mousedown", handleClick);
-        return () => {
-            document.removeEventListener("mousedown", handleClick);
-        };
-    }, []); // cukup kosong
+        return () => document.removeEventListener("mousedown", handleClick);
+    }, []);
 
 
     const containerMotion = {
@@ -101,11 +126,16 @@ export function useProject() {
         projects,
         isProjectLoading,
         blurDataProjects,
-        open,
-        handleDropdown,
-        defaultOpen,
-        setDefaultOpen,
-        dropDownRef,
-        dropDownData
+        openStatus,
+        openCategory,
+        handleDropdownStatus,
+        handleDropdownCategory,
+        defaultStatus,
+        defaultCategory,
+        setDefaultStatus,
+        setDefaultCategory,
+        dropDownData,
+        dropDownStatusRef,
+        dropDownCategoryRef
     };
 }
