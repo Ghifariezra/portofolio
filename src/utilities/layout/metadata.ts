@@ -4,6 +4,25 @@ import { getProjectBySlug } from "@/utilities/project/slug";
 const metaHome: Metadata = {
     title: "Ghifari Ezra Ramadhan",
     description: "Ghifari Ezra - Portfolio",
+    openGraph: {
+        title: "Ghifari Ezra Ramadhan",
+        description: "Ghifari Ezra - Portfolio",
+        url: "https://portofolio-jade-two.vercel.app/",
+        images: [
+            {
+                url: "https://fegnkzxvhxnbvqkhuzfo.supabase.co/storage/v1/object/public/Portofolio/profile/logo.webp",
+                width: 1200,
+                height: 630,
+                alt: "Ghifari Ezra Ramadhan",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Ghifari Ezra Ramadhan",
+        description: "Ghifari Ezra - Portfolio",
+        images: ["https://fegnkzxvhxnbvqkhuzfo.supabase.co/storage/v1/object/public/Portofolio/profile/logo.webp"],
+    },
 };
 
 const metaProject = async ({ slug }: { slug: string }): Promise<Metadata> => {
