@@ -8,7 +8,7 @@ const metaHome: Metadata = {
 };
 
 const metaProject = async ({ params }: SlugProps): Promise<Metadata> => {
-const { slug } = await params;
+    const { slug } = await params;
     const project = await getProjectBySlug(slug);
 
     if (!project) {
@@ -50,8 +50,8 @@ const metaNotFound: Metadata = {
     description: "The page you are looking for does not exist.",
 };
 
-export { 
-    metaHome, 
+export {
+    metaHome,
     metaNotFound,
     metaProject
- };
+};
