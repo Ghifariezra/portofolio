@@ -12,7 +12,7 @@ export async function getProjectBySlug(slug: string) {
             "Content-Type": "application/json",
             Cookie: `csrfToken=${csrfToken}`,
         },
-        cache: "no-store",
+        cache: process.env.NODE_ENV === "development" ? "no-cache" : "force-cache",
     });
 
     return await data.json();

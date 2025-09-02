@@ -22,8 +22,8 @@ export function Project({ project }: { project: ProjectBySlugResponse }) {
 						quality={100}
 						priority
 						placeholder="blur"
-						blurDataURL={project.blurData}
 						className="w-full h-full object-cover"
+						blurDataURL={project.blurData}
 					/>
 				</div>
 				<Avatars
