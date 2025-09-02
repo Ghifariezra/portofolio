@@ -15,7 +15,6 @@ function Logo() {
 		logoName,
 		imageMotion,
 		logo,
-		blurDataLogo,
 		isProfileLoading,
 	} = logoData;
 	
@@ -39,16 +38,15 @@ function Logo() {
 				{isProfileLoading ? (
 					<LogoSkeleton />
 				) : (
-					logo &&
-					blurDataLogo ? (
+					logo ? (
 						<Image
-							src={logo}
+							src={logo.url}
 							width={500}
 							height={500}
 							alt="logo"
 							priority
 							placeholder="blur"
-							blurDataURL={blurDataLogo}
+							blurDataURL={logo.blurDataUrl}
 						/>
 					): (
 						<NoLogoSkeleton />

@@ -25,11 +25,10 @@ export function CardAbout({
 		changeProfile,
 		change,
 		isSkillsLoading,
-		blurDataSkills,
 		skills,
 		logoData,
 	} = useHomeContext();
-	const { logo, profile, blurDataLogo, isProfileLoading } = logoData;
+	const { logo, profile, isProfileLoading } = logoData;
 
 	return (
 		<>
@@ -74,7 +73,6 @@ export function CardAbout({
 								<ToolBox
 									check="skills"
 									data={skills}
-									blurData={blurDataSkills}
 									className="w-12 h-12 bg-slate-300/30  rounded-full overflow-hidden cursor-pointer"
 								/>
 							)}
@@ -95,10 +93,9 @@ export function CardAbout({
 							{isProfileLoading && <ProfileSkeleton />}
 							{logo &&
 								profile &&
-								blurDataLogo &&
 								!isProfileLoading && (
 									<Image
-										src={change ? profile : logo}
+										src={change ? profile.url : logo.url}
 										width={500}
 										height={500}
 										style={{
@@ -109,7 +106,7 @@ export function CardAbout({
 										priority
 										alt="avatar"
 										placeholder="blur"
-										blurDataURL={blurDataLogo}
+										blurDataURL={change ? profile.blurDataUrl : logo.blurDataUrl}
 									/>
 								)}
 						</motion.div>

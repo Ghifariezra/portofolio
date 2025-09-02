@@ -1,13 +1,18 @@
 export type ProfileResponse = {
     assets: {
-        profile: Array<{ url: string }>;
+        profile: Array<{ 
+            url: string,
+            blurData: string
+         }>;
     };
 };
+
 export type SkillsResponse = {
     assets: {
         skills: Array<{
             name: string,
-            url: string
+            url: string,
+            blurData: string
         }>;
     };
 };
@@ -16,7 +21,8 @@ export type SocialsResponse = {
     assets: {
         "social-media": Array<{
             name: string,
-            url: string
+            url: string,
+            blurData: string
         }>;
     };
 };
@@ -31,6 +37,7 @@ export type ProjectResponse = {
         partner_team: string[];
         partner_social_media: string[];
         image: string;
+        blurData: string;
         demo: string;
         status: "individual" | "collaboration" | "default";
         created_at: string;
@@ -38,9 +45,7 @@ export type ProjectResponse = {
     }>;
 };
 
-
+export type ProjectBySlugResponse = ProjectResponse["projects"][0];
 export type Profile = ProfileResponse["assets"]["profile"][0]["url"] | null;
-export type Skills = SkillsResponse["assets"]["skills"];
 export type Projects = ProjectResponse["projects"];
-export type Socials = SocialsResponse["assets"]["social-media"];
 export type csrfToken = string | null;

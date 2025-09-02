@@ -14,7 +14,6 @@ export function ProfileStatus() {
 		available,
 		location,
 		isSocialLoading,
-		blurDataSocial,
 		socials,
 	} = useHomeContext();
 
@@ -45,7 +44,6 @@ export function ProfileStatus() {
 							<AnimatePresence mode="sync">
 								<ToolBox
 									data={socials}
-									blurData={blurDataSocial}
 									check="social-media"
 									className="w-8 h-8 bg-slate-300/30  rounded-full overflow-hidden"
 								/>

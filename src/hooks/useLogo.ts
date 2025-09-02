@@ -1,28 +1,24 @@
-import { useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import { easeIn, easeOut } from "motion/react";
 import { useProfileQuery } from "@/hooks/query/useAssetsQuery";
-import { toBase64 } from "@/utilities/base64/base64";
-import { Profile } from "@/types/response/assets";
 
 export function useLogo() {
     const logoName = "Ghifari Ezra Ramadhan";
     const { data, isLoading: isProfileLoading } = useProfileQuery();
 
     const logo = useMemo(()=> {
-        return data?.assets.profile?.[0]?.url ?? null;
+        return {
+            url: data?.assets.profile?.[0]?.url,
+            blurDataUrl: data?.assets.profile?.[0]?.blurData 
+        };
     }, [data]);
 
     const profile = useMemo(() => {
-        return data?.assets.profile?.[1]?.url ?? null;
+        return {
+            url: data?.assets.profile?.[1]?.url,
+            blurDataUrl: data?.assets.profile?.[1]?.blurData
+        }
     }, [data]);
-
-    // ⬇️ state untuk blur
-    const [blurDataLogo, setBlurDataLogo] = useState<Profile>(null);
-
-    useEffect(() => {
-        if (!logo) return;
-        toBase64(logo).then((res) => setBlurDataLogo(res));
-    }, [logo]);
 
     // Motion Config
     const containerMotion = {
@@ -80,7 +76,6 @@ export function useLogo() {
         imageMotion,
         logo,
         profile,
-        blurDataLogo,
         isProfileLoading
     };
 }

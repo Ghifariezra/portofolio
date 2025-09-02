@@ -7,7 +7,6 @@ import {
 } from "react";
 import { useProjectQuery } from "@/hooks/query/useAssetsQuery";
 import { easeIn, easeOut } from "motion/react";
-import { toBase64 } from "@/utilities/base64/base64";
 import { Projects } from "@/types/response/assets";
 
 export function useProject() {
@@ -24,7 +23,6 @@ export function useProject() {
     }, []);
     const dropDownStatusRef = useRef<HTMLDivElement>(null);
     const dropDownCategoryRef = useRef<HTMLDivElement>(null);
-
 
     const { data, isLoading: isProjectLoading } = useProjectQuery();
 
@@ -47,21 +45,6 @@ export function useProject() {
 
         return filtered;
     }, [data, defaultStatus, defaultCategory]);
-
-
-    const [blurDataProjects, setBlurDataProjects] = useState<string[]>([]);
-
-    useEffect(() => {
-        let mounted = true;
-
-        if (projects.length > 0) {
-            Promise.all(projects.map((item) => toBase64(item.image))).then((res) => {
-                if (mounted) setBlurDataProjects(res);
-            });
-        }
-
-        return () => { mounted = false; };
-    }, [projects]);
 
     const handleDropdownStatus = useCallback(() => {
         setOpenStatus(!openStatus);
@@ -125,7 +108,6 @@ export function useProject() {
         childMotion,
         projects,
         isProjectLoading,
-        blurDataProjects,
         openStatus,
         openCategory,
         handleDropdownStatus,

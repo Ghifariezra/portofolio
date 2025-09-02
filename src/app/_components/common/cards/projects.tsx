@@ -12,7 +12,7 @@ import { Avatars } from "@/app/_components/ui/avatars/avatars";
 
 export function CardProjects() {
 	const { projectData } = useHomeContext();
-	const { childMotion, projects, isProjectLoading, blurDataProjects } =
+	const { childMotion, projects, isProjectLoading } =
 		projectData;
 
 	return (
@@ -20,12 +20,11 @@ export function CardProjects() {
 			{isProjectLoading ? (
 				<ProjectSkeleton length={projects.length} />
 			) : !isProjectLoading &&
-			  projects.length > 0 &&
-			  blurDataProjects.length > 0 ? (
+			  projects.length > 0 ? (
 				<>
 					{projects.map((project, index) => (
 						<motion.div
-							key={project.uuid}
+							key={index}
 							variants={childMotion}
 							whileHover={{
 								y: -10,
@@ -41,9 +40,8 @@ export function CardProjects() {
 									alt={project.title}
 									sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
 									fill
-									priority
-									style={{ objectFit: "cover" }}
-									blurDataURL={blurDataProjects[index]}
+									placeholder="blur"
+									blurDataURL={project.blurData}
 								/>
 							</motion.div>
 							<motion.div
@@ -68,7 +66,10 @@ export function CardProjects() {
 										contributors={project.partner_team}
 									/>
 									{/* Button */}
-									<ButtonProjects url={project.demo} />
+									<ButtonProjects
+										url={project.demo}
+										slug={project.slug}
+									/>
 								</motion.div>
 							</motion.div>
 						</motion.div>

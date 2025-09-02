@@ -1,36 +1,39 @@
 "use client";
-
 import { motion } from "motion/react";
-import { useHomeContext } from "@/app/_components/providers/home-provider";
-import { StatusProject } from "@/app/_components/common/dropdown/status-project";
-import { CardProjects } from "@/app/_components/common/cards/projects";
+import type { ProjectBySlugResponse } from "@/types/response/assets";
+import Image from "next/image";
+import { Avatars } from "@/app/_components/ui/avatars/avatars";
 
-export default function Project() {
-	const { projectData } = useHomeContext();
-	const { titleSection, containerMotion, childMotion } = projectData;
-
+export function Project({ project }: { project: ProjectBySlugResponse }) {
 	return (
 		<motion.section
-			id="projects"
-			variants={containerMotion}
-			initial="hidden"
-			animate="visible"
-			whileInView="visible"
-			className="flex flex-col min-h-screen py-6 px-6 gap-6">
-			<motion.h1
-				variants={childMotion}
-				className="text-xl sm:text-2xl font-semibold">
-				{titleSection}
-			</motion.h1>
-			<motion.div variants={childMotion} className="flex flex-col gap-8">
-				<motion.div className="flex gap-4 justify-between">
-					{/* Dropdown */}
-					<StatusProject check="status" />
-					<StatusProject check="category" />
-				</motion.div>
-				{/* Projects */}
-				<CardProjects />
-			</motion.div>
+			key={project.slug}
+			initial={{ opacity: 0, y: 50 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.5 }}
+			className="flex flex-col items-center justify-center min-h-screen my-23 mx-4 sm:mx-8">
+			<div className="relative flex flex-col gap-6 w-fit h-full py-4 sm:py-8 px-4 sm:px-8 glassess border-glassess rounded-2xl">
+				<div className="aspect-video rounded-md overflow-hidden w-full h-full border-glassess">
+					<Image
+						src={project.image}
+						alt={project.title}
+						width={500}
+						height={500}
+						quality={100}
+						priority
+						placeholder="blur"
+						blurDataURL={project.blurData}
+						className="w-full h-full object-cover"
+					/>
+				</div>
+				<Avatars contributors={project.partner_team} />
+				<div className="flex flex-col gap-2">
+					<h1 className="text-lg sm:text-2xl font-semibold wi-full">
+						{project.title}
+					</h1>
+					<p>{project.description}</p>
+				</div>
+			</div>
 		</motion.section>
 	);
 }

@@ -1,6 +1,9 @@
-"use client";
-import Loader from "@/app/_components/ui/loaders/page";
+import { Loader } from "lucide-react";
 
 export default function Loading() {
-    return <Loader />;
+	return (
+		<div className="flex items-center justify-center h-screen w-screen">
+			<Loader className="animate-spin" />
+		</div>
+	);
 }

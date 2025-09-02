@@ -11,19 +11,17 @@ export function ToolBox({
 	className,
 	check,
 	data,
-	blurData,
 }: Readonly<{
 	className: string;
 	check: string;
-	data: { name: string; url: string }[];
-	blurData: string[];
+	data: { name: string; url: string; blurData: string }[];
 }>) {
 	if (check == "skills") {
 		return (
 			<>
-				{data && data.length > 0 && blurData.length > 0 ? (
+				{data && data.length > 0 ? (
 					<>
-						{data.map((dt, index) => (
+						{data.map((dt) => (
 							<motion.div
 								key={dt.name}
 								whileHover="hover"
@@ -33,9 +31,8 @@ export function ToolBox({
 									alt="Logo"
 									width={100}
 									height={100}
-									priority
 									placeholder="blur"
-									blurDataURL={blurData[index]}
+									blurDataURL={dt.blurData}
 									className="scale-60"
 								/>
 							</motion.div>
@@ -52,8 +49,7 @@ export function ToolBox({
 		<>
 			{check === "social-media" &&
 			data &&
-			data.length > 0 &&
-			blurData.length > 0 ? (
+			data.length > 0 ? (
 				<>
 					{data.map((dt, index) => (
 						<motion.div
@@ -72,7 +68,7 @@ export function ToolBox({
 											height={100}
 											priority
 											placeholder="blur"
-											blurDataURL={blurData[index]}
+											blurDataURL={dt.blurData}
 											className="scale-60"
 										/>
 									</Link>
