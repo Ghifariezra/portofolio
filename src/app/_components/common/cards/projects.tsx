@@ -12,15 +12,13 @@ import { Avatars } from "@/app/_components/ui/avatars/avatars";
 
 export function CardProjects() {
 	const { projectData } = useHomeContext();
-	const { childMotion, projects, isProjectLoading } =
-		projectData;
+	const { childMotion, projects, isProjectLoading } = projectData;
 
 	return (
 		<motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
 			{isProjectLoading ? (
 				<ProjectSkeleton length={projects.length} />
-			) : !isProjectLoading &&
-			  projects.length > 0 ? (
+			) : !isProjectLoading && projects.length > 0 ? (
 				<>
 					{projects.map((project, index) => (
 						<motion.div
@@ -64,7 +62,9 @@ export function CardProjects() {
 									{/* Avatars */}
 									<Avatars
 										contributors={project.partner_team}
-										socialMedia={project.partner_social_media}
+										socialMedia={
+											project.partner_social_media
+										}
 									/>
 									{/* Button */}
 									<ButtonProjects

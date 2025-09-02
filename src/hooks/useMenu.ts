@@ -1,9 +1,16 @@
 import { easeInOut, useScroll, useMotionValueEvent } from "motion/react";
 import { useState, useCallback, useRef, useEffect } from "react";
+import type { MenuItemType } from "@/types/menu/menu";
 
 export const useMenu = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [menuItems] = useState<MenuItemType[]>([
+        { name: "Home", href: "/" },
+        { name: "About", href: "/#about" },
+        { name: "Projects", href: "/#projects" },
+        { name: "Contact", href: "https://t.me/GhifariEzR" },
+    ]);
     const navRef = useRef<HTMLDivElement>(null);
     const { scrollY } = useScroll();
 
@@ -90,5 +97,6 @@ export const useMenu = () => {
         toggleMenu,
         navRef,
         scrolled,
+        menuItems,
     };
 };

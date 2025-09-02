@@ -2,13 +2,12 @@
 import { Fragment } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useMenu } from "@/hooks/useMenu";
-import { menuItems } from "@/utilities/menu/menu";
 import Link from "next/link";
 import type { ClassNameProps } from "@/types/props/className";
 import ContactButton from "@/app/_components/ui/buttons/contact";
 
 export function Menu({ className }: ClassNameProps) {
-	const { containerMotion, itemMotion } = useMenu();
+	const { containerMotion, itemMotion, menuItems } = useMenu();
 
 	return (
 		<motion.ul

@@ -24,7 +24,11 @@ export function ToolBox({
 						{data.map((dt) => (
 							<motion.div
 								key={dt.name}
-								whileHover="hover"
+								whileHover={{
+									y: -10,
+									scale: 1.1,
+									transition: { duration: 0.5, ease: "easeInOut" },
+								}}
 								className={className}>
 								<Image
 									src={dt.url}

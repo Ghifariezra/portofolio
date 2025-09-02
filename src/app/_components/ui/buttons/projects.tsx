@@ -5,9 +5,14 @@ import { Button } from "@/app/_components/ui/button";
 import { BookCheck, CircleArrowOutUpRight } from "lucide-react";
 import Link from "next/link";
 
-export function ButtonProjects({ url, slug }: { url: string, slug: string }) {
+export function ButtonProjects({ url, slug }: { url: string; slug: string }) {
 	return (
-		<motion.div className="flex flex-wrap lg:flex-nowrap items-center justify-between gap-4">
+		<motion.div
+			className={`flex flex-wrap lg:flex-nowrap items-center ${
+				url.length > 0 && slug.length > 0
+					? "justify-between"
+					: "justify-end"
+			} gap-4 select-none`}>
 			{url.length > 0 && slug.length > 0 ? (
 				<>
 					{/* Button */}
@@ -71,11 +76,12 @@ export function ButtonProjects({ url, slug }: { url: string, slug: string }) {
 						stiffness: 80,
 						damping: 15,
 					}}
-					className="w-full flex justify-end">
+					className="flex justify-center">
 					<Button variant={"outline"} asChild>
 						<Link
 							href={`/project/${slug}`}
-							className="flex items-center !bg-transparent hover:!bg-gray-200/30 hover:dark:!bg-slate-200/10 gap-2 cursor-pointer" prefetch>
+							className="flex items-center !bg-transparent hover:!bg-gray-200/30 hover:dark:!bg-slate-200/10 gap-2 cursor-pointer"
+							prefetch>
 							<motion.div className="relative">
 								<BookCheck size={24} strokeWidth={2} />
 							</motion.div>
