@@ -28,6 +28,17 @@ const metaHome: Metadata = {
 const metaProject = async ({ slug }: { slug: string }): Promise<Metadata> => {
     const project = await getProjectBySlug(slug);
 
+    const paths = [
+        "projects/achievly.webp",
+        "projects/batch-airflow.webp",
+        "projects/elt.webp",
+        "projects/etl.webp",
+        "projects/kapita-konsul.webp",
+        "projects/tech-playground.webp",
+    ];
+
+    const imagePath = paths.find((p) => p === project.image) || "";
+
     if (!project) {
         return {
             title: "Project Not Found | Ghifari Ezra",
@@ -46,7 +57,7 @@ const metaProject = async ({ slug }: { slug: string }): Promise<Metadata> => {
             url: `https://portofolio-jade-two.vercel.app/project/${slug}`,
             images: [
                 {
-                    url: `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}${project.image}`,
+                    url: `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}${imagePath}`,
                     width: 1200,
                     height: 630,
                     alt: project.title,
@@ -57,7 +68,7 @@ const metaProject = async ({ slug }: { slug: string }): Promise<Metadata> => {
             card: "summary_large_image",
             title: project.title,
             description: project.description?.slice(0, 150),
-            images: [`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}${project.image}`],
+            images: [`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}${imagePath}`],
         },
     };
 }
