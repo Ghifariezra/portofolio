@@ -29,12 +29,12 @@ const metaProject = async ({ slug }: { slug: string }): Promise<Metadata> => {
     const project = await getProjectBySlug(slug);
 
     const paths = [
-        "projects/achievly.webp",
-        "projects/batch-airflow.webp",
-        "projects/elt.webp",
-        "projects/etl.webp",
-        "projects/kapita-konsul.webp",
-        "projects/tech-playground.webp",
+        "/projects/achievly.webp",
+        "/projects/batch-airflow.webp",
+        "/projects/elt.webp",
+        "/projects/etl.webp",
+        "/projects/kapita-konsul.webp",
+        "/projects/tech-playground.webp",
     ];
 
     const imagePath = paths.find((p) => p === project.image) || "";
