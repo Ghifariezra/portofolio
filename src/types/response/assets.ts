@@ -37,6 +37,7 @@ export type ProjectResponse = {
         partner_team: string[];
         partner_social_media: string[];
         image: string;
+        imageUrl: string;
         blurData: string;
         demo: string;
         status: "individual" | "collaboration" | "default";

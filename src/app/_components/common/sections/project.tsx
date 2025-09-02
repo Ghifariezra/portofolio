@@ -29,7 +29,7 @@ export function Project({ slug }: { slug: string }) {
 			<div className="relative flex flex-col gap-6 w-fit h-full py-4 sm:py-8 px-4 sm:px-8 glassess border-glassess rounded-2xl">
 				<div className="relative aspect-video w-full rounded-md overflow-hidden border-glassess">
 					<Image
-						src={project.image}
+						src={project.imageUrl}
 						alt={project.title}
 						fill
 						priority

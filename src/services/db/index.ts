@@ -85,6 +85,6 @@ export class PortfolioService {
         const url = await this.getSignedUrl(data.image);
         const blurDataUrl = await toBase64(url);
 
-        return { ...data, image: url, blurData: blurDataUrl };
+        return { ...data, imageUrl: url, blurData: blurDataUrl };
     }
 }
