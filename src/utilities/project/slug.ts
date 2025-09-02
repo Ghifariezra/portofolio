@@ -14,6 +14,7 @@ export async function getProjectBySlug(slug: string) {
         },
         cache: "no-store"
     });
-
-    return await data.json();
+    
+    const dt = await data.json();
+    return await dt;
 }
