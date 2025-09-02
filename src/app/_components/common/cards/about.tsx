@@ -66,7 +66,7 @@ export function CardAbout({
 							Toolbox
 						</motion.h1>
 						<motion.div
-							className="flex flex-wrap gap-2">
+							className="flex flex-wrap justify-center sm:justify-start gap-2">
 							{isSkillsLoading ? (
 								<SkillsSkeleton />
 							) : (
