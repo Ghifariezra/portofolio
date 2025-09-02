@@ -11,7 +11,7 @@ export function Project({ project }: { project: ProjectBySlugResponse }) {
 			initial={{ opacity: 0, y: 50 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.5 }}
-			className="flex flex-col items-center justify-center min-h-screen my-23 mx-4 sm:mx-8">
+			className="flex flex-col items-center justify-center min-h-screen sm:my-23 my=12 mx-4 sm:mx-8">
 			<div className="relative flex flex-col gap-6 w-fit h-full py-4 sm:py-8 px-4 sm:px-8 glassess border-glassess rounded-2xl">
 				<div className="aspect-video rounded-md overflow-hidden w-full h-full border-glassess">
 					<Image
@@ -26,7 +26,10 @@ export function Project({ project }: { project: ProjectBySlugResponse }) {
 						className="w-full h-full object-cover"
 					/>
 				</div>
-				<Avatars contributors={project.partner_team} />
+				<Avatars
+					contributors={project.partner_team}
+					socialMedia={project.partner_social_media}
+				/>
 				<div className="flex flex-col gap-2">
 					<h1 className="text-lg sm:text-2xl font-semibold wi-full">
 						{project.title}

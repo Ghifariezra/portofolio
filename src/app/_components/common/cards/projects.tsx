@@ -64,6 +64,7 @@ export function CardProjects() {
 									{/* Avatars */}
 									<Avatars
 										contributors={project.partner_team}
+										socialMedia={project.partner_social_media}
 									/>
 									{/* Button */}
 									<ButtonProjects
