@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { SlugProps } from "@/types/props/slug";
 import { getProjectBySlug } from "@/utilities/project/slug";
 
 const metaHome: Metadata = {
@@ -7,8 +6,7 @@ const metaHome: Metadata = {
     description: "Ghifari Ezra - Portfolio",
 };
 
-const metaProject = async ({ params }: SlugProps): Promise<Metadata> => {
-    const { slug } = await params;
+const metaProject = async ({ slug }: { slug: string }): Promise<Metadata> => {
     const project = await getProjectBySlug(slug);
 
     if (!project) {
