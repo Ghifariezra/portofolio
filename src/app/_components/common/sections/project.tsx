@@ -13,17 +13,16 @@ export function Project({ project }: { project: ProjectBySlugResponse }) {
 			transition={{ duration: 0.5 }}
 			className="flex flex-col items-center justify-center min-h-screen sm:my-23 my=12 mx-4 sm:mx-8">
 			<div className="relative flex flex-col gap-6 w-fit h-full py-4 sm:py-8 px-4 sm:px-8 glassess border-glassess rounded-2xl">
-				<div className="aspect-video rounded-md overflow-hidden w-full h-full border-glassess">
+				<div className="relative aspect-video w-full rounded-md overflow-hidden border-glassess">
 					<Image
 						src={project.image}
 						alt={project.title}
-						width={500}
-						height={500}
-						quality={100}
+						fill
 						priority
+						quality={100}
 						placeholder="blur"
-						className="w-full h-full object-cover"
 						blurDataURL={project.blurData}
+						className="object-cover"
 					/>
 				</div>
 				<Avatars
