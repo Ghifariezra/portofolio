@@ -1,13 +1,27 @@
 "use client";
 import { motion } from "motion/react";
-import type { ProjectBySlugResponse } from "@/types/response/assets";
 import Image from "next/image";
 import { Avatars } from "@/app/_components/ui/avatars/avatars";
+import { useProjectBySlug } from "@/hooks/project/useProjectBySlug";
+import {
+	ProjectSkeleton,
+	ProjectNotFound,
+} from "@/app/_components/common/skeleton/projects/project";
 
-export function Project({ project }: { project: ProjectBySlugResponse }) {
+export function Project({ slug }: { slug: string }) {
+	const { data: project, isLoading } = useProjectBySlug(slug);
+
+	if (isLoading) {
+		return <ProjectSkeleton />;
+	}
+
+	if (!project) {
+		return <ProjectNotFound />;
+	}
+
 	return (
 		<motion.section
-			key={project.slug}
+			key={slug}
 			initial={{ opacity: 0, y: 50 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.5 }}

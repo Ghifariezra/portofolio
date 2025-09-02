@@ -6,7 +6,7 @@ import Image from "next/image";
 import {
 	ProjectSkeleton,
 	NoProjectSkeleton,
-} from "@/app/_components/common/skeleton/projects";
+} from "@/app/_components/common/skeleton/projects/projects";
 import { ButtonProjects } from "@/app/_components/ui/buttons/projects";
 import { Avatars } from "@/app/_components/ui/avatars/avatars";
 

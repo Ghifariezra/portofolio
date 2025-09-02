@@ -73,9 +73,10 @@ export const useProjectQuery = () => {
         refetch: query.refetch,
     };
 };
+
 export const useProjectBySlugQuery = ({slug} : {slug: string}) => {
     const query = useQuery({
-        queryKey: ["project-by-slug"],
+        queryKey: ["project-by-slug", slug],
         queryFn: () => ProjectBySlugRequest({slug}),
     });
 
