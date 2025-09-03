@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getProjectBySlug } from "@/utilities/project/slug";
+import { PortfolioService } from "@/services/db";
 
 const metaHome: Metadata = {
     title: "Ghifari Ezra Ramadhan",
@@ -26,7 +26,8 @@ const metaHome: Metadata = {
 };
 
 const metaProject = async ({ slug }: { slug: string }): Promise<Metadata> => {
-    const project = await getProjectBySlug(slug);
+    const client = new PortfolioService();
+    const project = await client.getProjectBySlug(slug);
 
     if (!project) {
         return {
