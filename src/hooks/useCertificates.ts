@@ -20,5 +20,5 @@ export function useCertificates() {
         return () => clearInterval(interval);
     }, [data, handleNext]);
 
-    return { data, isLoading, isError, currentIndex, };
+    return { data, isLoading, isError, currentIndex };
 }
