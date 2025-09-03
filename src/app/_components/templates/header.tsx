@@ -1,9 +1,10 @@
 "use client";
 import Navbar from "@/app/_components/common/navbar/navbar";
+import { memo } from "react";
 import { useMenu } from "@/hooks/useMenu";
 import { Toaster } from "sonner";
 
-export default function Header() {
+function Header() {
 	const { scrolled } = useMenu();
 	return (
 		<header
@@ -15,3 +16,5 @@ export default function Header() {
 		</header>
 	);
 }
+
+export default memo(Header);

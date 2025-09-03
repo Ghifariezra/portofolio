@@ -4,8 +4,9 @@ import { motion } from "motion/react";
 import { useHomeContext } from "@/app/_components/providers/home-provider";
 import { StatusProject } from "@/app/_components/common/dropdown/status-project";
 import { CardProjects } from "@/app/_components/common/cards/projects";
+import { memo } from "react";
 
-export default function Projects() {
+function Projects() {
 	const { projectData } = useHomeContext();
 	const { titleSection, containerMotion, childMotion } = projectData;
 
@@ -34,3 +35,5 @@ export default function Projects() {
 		</motion.section>
 	);
 }
+
+export default memo(Projects);

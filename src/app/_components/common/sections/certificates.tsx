@@ -8,8 +8,9 @@ import {
 	ErrorSkeleton,
 	LoadingSkeleton,
 } from "@/app/_components/common/skeleton/certificates";
+import { memo } from "react";
 
-export default function Certificates() {
+function Certificates() {
 	const { data, isLoading, isError, currentIndex } = useCertificates();
 
 	if (isLoading) return LoadingSkeleton();
@@ -62,3 +63,5 @@ export default function Certificates() {
 		</section>
 	);
 }
+
+export default memo(Certificates);

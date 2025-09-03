@@ -2,8 +2,9 @@
 import { motion, AnimatePresence } from "motion/react";
 import { ProfileStatus } from "@/app/_components/common/status/status";
 import { useHomeContext } from "../../providers/home-provider";
+import { memo } from "react";
 
-export default function About() {
+function About() {
 	const { containerTitleMotion } = useHomeContext();
 	return (
 		<AnimatePresence>
@@ -20,3 +21,5 @@ export default function About() {
 		</AnimatePresence>
 	);
 }
+
+export default memo(About);

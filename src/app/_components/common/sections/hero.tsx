@@ -1,8 +1,9 @@
 "use client";
 import { motion } from "motion/react";
 import { useHero } from "@/hooks/home/useHero";
+import { memo } from "react";
 
-export default function Hero() {
+function Hero() {
 	const { containerMotion, quoteMotion, quoteTransform } = useHero();
 
 	return (
@@ -23,3 +24,5 @@ export default function Hero() {
 		</motion.section>
 	);
 }
+
+export default memo(Hero);

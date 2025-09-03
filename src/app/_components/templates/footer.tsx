@@ -1,4 +1,5 @@
 "use client";
+import { memo } from "react";
 
 export default function Footer() {
 	return (
@@ -12,3 +13,5 @@ export default function Footer() {
 		</footer>
 	);
 }
+
+export const FooterMemo = memo(Footer);
