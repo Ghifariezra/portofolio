@@ -1,32 +1,45 @@
 import type { Metadata } from "next";
 import { PortfolioService } from "@/services/db";
 
-const metaHome: Metadata = {
-    title: "Ghifari Ezra Ramadhan",
-    description: "Ghifari Ezra - Portfolio",
-    openGraph: {
+const client = new PortfolioService();
+
+const metaHome = async (): Promise<Metadata> => {
+    const data = await client.getFilesWithSignedUrl("profile");
+    const profile = data.find((file) => file.name === "logo");
+
+    if (!profile) {
+        return {
+            title: "Ghifari Ezra",
+            description: "Ghifari Ezra - Project Portfolio",
+        };
+    }
+
+    return {
         title: "Ghifari Ezra Ramadhan",
         description: "Ghifari Ezra - Portfolio",
-        url: "https://portofolio-jade-two.vercel.app/",
-        images: [
-            {
-                url: `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}profile/logo.webp`,
-                width: 1200,
-                height: 630,
-                alt: "Ghifari Ezra Ramadhan",
-            },
-        ],
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Ghifari Ezra Ramadhan",
-        description: "Ghifari Ezra - Portfolio",
-        images: [`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}profile/logo.webp`],
-    },
-};
+        openGraph: {
+            title: "Ghifari Ezra Ramadhan",
+            description: "Ghifari Ezra - Portfolio",
+            url: "https://portofolio-jade-two.vercel.app/",
+            images: [
+                {
+                    url: profile.url,
+                    width: 1200,
+                    height: 630,
+                    alt: "Ghifari Ezra Ramadhan",
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: "Ghifari Ezra Ramadhan",
+            description: "Ghifari Ezra - Portfolio",
+            images: [profile.url],
+        },
+    }
+}
 
 const metaProject = async ({ slug }: { slug: string }): Promise<Metadata> => {
-    const client = new PortfolioService();
     const project = await client.getProjectBySlug(slug);
 
     if (!project) {

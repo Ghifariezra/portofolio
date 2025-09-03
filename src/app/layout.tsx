@@ -7,7 +7,7 @@ import Layout from "@/app/_components/layout/layout";
 import QueryProvider from "@/app/_components/providers/query-provider";
 import "./globals.css";
 
-export const metadata = metaHome;
+export const metadata = async () => metaHome();
 
 export default function RootLayout({ children }: Readonly<ChildrenProps>) {
 	return (
