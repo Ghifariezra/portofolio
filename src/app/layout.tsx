@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { libertinusSerif } from "@/utilities/layout/fonts";
 import { metaHome } from "@/utilities/layout/metadata";
 import { ThemeProvider } from "@/app/_components/providers/theme-provider";
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: Readonly<ChildrenProps>) {
 						<Layout>{children}</Layout>
 					</ThemeProvider>
 				</QueryProvider>
+				<SpeedInsights />
 			</body>
 		</html>
 	);
