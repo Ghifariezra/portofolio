@@ -47,7 +47,7 @@ const metaProject = async ({ slug }: { slug: string }): Promise<Metadata> => {
             url: `https://portofolio-jade-two.vercel.app/project/${slug}`,
             images: [
                 {
-                    url: `${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}${project.image}`,
+                    url: project.imageUrl,
                     width: 1200,
                     height: 630,
                     alt: project.title,
@@ -58,7 +58,7 @@ const metaProject = async ({ slug }: { slug: string }): Promise<Metadata> => {
             card: "summary_large_image",
             title: project.title,
             description: project.description?.slice(0, 150),
-            images: [`${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL}${project.image}`],
+            images: [project.imageUrl],
         },
     };
 }
