@@ -3,38 +3,24 @@ import { useHomeContext } from "@/app/_components/providers/home-provider";
 import { motion, AnimatePresence } from "motion/react";
 import { CardAbout } from "@/app/_components/common/cards/about";
 import { CardStatus } from "@/app/_components/common/cards/status";
-import {
-	SocialsSkeleton,
-} from "@/app/_components/common/skeleton/socials";
+import { SocialsSkeleton } from "@/app/_components/common/skeleton/socials";
 import { ToolBox } from "@/app/_components/common/cards/toolbox";
 import { DownloadCv } from "@/app/_components/ui/buttons/download";
 
 export function ProfileStatus() {
-	const {
-		available,
-		location,
-		isSocialLoading,
-		socials,
-	} = useHomeContext();
+	const { available, location, isSocialLoading, socials } = useHomeContext();
 
 	return (
 		<>
-			<motion.div
-				className="col-span-2 sm:order-1 flex flex-col-reverse sm:flex-col gap-4 h-full">
+			<motion.div className="col-span-2 sm:order-1 flex flex-col-reverse sm:flex-col gap-4 h-full">
 				<motion.div className="flex flex-wrap lg:flex-nowrap flex-col sm:flex-row gap-2">
 					<CardStatus check="available">
 						{available && (
-							<motion.strong>
-								{available}
-							</motion.strong>
+							<motion.strong>{available}</motion.strong>
 						)}
 					</CardStatus>
 					<CardStatus check="location">
-						{location && (
-							<motion.strong>
-								{location}
-							</motion.strong>
-						)}
+						{location && <motion.strong>{location}</motion.strong>}
 					</CardStatus>
 					<CardStatus check="social-media">
 						<motion.strong>Social Media:</motion.strong>

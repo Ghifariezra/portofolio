@@ -1,52 +1,43 @@
-export type ProfileResponse = {
+export type AssetItem = {
+    url: string;
+    blurData: string;
+    name?: string;
+};
+
+type ProjectItem = {
+    uuid: string;
+    title: string;
+    category: string;
+    description: string;
+    slug: string;
+    partner_team: string[];
+    partner_social_media: string[];
+    image: string;
+    imageUrl: string;
+    blurData: string;
+    demo: string;
+    status: "individual" | "collaboration" | "default";
+    created_at: string;
+    updated_at: string;
+}
+
+type AssetResponse<K extends string> = {
     assets: {
-        profile: Array<{ 
-            url: string,
-            blurData: string
-         }>;
+        [key in K]: Array<AssetItem>;
     };
 };
 
-export type SkillsResponse = {
-    assets: {
-        skills: Array<{
-            name: string,
-            url: string,
-            blurData: string
-        }>;
-    };
+type DefaultProjectResponse<K extends string> = {
+    [key in K]: Array<ProjectItem>;
 };
 
-export type SocialsResponse = {
-    assets: {
-        "social-media": Array<{
-            name: string,
-            url: string,
-            blurData: string
-        }>;
-    };
-};
+export type ProfileResponse = AssetResponse<"profile">;
+export type SkillsResponse = AssetResponse<"skills">;
+export type SocialsResponse = AssetResponse<"social-media">;
+export type CertificatesResponse = AssetResponse<"certificates">;
 
-export type ProjectResponse = {
-    projects: Array<{
-        uuid: string;
-        title: string;
-        category: string;
-        description: string;
-        slug: string;
-        partner_team: string[];
-        partner_social_media: string[];
-        image: string;
-        imageUrl: string;
-        blurData: string;
-        demo: string;
-        status: "individual" | "collaboration" | "default";
-        created_at: string;
-        updated_at: string;
-    }>;
-};
-
-export type ProjectBySlugResponse = ProjectResponse["projects"][0];
-export type Profile = ProfileResponse["assets"]["profile"][0]["url"] | null;
+export type ProjectResponse = DefaultProjectResponse<"projects">;
 export type Projects = ProjectResponse["projects"];
+export type ProjectBySlugResponse = ProjectResponse["projects"][0];
+
 export type csrfToken = string | null;

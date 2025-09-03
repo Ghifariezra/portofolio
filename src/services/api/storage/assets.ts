@@ -1,10 +1,11 @@
 import csrfInterceptor from "@/services/api/csrf/interceptor";
-import type { 
-    ProfileResponse, 
-    ProjectBySlugResponse, 
+import type {
+    CertificatesResponse,
+    ProfileResponse,
+    ProjectBySlugResponse,
     ProjectResponse,
-    SkillsResponse, 
-    SocialsResponse 
+    SkillsResponse,
+    SocialsResponse
 } from "@/types/response/assets";
 
 export const ProfileRequest = async (): Promise<ProfileResponse> => {
@@ -26,6 +27,14 @@ export const SkillsRequest = async (): Promise<SkillsResponse> => {
 export const SocialRequest = async (): Promise<SocialsResponse> => {
     const res = await csrfInterceptor.get("/api/assets", {
         params: { folder: "social-media" },
+    });
+
+    return res.data;
+};
+
+export const CertificatesRequest = async (): Promise<CertificatesResponse> => {
+    const res = await csrfInterceptor.get("/api/assets", {
+        params: { folder: "certificates" },
     });
 
     return res.data;

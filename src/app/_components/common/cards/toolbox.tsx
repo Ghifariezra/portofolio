@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { NoSocialsSkeleton } from "@/app/_components/common/skeleton/socials";
 import { NoSkillsSkeleton } from "@/app/_components/common/skeleton/skills";
+import type { AssetItem } from "@/types/response/assets";
 
 export function ToolBox({
 	className,
@@ -14,7 +15,7 @@ export function ToolBox({
 }: Readonly<{
 	className: string;
 	check: string;
-	data: { name: string; url: string; blurData: string }[];
+	data: AssetItem[];
 }>) {
 	if (check == "skills") {
 		return (

@@ -9,6 +9,7 @@ export const useMenu = () => {
         { name: "Home", href: "/" },
         { name: "About", href: "/#about" },
         { name: "Projects", href: "/#projects" },
+        { name: "Certificates", href: "/#certificates" },
         { name: "Contact", href: "https://t.me/GhifariEzR" },
     ]);
     const navRef = useRef<HTMLDivElement>(null);

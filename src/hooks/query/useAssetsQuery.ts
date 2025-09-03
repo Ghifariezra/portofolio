@@ -3,14 +3,16 @@ import {
     SkillsRequest,
     SocialRequest,
     ProjectRequest,
-    ProjectBySlugRequest
+    ProjectBySlugRequest,
+    CertificatesRequest
 } from "@/services/api/storage/assets";
 import type {
     SkillsResponse,
     SocialsResponse,
     ProfileResponse,
     ProjectResponse,
-    ProjectBySlugResponse
+    ProjectBySlugResponse,
+    CertificatesResponse
 } from "@/types/response/assets";
 import { useQuery } from "@tanstack/react-query";
 
@@ -52,6 +54,21 @@ export const useSocialQuery = () => {
 
     return {
         data: query.data as SocialsResponse,
+        isLoading: query.isLoading,
+        isError: query.isError,
+        error: query.error,
+        refetch: query.refetch,
+    };
+};
+
+export const useCertificatesQuery = () => {
+    const query = useQuery({
+        queryKey: ["certificates"],
+        queryFn: CertificatesRequest,
+    });
+
+    return {
+        data: query.data as CertificatesResponse,
         isLoading: query.isLoading,
         isError: query.isError,
         error: query.error,

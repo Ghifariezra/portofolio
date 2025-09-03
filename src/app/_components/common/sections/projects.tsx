@@ -19,7 +19,7 @@ export default function Projects() {
 			className="flex flex-col min-h-screen py-6 px-6 gap-6">
 			<motion.h1
 				variants={childMotion}
-				className="text-xl sm:text-2xl font-semibold">
+				className="text-2xl font-semibold">
 				{titleSection}
 			</motion.h1>
 			<motion.div variants={childMotion} className="flex flex-col gap-8">

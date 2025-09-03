@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import { MoveUp } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import Link from "next/link";
 import { useSot } from "@/hooks/useSot";
 
@@ -26,10 +26,10 @@ export default function Sot() {
 						stiffness: 400,
 						damping: 17,
 					}}
-					className="fixed bottom-4 right-6 w-fit glassess border-glassess rounded-full p-2 select-none cursor-pointer">
+					className="fixed bottom-4 right-4 w-fit glassess border-glassess rounded-full p-2 select-none cursor-pointer">
 					<Link href="#top" className="flex items-center gap-2">
-						<MoveUp
-							size={26}
+						<ArrowUp
+							size={28}
 							strokeWidth={2}
 							className="text-slate-500 dark:text-slate-400"
 						/>
