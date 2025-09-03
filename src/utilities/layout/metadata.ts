@@ -17,6 +17,16 @@ const metaHome = async (): Promise<Metadata> => {
     return {
         title: "Ghifari Ezra Ramadhan",
         description: "Ghifari Ezra - Portfolio",
+        keywords: [
+            "Ghifari Ezra Ramadhan",
+            "Portfolio Web Developer",
+            "Fullstack Web Developer",
+            "Frontend Developer React Next.js",
+            "Backend Developer Express PostgreSQL",
+            "TypeScript JavaScript",
+            "Tailwind CSS Developer",
+            "Web Developer Indonesia"
+        ],
         openGraph: {
             title: "Ghifari Ezra Ramadhan",
             description: "Ghifari Ezra - Portfolio",
