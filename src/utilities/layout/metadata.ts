@@ -30,7 +30,7 @@ const metaHome = async (): Promise<Metadata> => {
         openGraph: {
             title: "Ghifari Ezra Ramadhan",
             description: "Ghifari Ezra - Portfolio",
-            url: "https://portofolio-jade-two.vercel.app/",
+            url: "https://www.ezdev.xyz/",
             images: [
                 {
                     url: profile.url,
@@ -67,7 +67,7 @@ const metaProject = async ({ slug }: { slug: string }): Promise<Metadata> => {
         openGraph: {
             title: project.title,
             description: project.description?.slice(0, 150),
-            url: `https://portofolio-jade-two.vercel.app/project/${slug}`,
+            url: `https://www.ezdev.xyz/project/${slug}`,
             images: [
                 {
                     url: project.imageUrl,

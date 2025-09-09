@@ -7,13 +7,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     return [
         {
-            url: "https://portofolio-jade-two.vercel.app",
+            url: "https://www.ezdev.xyz/",
             lastModified: new Date(),
             changeFrequency: "yearly",
             priority: 1,
         },
         ...projects.map((project) => ({
-            url: `https://portofolio-jade-two.vercel.app/project/${project.slug}`,
+            url: `https://www.ezdev.xyz/project/${project.slug}`,
             lastModified: new Date(),
             changeFrequency: "yearly" as const,
             priority: 0.8,
