@@ -9,13 +9,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         {
             url: "https://www.ezdev.xyz/",
             lastModified: new Date(),
-            changeFrequency: "yearly",
-            priority: 1,
+            changeFrequency: "weekly",
+            priority: 1.0,
         },
         ...projects.map((project) => ({
             url: `https://www.ezdev.xyz/project/${project.slug}`,
-            lastModified: new Date(),
-            changeFrequency: "yearly" as const,
+            lastModified: project.updatedAt ? new Date(project.updatedAt) : new Date(),
+            changeFrequency: "monthly" as const,
             priority: 0.8,
         })),
     ]
