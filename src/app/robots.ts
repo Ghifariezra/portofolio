@@ -10,8 +10,6 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: [
                     "/api/",      // API internal
                     "/server/",   // server-side route
-                    "/static/",   // static raw file
-                    "/_next/",    // asset Next.js
                     "/404",       // error pages
                     "/500",
                 ],
