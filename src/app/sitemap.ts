@@ -8,13 +8,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return [
         {
             url: "https://www.ezdev.xyz/",
-            lastModified: new Date(),
+            lastModified: new Date().toISOString(),
             changeFrequency: "weekly",
             priority: 1.0,
         },
         ...projects.map((project) => ({
             url: `https://www.ezdev.xyz/project/${project.slug}`,
-            lastModified: project.updatedAt ? new Date(project.updatedAt) : new Date(),
+            lastModified: project.updatedAt
+                ? new Date(project.updatedAt).toISOString()
+                : new Date().toISOString(),
             changeFrequency: "monthly" as const,
             priority: 0.8,
         })),
