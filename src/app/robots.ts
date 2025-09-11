@@ -16,34 +16,10 @@ export default function robots(): MetadataRoute.Robots {
                     "/500",
                 ],
             },
-            // Googlebot (umum)
-            {
-                userAgent: "Googlebot",
-                allow: "/",
-                disallow: ["/api/", "/server/", "/_next/"],
-            },
             // Googlebot-Image (supaya gambar project masuk Google Images)
             {
                 userAgent: "Googlebot-Image",
                 allow: ["/images/", "/project/"],
-            },
-            // Bingbot (Microsoft)
-            {
-                userAgent: "bingbot",
-                allow: "/",
-                disallow: ["/api/", "/server/", "/_next/"],
-            },
-            // Yandex (meski jarang dipakai di ID, tapi aktif di global)
-            {
-                userAgent: "Yandex",
-                allow: "/",
-                disallow: ["/api/", "/server/", "/_next/"],
-            },
-            // Baidu Spider (aktif banget di Asia)
-            {
-                userAgent: "Baiduspider",
-                allow: "/",
-                disallow: ["/api/", "/server/", "/_next/"],
             },
             // Googlebot-News (tidak relevan)
             {
@@ -52,6 +28,5 @@ export default function robots(): MetadataRoute.Robots {
             },
         ],
         sitemap: "https://www.ezdev.xyz/sitemap.xml",
-        host: "https://www.ezdev.xyz",
     };
 }
