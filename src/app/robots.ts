@@ -3,28 +3,37 @@ import type { MetadataRoute } from "next";
 export default function robots(): MetadataRoute.Robots {
     return {
         rules: [
-            // aturan umum untuk semua crawler
+            // aturan default untuk semua crawler
             {
                 userAgent: "*",
                 allow: "/",
                 disallow: [
-                    "/api/",      // API internal
-                    "/server/",   // server-side route
-                    "/404",       // error pages
+                    "/api/",       // blok semua endpoint API
+                    "/server/",    // server-side route
+                    "/404",        // error pages
                     "/500",
                 ],
             },
-            // Googlebot-Image (supaya gambar project masuk Google Images)
+
+            // pengecualian: izinkan akses assets lewat API (khusus Googlebot)
+            {
+                userAgent: "Googlebot",
+                allow: ["/api/assets"],
+            },
+
+            // Google Images crawler (supaya gambar bisa masuk Google Images)
             {
                 userAgent: "Googlebot-Image",
-                allow: ["/images/", "/project/"],
+                allow: ["/images/", "/project/", "/api/assets"],
             },
-            // Googlebot-News (tidak relevan)
+
+            // Google News crawler (tidak relevan untuk site ini)
             {
                 userAgent: "Googlebot-News",
                 disallow: "/",
             },
         ],
+
         sitemap: "https://www.ezdev.xyz/sitemap.xml",
     };
 }
