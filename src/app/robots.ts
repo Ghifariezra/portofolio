@@ -15,7 +15,7 @@ export default function robots(): MetadataRoute.Robots {
             },
             {
                 userAgent: "Googlebot",
-                allow: ["/api/assets"], // izinkan API asset agar bisa diindeks
+                allow: ["/api/assets"],
             },
             {
                 userAgent: "Googlebot-Image",
@@ -26,6 +26,6 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: "/",
             },
         ],
-        sitemap: "https://www.ezdev.xyz/sitemap.xml",
+        sitemap: "https://www.ezdev.xyz/sitemap",
     };
 }
