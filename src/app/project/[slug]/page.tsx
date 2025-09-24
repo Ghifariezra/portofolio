@@ -6,6 +6,7 @@ export async function generateMetadata({ params }: SlugProps) {
     const { slug } = await params;
     return metaProject({ slug });
 }
+
 export default async function ProjectPage({ params }: SlugProps) {
 	const { slug } = await params;
 
