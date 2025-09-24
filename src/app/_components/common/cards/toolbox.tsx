@@ -39,7 +39,6 @@ export function ToolBox({
 									placeholder="blur"
 									blurDataURL={dt.blurData}
 									className="scale-60"
-									unoptimized
 								/>
 							</motion.div>
 						))}
@@ -76,7 +75,6 @@ export function ToolBox({
 											placeholder="blur"
 											blurDataURL={dt.blurData}
 											className="scale-60"
-											unoptimized
 										/>
 									</Link>
 								)}
