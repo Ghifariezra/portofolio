@@ -39,6 +39,7 @@ function Certificates() {
 							placeholder="blur"
 							blurDataURL={certificate.blurData}
 							className="object-cover"
+							unoptimized
 						/>
 					</div>
 				))}
@@ -57,6 +58,7 @@ function Certificates() {
 						placeholder="blur"
 						blurDataURL={certificates[currentIndex].blurData}
 						className="object-cover"
+						unoptimized
 					/>
 				</motion.div>
 			</div>

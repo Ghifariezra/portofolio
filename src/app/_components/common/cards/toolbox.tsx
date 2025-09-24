@@ -33,12 +33,13 @@ export function ToolBox({
 								className={className}>
 								<Image
 									src={dt.url}
-									alt="Logo"
+									alt={dt.name || "Skill Image"}
 									width={100}
 									height={100}
 									placeholder="blur"
 									blurDataURL={dt.blurData}
 									className="scale-60"
+									unoptimized
 								/>
 							</motion.div>
 						))}
@@ -68,13 +69,14 @@ export function ToolBox({
 										target="_blank">
 										<Image
 											src={dt.url}
-											alt="Logo"
+											alt={SocialItems[index].name}
 											width={100}
 											height={100}
 											priority
 											placeholder="blur"
 											blurDataURL={dt.blurData}
 											className="scale-60"
+											unoptimized
 										/>
 									</Link>
 								)}

@@ -40,6 +40,7 @@ export function CardProjects() {
 									fill
 									placeholder="blur"
 									blurDataURL={project.blurData}
+									unoptimized
 								/>
 							</motion.div>
 							<motion.div
