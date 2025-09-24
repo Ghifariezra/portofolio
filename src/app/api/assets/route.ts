@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: "Missing folder" }, { status: 400 });
     }
 
-    const data = await storage.getFilesWithSignedUrl(folder);
+    const data = await storage.getFilesWithPublicUrl(folder);
 
     return NextResponse.json({
         assets: {
