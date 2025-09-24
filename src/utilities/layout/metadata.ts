@@ -4,7 +4,7 @@ import { PortfolioService } from "@/services/db";
 const client = new PortfolioService();
 
 const metaHome = async (): Promise<Metadata> => {
-    const data = await client.getFilesWithPublicUrl("profile");
+    const data = await client.getFilesWithSignedUrl("profile");
     const profile = data.find((file) => file.name === "logo");
 
     if (!profile) {

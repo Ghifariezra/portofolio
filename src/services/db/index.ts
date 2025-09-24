@@ -4,7 +4,7 @@ import { supabase } from "@/utilities/supabase/client";
 export class PortfolioService {
     private client;
     private bucket = "Portofolio";
-    private expiresIn = 60 * 60 * 24 * 365; // 1 tahun
+    private expiresIn = 60 * 60 * 24 * 365;
 
     constructor() {
         this.client = supabase();
@@ -22,53 +22,25 @@ export class PortfolioService {
         return data;
     }
 
-    // // generate signed URL untuk 1 file
-    // async getSignedUrl(path: string) {
-    //     const { data, error } = await this.client
-    //         .storage
-    //         .from(this.bucket)
-    //         .createSignedUrl(path, this.expiresIn);
-
-    //     if (error) throw new Error(error.message);
-
-    //     return data?.signedUrl ?? null;
-    // }
-
-    // // ambil semua file dengan signed URL
-    // async getFilesWithSignedUrl(folder: string) {
-    //     const files = await this.listFiles(folder);
-
-    //     const signedUrls = await Promise.all(
-    //         files.map(async (file) => {
-    //             const url = await this.getSignedUrl(`${folder}/${file.name}`);
-    //             return {
-    //                 name: file.name.split(".")[0],
-    //                 url: url,
-    //                 blurData: await toBase64(url),
-    //             };
-    //         })
-    //     );
-
-    //     return signedUrls;
-    // }
-
-    // generate public URL untuk 1 file
-    async getPublicUrl(path: string) {
-        const { data } = this.client
+    // generate signed URL untuk 1 file
+    async getSignedUrl(path: string) {
+        const { data, error } = await this.client
             .storage
             .from(this.bucket)
-            .getPublicUrl(path);
+            .createSignedUrl(path, this.expiresIn);
 
-        return data.publicUrl;
+        if (error) throw new Error(error.message);
+
+        return data?.signedUrl ?? null;
     }
 
-    // ambil semua file dengan public URL
-    async getFilesWithPublicUrl(folder: string) {
+    // ambil semua file dengan signed URL
+    async getFilesWithSignedUrl(folder: string) {
         const files = await this.listFiles(folder);
 
-        const urls = await Promise.all(
+        const signedUrls = await Promise.all(
             files.map(async (file) => {
-                const url = await this.getPublicUrl(`${folder}/${file.name}`);
+                const url = await this.getSignedUrl(`${folder}/${file.name}`);
                 return {
                     name: file.name.split(".")[0],
                     url: url,
@@ -77,7 +49,7 @@ export class PortfolioService {
             })
         );
 
-        return urls;
+        return signedUrls;
     }
 
     // Project
@@ -90,7 +62,7 @@ export class PortfolioService {
 
         const signedUrls = await Promise.all(
             data.map(async (project) => {
-                const url = await this.getPublicUrl(project.image);
+                const url = await this.getSignedUrl(project.image);
                 const blurDataUrl = await toBase64(url);
                 return { ...project, image: url, blurData: blurDataUrl };
             })
@@ -110,7 +82,7 @@ export class PortfolioService {
 
         if (!data) return null;
 
-        const url = await this.getPublicUrl(data.image);
+        const url = await this.getSignedUrl(data.image);
         const blurDataUrl = await toBase64(url);
 
         return { ...data, imageUrl: url, blurData: blurDataUrl };
