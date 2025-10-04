@@ -4,9 +4,10 @@ import { PortfolioService } from "@/services/db";
 import { verifyLoginToken } from "@/utilities/auth/login";
 import { verifyCsrfToken } from "@/utilities/csrf/csrf";
 import type { SlugProps } from "@/types/props/slug";
-
-type Status = "default" | "individual" | "collaboration";
-type Category = "default" | "data" | "web" | "ui/ux" | "telegram";
+import type {
+    Status,
+    Category,
+} from "@/types/form/project";
 
 export async function POST(req: Request, { params }: SlugProps) {
     const csrfToken = (await cookies()).get("csrfToken")?.value || "";

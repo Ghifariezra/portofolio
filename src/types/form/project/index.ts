@@ -6,3 +6,6 @@ export type FormSchemaProject = z.infer<typeof schemaFormProject>;
 export type FormSchemaProjectUpdate = FormSchemaProject & {
     user_id: string;
 };
+
+export type Status = "default" | "individual" | "collaboration";
+export type Category = "default" | "data" | "web" | "ui/ux" | "telegram";
