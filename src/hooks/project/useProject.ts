@@ -13,6 +13,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schemaFormProject } from "@/utilities/schema/form/project";
 import type { FormSchemaProject } from "@/types/form/project";
+import { toast } from "sonner";
 
 export function useProject() {
     const titleSection = "Projects";
@@ -185,9 +186,11 @@ export function useProject() {
         }
 
         if (res.status === 200) {
+            if (isLoading) return;
+            toast.success("Project berhasil ditambahkan 🎉");
             handleReset(form);
         }
-    }, [form, handleReset, mutate]);
+    }, [form, handleReset, mutate, isLoading]);
 
 
     return {

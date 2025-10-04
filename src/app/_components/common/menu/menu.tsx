@@ -9,6 +9,12 @@ import { usePathname } from "next/navigation";
 import type { ClassNameProps } from "@/types/props/className";
 import { Button } from "../../ui/button";
 
+const pathAuth = [
+	"/dashboard",
+	"/dashboard/projects",
+	"/dashboard/blogs",
+]
+
 export function Menu({ className }: ClassNameProps) {
 	const pathname = usePathname();
 	const { payload, menuItemsAuth, logout } = useAuthContext();
@@ -22,7 +28,7 @@ export function Menu({ className }: ClassNameProps) {
 			exit="hidden"
 			className={`${className} items-center gap-6`}>
 			<AnimatePresence mode="sync" initial={true}>
-				{pathname === "/dashboard" && payload?.authenticated
+				{pathAuth.includes(pathname) && payload?.authenticated
 					? menuItemsAuth.map((item, index) => (
 							<Fragment key={index}>
 								{item.name !== "Logout" ? (

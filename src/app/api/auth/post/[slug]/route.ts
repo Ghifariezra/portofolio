@@ -28,7 +28,6 @@ export async function POST(req: Request, { params }: SlugProps) {
     }
 
     const slug = (await params).slug;
-    console.log(slug);
 
     switch (slug) {
         case "project":

@@ -128,7 +128,6 @@ export class PortfolioService {
     }
 
     async createProject(data: FormSchemaProjectUpdate) {
-        console.log(data);
         let imagePath: string | null = null;
 
         if (data.image instanceof File) {

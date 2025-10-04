@@ -21,7 +21,10 @@ export function Summary() {
 					{projects.length}
 				</p>
 				<Button variant={"outline"} asChild>
-					<Link scroll={true} prefetch={true} href="/#projects">
+					<Link
+						scroll={true}
+						prefetch={true}
+						href="/dashboard/projects">
 						View All
 					</Link>
 				</Button>
@@ -33,7 +36,10 @@ export function Summary() {
 					{projects.length}
 				</p>
 				<Button variant={"outline"} asChild>
-					<Link scroll={true} prefetch={true} href="/#projects">
+					<Link
+						scroll={true}
+						prefetch={true}
+						href="/dashboard/blogs">
 						View All
 					</Link>
 				</Button>

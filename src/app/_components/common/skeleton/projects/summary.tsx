@@ -41,13 +41,13 @@ export function SummarySkeleton({
 				title="Total Projects"
 				value={totalProjects}
 				isLoading={isLoading}
-				href="/#projects"
+				href="/dashboard/projects"
 			/>
 			<SummaryCard
 				title="Total Blogs"
 				value={totalBlogs}
 				isLoading={isLoading}
-				href="/#blogs"
+				href="/dashboard/blogs"
 			/>
 		</div>
 	);
