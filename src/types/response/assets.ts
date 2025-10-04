@@ -5,6 +5,7 @@ export type AssetItem = {
 };
 
 type ProjectItem = {
+    user_id: string;
     uuid: string;
     title: string;
     category: string;

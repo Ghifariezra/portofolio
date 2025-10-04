@@ -153,4 +153,16 @@ export class PortfolioService {
 
         return "✅ Project created successfully";
     }
+
+    async deleteProject(id: string, user_id: string) {
+        const { error } = await this.client
+            .from("projects")
+            .delete()
+            .eq("uuid", id)
+            .eq("user_id", user_id);
+
+        if (error) throw new Error(`DB delete failed: ${error.message}`);
+
+        return "✅ Project deleted successfully";
+    }
 }

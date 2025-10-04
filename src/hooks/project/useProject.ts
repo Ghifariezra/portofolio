@@ -6,7 +6,10 @@ import {
     useRef
 } from "react";
 import { useProjectQuery } from "@/hooks/query/useAssetsQuery";
-import { usePostProject } from "@/hooks/mutation/project/useProjectMutation";
+import { 
+    usePostProject,
+    useDeleteProject
+ } from "@/hooks/mutation/project/useProjectMutation";
 import { easeIn, easeOut } from "motion/react";
 import { Projects } from "@/types/response/assets";
 import { useForm, useFieldArray } from "react-hook-form";
@@ -176,7 +179,7 @@ export function useProject() {
 
     // 2. Define a submit handler.
     const onSubmit = useCallback(async (values: FormSchemaProject) => {
-        console.log(values);
+        // console.log(values);
 
         const res = await mutate(values);
 
@@ -192,6 +195,27 @@ export function useProject() {
         }
     }, [form, handleReset, mutate, isLoading]);
 
+    const { mutate: mutateDelete, isLoading: isLoadingDelete } = useDeleteProject();
+    const handleDelete = useCallback(async (id: string, user_id: string) => {
+        const deleteData = {
+            id,
+            user_id
+        };
+        // console.log(deleteData);
+
+        const res = await mutateDelete(deleteData);
+
+        if (!res) {
+            console.error("Gagal mengirim data (mungkin 401 Unauthorized)");
+            return;
+        }
+
+        if (res.status === 200) {
+            if (isLoadingDelete) return;
+            toast.success("Project berhasil dihapus 🎉");
+        }
+
+    }, [mutateDelete, isLoadingDelete]);
 
     return {
         titleSection,
@@ -225,6 +249,7 @@ export function useProject() {
         appendSocial,
         removeSocial,
         onSubmit,
-        isLoading
+        isLoading,
+        handleDelete,
     };
 }

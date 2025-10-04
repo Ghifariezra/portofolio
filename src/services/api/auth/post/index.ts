@@ -32,3 +32,18 @@ export const PostRequestProject = async (data: FormSchemaProject) => {
         throw err;
     }
 };
+
+export const DeleteRequestProject = async (id: string, user_id: string) => {
+    try {
+        const res = await csrfInterceptor.delete(
+            `/api/auth/delete/project/${id}`,
+            { params: { user_id } }
+        );
+        return { status: res.status }
+    } catch (err) {
+        if (err instanceof AxiosError) {
+            return { status: err.response?.status ?? 500, data: null }
+        }
+        throw err;
+    }
+};
