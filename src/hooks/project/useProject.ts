@@ -6,11 +6,19 @@ import {
     useRef
 } from "react";
 import { useProjectQuery } from "@/hooks/query/useAssetsQuery";
+import { usePostProject } from "@/hooks/mutation/project/useProjectMutation";
 import { easeIn, easeOut } from "motion/react";
 import { Projects } from "@/types/response/assets";
+import { useForm, useFieldArray } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { schemaFormProject } from "@/utilities/schema/form/project";
+import type { FormSchemaProject } from "@/types/form/project";
 
 export function useProject() {
     const titleSection = "Projects";
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+    const [showPreview, setShowPreview] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
 
     const [defaultStatus, setDefaultStatus] = useState("Default");
     const [defaultCategory, setDefaultCategory] = useState("Default");
@@ -18,7 +26,7 @@ export function useProject() {
     const [openCategory, setOpenCategory] = useState(false);
     const dropDownData = useCallback((check: string): string[] => {
         if (check === "status") return ["Default", "Individual", "Collaboration"];
-        if (check === "category") return ["Default", "Web", "Data"];
+        if (check === "category") return ["Default", "Web", "Data", "Telegram"];
         return [];
     }, []);
     const dropDownStatusRef = useRef<HTMLDivElement>(null);
@@ -101,6 +109,86 @@ export function useProject() {
         },
     };
 
+    const handlePreview = useCallback(() => {
+        setShowPreview(!showPreview);
+    }, [showPreview]);
+
+    const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>, field: {
+        onChange: (file: File | null) => void
+    }) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            field.onChange(file);
+
+            setPreviewUrl(
+                URL.createObjectURL(file)
+            );
+        } else {
+            field.onChange(null);
+            setPreviewUrl(null);
+        }
+    }, [setPreviewUrl]);
+
+    const handleReset = useCallback((form: {
+        reset: () => void
+    }) => {
+        form.reset();
+        setPreviewUrl(null);
+
+        // Kosongkan input file manual
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+        }
+    }, [setPreviewUrl]);
+
+    // 1. Define your form.
+    const form = useForm<FormSchemaProject>({
+        resolver: zodResolver(schemaFormProject),
+        mode: "onChange",
+        defaultValues: {
+            title: "",
+            description: "",
+            slug: "",
+            partner_team: [],
+            partner_social_media: [],
+            demo: "",
+            status: "default",
+            category: "default",
+        },
+    });
+
+    const { fields, append, remove } = useFieldArray({
+        control: form.control,
+        name: "partner_team",
+    });
+
+    const {
+        fields: socialFields,
+        append: appendSocial,
+        remove: removeSocial,
+    } = useFieldArray({
+        control: form.control,
+        name: "partner_social_media",
+    });
+
+    const { mutate, isLoading} = usePostProject();
+
+    // 2. Define a submit handler.
+    const onSubmit = useCallback(async (values: FormSchemaProject) => {
+        console.log(values);
+
+        const res = await mutate(values);
+
+        if (!res) {
+            console.error("Gagal mengirim data (mungkin 401 Unauthorized)");
+            return;
+        }
+
+        if (res.status === 200) {
+            handleReset(form);
+        }
+    }, [form, handleReset, mutate]);
+
 
     return {
         titleSection,
@@ -118,6 +206,22 @@ export function useProject() {
         setDefaultCategory,
         dropDownData,
         dropDownStatusRef,
-        dropDownCategoryRef
+        dropDownCategoryRef,
+        previewUrl,
+        setPreviewUrl,
+        showPreview,
+        handlePreview,
+        handleFileChange,
+        handleReset,
+        fileInputRef,
+        form,
+        fields,
+        append,
+        remove,
+        socialFields,
+        appendSocial,
+        removeSocial,
+        onSubmit,
+        isLoading
     };
 }

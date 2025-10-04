@@ -7,5 +7,10 @@ export const useDirect = () => {
         router.push('/')
     }
 
-    return { goHome }
+    const goDashboard = () => {
+        router.push('/dashboard');
+        window.location.reload();
+    };
+
+    return { goHome, goDashboard }
 }

@@ -1,5 +1,7 @@
 import { toBase64 } from "@/utilities/base64/base64";
 import { supabase } from "@/utilities/supabase/client";
+import { randomUUID } from "crypto";
+import type { FormSchemaProjectUpdate } from "@/types/form/project";
 
 export class PortfolioService {
     private client;
@@ -7,7 +9,7 @@ export class PortfolioService {
     private expiresIn = 60 * 60 * 24 * 365;
 
     constructor() {
-        this.client = supabase();
+        this.client = supabase;
     }
 
     // ambil daftar file di folder tertentu
@@ -52,6 +54,27 @@ export class PortfolioService {
         return signedUrls;
     }
 
+    async uploadImage(file: File): Promise<string> {
+        if (!file) throw new Error("No file provided");
+
+        const buffer = Buffer.from(await file.arrayBuffer());
+        const ext = file.name.split(".").pop();
+        const fileName = `${randomUUID()}.${ext}`;
+        const filePath = `projects/${fileName}`;
+
+        const { error } = await this.client.storage
+            .from(this.bucket)
+            .upload(filePath, buffer, {
+                contentType: file.type,
+                upsert: false,
+            });
+
+        if (error) throw new Error(`Upload failed: ${error.message}`);
+
+        // 🧠 karena bucket private, kita hanya return path, bukan URL
+        return filePath;
+    }
+
     // Project
     async getProjects() {
         const { data, error } = await this.client
@@ -64,7 +87,11 @@ export class PortfolioService {
             data.map(async (project) => {
                 const url = await this.getSignedUrl(project.image);
                 const blurDataUrl = await toBase64(url);
-                return { ...project, image: url, blurData: blurDataUrl };
+                return { 
+                    ...project, 
+                    image: url, 
+                    blurData: blurDataUrl
+                 };
             })
         );
 
@@ -86,5 +113,45 @@ export class PortfolioService {
         const blurDataUrl = await toBase64(url);
 
         return { ...data, imageUrl: url, blurData: blurDataUrl };
+    }
+
+    async getUsers(username: string) {
+        const { data, error } = await this.client
+            .from("users")
+            .select("*")
+            .eq("username", username)
+            .single();
+
+        if (error) throw new Error(error.message);
+
+        return data;
+    }
+
+    async createProject(data: FormSchemaProjectUpdate) {
+        console.log(data);
+        let imagePath: string | null = null;
+
+        if (data.image instanceof File) {
+            imagePath = await this.uploadImage(data.image);
+        }
+
+        const payload = {
+            user_id: data.user_id,
+            title: data.title,
+            description: data.description,
+            slug: data.slug,
+            demo: data.demo,
+            status: data.status,
+            category: data.category,
+            partner_team: data.partner_team,
+            partner_social_media: data.partner_social_media,
+            image: imagePath,
+        };
+
+        const { error } = await this.client.from("projects").insert(payload);
+
+        if (error) throw new Error(`DB insert failed: ${error.message}`);
+
+        return "✅ Project created successfully";
     }
 }

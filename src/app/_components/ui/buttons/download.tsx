@@ -6,8 +6,7 @@ import { useHomeContext } from "@/app/_components/providers/home-provider";
 import { Button } from "@/app/_components/ui/button";
 
 export function DownloadCv({ className }: ClassNameProps) {
-	const cv =
-		"https://drive.google.com/uc?export=download&id=1YCvYiw2lnNKDihbfp6BYJa5MTZllUPCU";
+	const cv = process.env.NEXT_PUBLIC_CV_URL!;
 
 	const { 
 		handleDownload, 

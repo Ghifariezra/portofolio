@@ -36,6 +36,7 @@ function Certificates() {
 							fill
 							priority
 							quality={100}
+							sizes="100vw" // ✅ tambahkan ini
 							placeholder="blur"
 							blurDataURL={certificate.blurData}
 							className="object-cover"
@@ -54,6 +55,7 @@ function Certificates() {
 						fill
 						priority
 						quality={100}
+						sizes="100vw" // ✅ tambahkan ini juga
 						placeholder="blur"
 						blurDataURL={certificates[currentIndex].blurData}
 						className="object-cover"
