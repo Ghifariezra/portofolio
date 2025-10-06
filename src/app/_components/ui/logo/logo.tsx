@@ -53,7 +53,7 @@ function Logo() {
 					)
 				)}
 			</motion.div>
-			<motion.div className="relative hidden sm:block sm:break-all">
+			<motion.div className="relative hidden lg:block sm:break-all">
 				<AnimatePresence mode="sync" initial={true}>
 					{logoName.split("").map((word, index) => (
 						<motion.span

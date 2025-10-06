@@ -3,6 +3,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Button } from "@/app/_components/ui/button";
 import { Copy } from "lucide-react";
+import { useWindowWidth } from "@/hooks/useWindow";
 
 interface CodeBlockProps {
     code: string;
@@ -11,6 +12,8 @@ interface CodeBlockProps {
 
 export function CodeBlock({ code, language }: CodeBlockProps) {
     const [copied, setCopied] = useState(false);
+    const { width } = useWindowWidth();
+    const checkWrapLines = width <= 768 ? false : true;
 
     const handleCopy = useCallback(async () => {
         try {
@@ -43,7 +46,7 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
                 style={oneDark}
                 language={language}
                 showLineNumbers
-                wrapLongLines
+                wrapLongLines={checkWrapLines}
                 wrapLines
                 codeTagProps={{ className: "text-sm font-mono tracking-tight" }}
                 customStyle={{ marginBottom: "1rem" }}
