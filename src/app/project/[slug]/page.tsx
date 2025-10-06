@@ -1,6 +1,6 @@
 import type { SlugProps } from "@/types/props/slug";
 import { metaProject } from "@/utilities/layout/metadata";
-import { Project } from "@/app/_components/common/sections/project";
+import { ProjectDetail } from "@/app/_components/common/sections/projects/ProjectDetail";
 
 export async function generateMetadata({ params }: SlugProps) {
     const { slug } = await params;
@@ -10,5 +10,5 @@ export async function generateMetadata({ params }: SlugProps) {
 export default async function ProjectPage({ params }: SlugProps) {
 	const { slug } = await params;
 
-	return <Project slug={slug} />;
+	return <ProjectDetail slug={slug} />;
 }

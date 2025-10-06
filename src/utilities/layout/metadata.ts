@@ -86,6 +86,43 @@ const metaProject = async ({ slug }: { slug: string }): Promise<Metadata> => {
     };
 }
 
+const metaBlog = async ({ slug }: { slug: string }): Promise<Metadata> => {
+    const blog = await client.getBlogBySlug(slug);
+
+    if (!blog) {
+        return {
+            title: "Project Not Found | Ghifari Ezra",
+            description: "The project you are looking for does not exist.",
+        };
+    }
+
+    return {
+        title: `${blog.title} | Ghifari Ezra`,
+        description:
+            blog.description?.slice(0, 150) ||
+            "Ghifari Ezra - Project Portfolio",
+        openGraph: {
+            title: blog.title,
+            description: blog.description?.slice(0, 150),
+            url: `https://www.ezdev.xyz/project/${slug}`,
+            images: [
+                {
+                    url: blog.imageUrl,
+                    width: 1200,
+                    height: 630,
+                    alt: blog.title,
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: blog.title,
+            description: blog.description?.slice(0, 150),
+            images: [blog.imageUrl],
+        },
+    };
+}
+
 const metaNotFound: Metadata = {
     title: "404 - Page Not Found",
     description: "The page you are looking for does not exist.",
@@ -94,5 +131,6 @@ const metaNotFound: Metadata = {
 export {
     metaHome,
     metaNotFound,
-    metaProject
+    metaProject,
+    metaBlog
 };

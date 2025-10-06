@@ -6,6 +6,7 @@ import { memo } from "react";
 
 function About() {
 	const { containerTitleMotion } = useHomeContext();
+	
 	return (
 		<AnimatePresence>
 			<motion.section

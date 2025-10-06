@@ -1,8 +1,8 @@
 import { motion } from "motion/react";
 
-export function ProjectSkeleton({ length }: { length: number }) {
+export function ProjectSkeleton({ length = 3 }: { length?: number }) {
 	return (
-		<>
+		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
 			{Array.from({ length }).map((_, i) => (
 				<motion.div
 					key={i}
@@ -28,7 +28,7 @@ export function ProjectSkeleton({ length }: { length: number }) {
 					<div className="h-9 w-24 rounded-md bg-slate-300/40 mt-3" />
 				</motion.div>
 			))}
-		</>
+		</div>
 	);
 }
 

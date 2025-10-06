@@ -103,7 +103,7 @@ export class PortfolioService {
             .from("projects")
             .select("*")
             .eq("slug", slug)
-            .single();
+            .maybeSingle();
 
         if (error) throw new Error(error.message);
 
@@ -164,5 +164,45 @@ export class PortfolioService {
         if (error) throw new Error(`DB delete failed: ${error.message}`);
 
         return "✅ Project deleted successfully";
+    }
+
+    // Blogs
+    async getBlogs() {
+        const { data, error } = await this.client
+            .from("blogs")
+            .select("*");
+
+        if (error) throw new Error(error.message);
+
+        const signedUrls = await Promise.all(
+            data.map(async (blog) => {
+                const url = await this.getSignedUrl(blog.image);
+                const blurDataUrl = await toBase64(url);
+                return {
+                    ...blog,
+                    image: url,
+                    blurData: blurDataUrl
+                };
+            })
+        );
+
+        return signedUrls;
+    }
+
+    async getBlogBySlug(slug: string) {
+        const { data, error } = await this.client
+            .from("blogs")
+            .select("*")
+            .eq("slug", slug)
+            .maybeSingle();
+
+        if (error) throw new Error(error.message);
+
+        if (!data) return null;
+
+        const url = await this.getSignedUrl(data.image);
+        const blurDataUrl = await toBase64(url);
+
+        return { ...data, image: url, blurData: blurDataUrl };
     }
 }

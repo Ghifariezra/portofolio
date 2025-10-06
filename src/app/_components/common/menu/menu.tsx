@@ -65,7 +65,7 @@ export function Menu({ className }: ClassNameProps) {
 										<Link
 											href={item.href}
 											scroll={true}
-											prefetch={item.name === "Projects"}>
+											prefetch={item.name === "Projects" || item.name === "Blogs"}>
 											{item.name}
 										</Link>
 									</motion.li>

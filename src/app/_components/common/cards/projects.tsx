@@ -14,11 +14,15 @@ export function CardProjects() {
 	const { projectData } = useHomeContext();
 	const { childMotion, projects, isProjectLoading } = projectData;
 
+	if (isProjectLoading) {
+		return (
+			<ProjectSkeleton />
+		);
+	}
+
 	return (
 		<motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-			{isProjectLoading ? (
-				<ProjectSkeleton length={projects.length} />
-			) : !isProjectLoading && projects.length > 0 ? (
+			{!isProjectLoading && projects.length > 0 ? (
 				<>
 					{projects.map((project, index) => (
 						<motion.div
@@ -29,6 +33,8 @@ export function CardProjects() {
 								transition: { duration: 0.5 },
 							}}
 							className="flex flex-col gap-4 glassess border-glassess p-4 rounded-2xl hover:shadow-xl shadow-blue-500/30 transition-shadow max-h-fit">
+
+							{/* Thumbnail */}
 							<motion.div
 								key={project.title}
 								variants={childMotion}
@@ -42,10 +48,11 @@ export function CardProjects() {
 									blurDataURL={project.blurData}
 								/>
 							</motion.div>
+							
+							{/* Content */}
 							<motion.div
 								variants={childMotion}
 								className="flex flex-col gap-4">
-								{/* Content */}
 								<motion.div className="flex flex-col gap-4">
 									<motion.div className="flex flex-col gap-2">
 										<motion.h1

@@ -11,17 +11,17 @@ export async function GET(
     const csrfToken = (await cookies()).get("csrfToken")?.value || "";
 
     if (!csrfToken) {
-        return NextResponse.json({ error: "Missing CSRF token" }, { status: 403 });
+        return NextResponse.json({ error: "Missing CSRF token" }, { status: 404 });
     }
 
     const valid = await verifyCsrfToken(csrfToken);
     if (!valid) {
-        return NextResponse.json({ error: "Invalid CSRF token" }, { status: 403 });
+        return NextResponse.json({ error: "Invalid CSRF token" }, { status: 404 });
     }
 
     const slug = (await params).slug;
     const storage = new PortfolioService();
-    const data = await storage.getProjectBySlug(slug);
+    const data = await storage.getBlogBySlug(slug);
 
     return NextResponse.json(data);
 }

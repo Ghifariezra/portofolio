@@ -5,7 +5,7 @@ import {
     useCallback,
     useRef
 } from "react";
-import { useProjectQuery } from "@/hooks/query/useAssetsQuery";
+import { useProjectQuery } from "@/hooks/query/useProjectQuery";
 import { 
     usePostProject,
     useDeleteProject

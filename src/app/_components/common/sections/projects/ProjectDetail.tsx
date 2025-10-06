@@ -8,7 +8,7 @@ import {
 	ProjectNotFound,
 } from "@/app/_components/common/skeleton/projects/project";
 
-export function Project({ slug }: { slug: string }) {
+export function ProjectDetail({ slug }: { slug: string }) {
 	const { data: project, isLoading } = useProjectBySlug(slug);
 
 	if (isLoading) {
