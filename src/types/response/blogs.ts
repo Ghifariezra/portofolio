@@ -8,7 +8,7 @@ export interface BlogsItems {
     image: string;
     blurData: string;
     slug: string;
-    created_at: string;
+    publish_date: string;
     updated_at: string;
 }
 
