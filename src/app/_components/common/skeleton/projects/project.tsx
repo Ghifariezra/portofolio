@@ -9,7 +9,7 @@ export function ProjectNotFound() {
 export function ProjectSkeleton() {
     return (
 		<section
-			className="flex flex-col items-center justify-center min-h-screen sm:my-23 my-12 mx-4 sm:mx-8">
+			className="flex flex-col items-center justify-center min-h-screen my-33 mx-6">
 			<div className="relative flex flex-col gap-6 w-full h-full py-4 sm:py-8 px-4 sm:px-8 glassess border-glassess rounded-2xl">
 				{/* Skeleton gambar */}
 				<div className="relative aspect-video w-full rounded-md overflow-hidden border-glassess">

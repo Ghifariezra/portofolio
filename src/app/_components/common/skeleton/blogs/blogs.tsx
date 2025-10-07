@@ -34,7 +34,7 @@ export function NoBlogsSkeleton() {
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
-			className="flex flex-col items-center justify-center text-center py-20 gap-4 glassess border-glassess rounded-2xl">
+			className="flex flex-col items-center justify-center text-center py-20 gap-4 glassess border-glassess rounded-2xl my-33 mx-6">
 			{/* Icon / Illustration */}
 			<div className="w-20 h-20 rounded-full bg-gray-200 dark:bg-slate-700 flex items-center justify-center">
 				<span className="text-4xl">📰</span>
