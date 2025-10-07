@@ -1,6 +1,6 @@
 export function ProjectNotFound() {
     return (
-        <div className="flex items-center justify-center h-screen w-screen">
+        <div className="flex items-center justify-center my-33 mx-6">
             <h1 className="text-2xl font-bold">Project not found</h1>
         </div>
     );
@@ -9,7 +9,7 @@ export function ProjectNotFound() {
 export function ProjectSkeleton() {
     return (
 		<section
-			className="flex flex-col items-center justify-center min-h-screen my-33 mx-6">
+			className="flex flex-col items-center justify-center my-33 mx-6">
 			<div className="relative flex flex-col gap-6 w-full h-full py-4 sm:py-8 px-4 sm:px-8 glassess border-glassess rounded-2xl">
 				{/* Skeleton gambar */}
 				<div className="relative aspect-video w-full rounded-md overflow-hidden border-glassess">
