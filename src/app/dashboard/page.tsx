@@ -1,6 +1,5 @@
 import { Summary } from "@/app/_components/common/cards/summary";
-import { ProjectForm } from "@/app/_components/common/form/project";
-// import { BlogForm } from "@/app/_components/common/form/blog";
+import { FormDashboard } from "@/app/_components/common/form/dashboard";
 
 export default function Dashboard() {
 	return (
@@ -10,8 +9,7 @@ export default function Dashboard() {
 				<Summary />
 			</div>
 			<div className="flex flex-col gap-4">
-				<h2 className="text-2xl font-bold">Post</h2>
-				<ProjectForm />
+				<FormDashboard />
 			</div>
 		</div>
 	);

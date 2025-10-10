@@ -20,9 +20,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/app/_components/ui/select";
+import { FieldInput } from "@/app/_components/common/form/field/input";
+import { ScanEye } from "lucide-react";
 import { Input } from "@/app/_components/ui/input";
-import { Textarea } from "@/app/_components/ui/textarea";
-import { ScanEye, Eye, EyeOff } from "lucide-react";
 
 export function ProjectForm() {
 	const { projectData } = useHomeContext();
@@ -48,65 +48,30 @@ export function ProjectForm() {
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 				{/* Title */}
-				<FormField
-					control={form.control}
+				<FieldInput
+					form={form}
 					name="title"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel className="font-semibold">
-								Title
-							</FormLabel>
-							<FormControl>
-								<Input
-									placeholder="Example"
-									{...field}
-									required
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					label="Title"
+					placeholder="Example"
+					required={true}
 				/>
 
 				{/* Description */}
-				<FormField
-					control={form.control}
+				<FieldInput
+					form={form}
 					name="description"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel className="font-semibold">
-								Description
-							</FormLabel>
-							<FormControl>
-								<Textarea
-									placeholder="Description of the project"
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					label="Description"
+					placeholder="Description of the project"
+					type="textarea"
 				/>
-
+				
 				{/* Slug */}
-				<FormField
-					control={form.control}
+				<FieldInput
+					form={form}
 					name="slug"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel className="font-semibold">
-								Slug
-							</FormLabel>
-							<FormControl>
-								<Input
-									placeholder="example"
-									{...field}
-									required
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					label="Slug"
+					placeholder="example"
+					required={true}
 				/>
 
 				{/* Partner Team & Social Media */}
@@ -196,48 +161,18 @@ export function ProjectForm() {
 				</div>
 
 				{/* Image */}
-				<FormField
-					control={form.control}
+				<FieldInput
+					form={form}
 					name="image"
-					render={({ field }) => (
-						<FormItem>
-							<div className="flex justify-between">
-								<FormLabel className="font-semibold">
-									Image
-								</FormLabel>
-								<div
-									className="flex gap-2 items-center cursor-pointer hover:underline"
-									onClick={handlePreview}>
-									{showPreview ? (
-										<>
-											<EyeOff size={16} />
-											<p className="text-sm">
-												Hide preview
-											</p>
-										</>
-									) : (
-										<>
-											<Eye size={16} />
-											<p className="text-sm">
-												Show preview
-											</p>
-										</>
-									)}
-								</div>
-							</div>
-							<FormControl>
-								<Input
-									ref={fileInputRef}
-									type="file"
-									accept="image/*"
-									className="cursor-pointer"
-									onChange={(e) => handleFileChange(e, field)}
-									required
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					label="Image"
+					placeholder="Image"
+					type="file"
+					required={true}
+					handlePreview={handlePreview}
+					hidePreview={true}
+					showPreview={showPreview}
+					fileInputRef={fileInputRef}
+					handleFileChange={handleFileChange}
 				/>
 
 				{/* Preview */}
@@ -340,26 +275,14 @@ export function ProjectForm() {
 				</div>
 
 				{/* Demo */}
-				<FormField
-					control={form.control}
+				<FieldInput
+					form={form}
 					name="demo"
-					render={({ field }) => (
-						<FormItem className="w-full">
-							<FormLabel className="font-semibold">
-								Demo
-							</FormLabel>
-							<FormControl>
-								<Input
-									placeholder="https://example.com"
-									type="text"
-									{...field}
-									required
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					label="Demo"
+					placeholder="https://example.com"
+					required={true}
 				/>
+				
 				<div className="flex gap-4 justify-end mt-8">
 					<div className="relative max-w-3xs w-full">
 						<Button

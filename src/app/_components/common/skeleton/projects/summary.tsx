@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/app/_components/ui/button";
+import { Loader } from "lucide-react";
 
 type SummaryCardProps = {
 	title: string;
@@ -15,7 +16,11 @@ function SummaryCard({ title, value, isLoading, href }: SummaryCardProps) {
 		<div className="flex flex-col gap-4 glassess border-glassess p-4 rounded-2xl max-h-fit w-full">
 			<h1 className="text-xl">{title}</h1>
 			<p className={`${isLoading ? "text-xl" : "text-8xl"} font-bold text-center`}>
-				{isLoading ? "Loading..." : value}
+				{isLoading ? (
+					<span className="flex items-center justify-center">
+						<Loader className="animate-spin w-8 h-8"  />
+					</span>
+				) : value}
 			</p>
 			<Button variant="outline" asChild>
 				<Link scroll={true} prefetch={true} href={href}>

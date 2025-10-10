@@ -2,6 +2,7 @@ import { toBase64 } from "@/utilities/base64/base64";
 import { supabase } from "@/utilities/supabase/client";
 import { randomUUID } from "crypto";
 import type { FormSchemaProjectUpdate } from "@/types/form/project";
+import type { FormSchemaBlogUpdate } from "@/types/form/blogs";
 
 export class PortfolioService {
     private client;
@@ -54,13 +55,13 @@ export class PortfolioService {
         return signedUrls;
     }
 
-    async uploadImage(file: File): Promise<string> {
+    async uploadImage(file: File, folder: string): Promise<string> {
         if (!file) throw new Error("No file provided");
 
         const buffer = Buffer.from(await file.arrayBuffer());
         const ext = file.name.split(".").pop();
         const fileName = `${randomUUID()}.${ext}`;
-        const filePath = `projects/${fileName}`;
+        const filePath = `${folder}/${fileName}`;
 
         const { error } = await this.client.storage
             .from(this.bucket)
@@ -131,7 +132,7 @@ export class PortfolioService {
         let imagePath: string | null = null;
 
         if (data.image instanceof File) {
-            imagePath = await this.uploadImage(data.image);
+            imagePath = await this.uploadImage(data.image, "projects");
         }
 
         const payload = {
@@ -204,5 +205,29 @@ export class PortfolioService {
         const blurDataUrl = await toBase64(url);
 
         return { ...data, image: url, blurData: blurDataUrl };
+    }
+
+    async createBlog(data: FormSchemaBlogUpdate) {
+        let imagePath: string | null = null;
+
+        if (data.image instanceof File) {
+            imagePath = await this.uploadImage(data.image, "blogs");
+        }
+
+        const payload = {
+            user_id: data.user_id,
+            title: data.title,
+            description: data.description,
+            slug: data.slug,
+            language: data.language,
+            content: data.content,
+            image: imagePath,
+        };
+
+        const { error } = await this.client.from("blogs").insert(payload);
+
+        if (error) throw new Error(`DB insert failed: ${error.message}`);
+
+        return "✅ Blog created successfully";
     }
 }

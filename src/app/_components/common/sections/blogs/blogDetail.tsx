@@ -41,12 +41,14 @@ export function BlogDetail({ slug }: { slug: string }) {
 						{data.title}
 					</h1>
 
-					{/* 🧠 Markdown Body */}
-					<Markdown 
-						content={data.content}
-						lang={data.language}
-					/>
+					<div className="prose max-w-none dark:prose-invert w-full overflow-x-auto">
+						<Markdown
+							content={data.content}
+							lang={data.language}
+						/>
+					</div>
 				</div>
+
 			</div>
 		</motion.section>
 	);

@@ -6,10 +6,11 @@ import { Button } from "@/app/_components/ui/button";
 import { SummarySkeleton } from "@/app/_components/common/skeleton/projects/summary";
 
 export function Summary() {
-	const { projectData } = useHomeContext();
+	const { projectData, blogsData } = useHomeContext();
 	const { projects, isProjectLoading } = projectData;
+	const { blogs, isLoadingBlogs } = blogsData;
 
-	if (isProjectLoading) {
+	if (isProjectLoading || isLoadingBlogs) {
 		return <SummarySkeleton isLoading={isProjectLoading} />;
 	}
 
@@ -33,7 +34,7 @@ export function Summary() {
 			<div className="flex flex-col gap-4 glassess border-glassess p-4 rounded-2xl max-h-fit w-full">
 				<h1 className="text-xl">Total Blogs</h1>
 				<p className="text-8xl font-bold text-center">
-					{projects.length}
+					{blogs.length}
 				</p>
 				<Button variant={"outline"} asChild>
 					<Link

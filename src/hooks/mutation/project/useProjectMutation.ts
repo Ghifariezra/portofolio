@@ -15,6 +15,7 @@ export const usePostProject = () => {
         mutationFn: async (data: FormSchemaProject) => PostRequestProject(data),
         onSuccess: () => {
             qC.invalidateQueries({ queryKey: ["projects"] });
+            qC.invalidateQueries({ queryKey: ["project-by-slug"] });
         }
     })
 
@@ -36,6 +37,7 @@ export const useDeleteProject = () => {
         }: { id: string; user_id: string }) => DeleteRequestProject(id, user_id),
         onSuccess: () => {
             qC.invalidateQueries({ queryKey: ["projects"] });
+            qC.invalidateQueries({ queryKey: ["project-by-slug"] });
         }
     })
 

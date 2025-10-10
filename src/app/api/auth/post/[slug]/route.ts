@@ -30,31 +30,32 @@ export async function POST(req: Request, { params }: SlugProps) {
 
     const slug = (await params).slug;
 
+    const check = new PortfolioService();
+
+    const user = await verifyLoginToken(token);
+
+    if (!user) {
+        return NextResponse.json({ authenticated: false }, { status: 401 });
+    }
+
+    const {
+        uuid,
+        username,
+        role
+    } = await check.getUsers(user.username);
+
+    if (!username) {
+        return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    if (role !== "admin") {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+    }
+
     switch (slug) {
         case "project":
-            const check = new PortfolioService();
-
-            const user = await verifyLoginToken(token);
-
-            if (!user) {
-                return NextResponse.json({ authenticated: false }, { status: 401 });
-            }
-
-            const {
-                uuid,
-                username,
-                role
-            } = await check.getUsers(user.username);
-
-            if (!username) {
-                return NextResponse.json({ error: "User not found" }, { status: 404 });
-            }
-
-            if (role !== "admin") {
-                return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-            }
-
             const form = await req.formData();
+            console.log(form);
             const rawData = Object.fromEntries(form);
 
             const img = rawData.image as File;
@@ -97,7 +98,43 @@ export async function POST(req: Request, { params }: SlugProps) {
             return NextResponse.json({
                 message: result
             }, { status: 200 });
+        
         case "blog":
+            const formBlog = await req.formData();
+
+            if (!formBlog) {
+                return NextResponse.json({ error: "Missing blog data" }, { status: 400 });
+            }
+
+            const rawDataBlog = Object.fromEntries(formBlog);
+
+            const imgBlog = rawDataBlog.image as File;
+            if (!imgBlog) {
+                return NextResponse.json({ error: "Missing blog image" }, { status: 400 });
+            }
+
+            const payloadBlog = {
+                user_id: uuid,
+                title: rawDataBlog.title as string,
+                description: rawDataBlog.description as string,
+                slug: rawDataBlog.slug as string,
+                language: rawDataBlog.language as string,
+                content: rawDataBlog.content as string,
+                image: imgBlog
+            };
+
+            console.log(payloadBlog);
+
+            if (!payloadBlog) {
+                return NextResponse.json({ error: "Missing blog data" }, { status: 400 });
+            }
+
+            const resultBlog = await check.createBlog(payloadBlog);
+
+            return NextResponse.json({
+                message: resultBlog
+            }, { status: 200 });
+
         default:
             return NextResponse.json({ error: "Invalid slug" }, { status: 400 });
     }
