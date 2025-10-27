@@ -6,12 +6,15 @@ import { useBlogBySlug } from "@/hooks/blogs/useBlogBySlug";
 import { NoBlogsSkeleton } from "@/app/_components/common/skeleton/blogs/blogs";
 import { BlogDetailSkeleton } from "@/app/_components/common/skeleton/blogs/blog";
 import { Markdown } from "@/app/_components/common/markdown/markdown";
+import LZString from "lz-string";
 
 export function BlogDetail({ slug }: { slug: string }) {
 	const { data, isLoading } = useBlogBySlug(slug);
 
 	if (isLoading) return <BlogDetailSkeleton />;
 	if (!data) return <NoBlogsSkeleton />;
+
+	console.log(data.content);
 
 	return (
 		<motion.section
@@ -43,12 +46,11 @@ export function BlogDetail({ slug }: { slug: string }) {
 
 					<div className="prose max-w-none dark:prose-invert w-full overflow-x-auto">
 						<Markdown
-							content={data.content}
+							content={LZString.decompressFromBase64(data.content)}
 							lang={data.language}
 						/>
 					</div>
 				</div>
-
 			</div>
 		</motion.section>
 	);

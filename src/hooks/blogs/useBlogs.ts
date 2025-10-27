@@ -9,6 +9,7 @@ import type { FormSchemaBlog } from "@/types/form/blogs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import LZString from "lz-string";
 
 export const useBlogs = () => {
     const [showPreview, setShowPreview] = useState(false);
@@ -98,7 +99,12 @@ export const useBlogs = () => {
     const onSubmit = useCallback(async (values: FormSchemaBlog) => {
         // console.log(values);
 
-        const res = await mutate(values);
+        const newValues = { 
+            ...values, 
+            content: LZString.compressToBase64(values.content)
+         };
+
+        const res = await mutate(newValues);
 
         if (!res) {
             console.error("Gagal mengirim data (mungkin 401 Unauthorized)");
