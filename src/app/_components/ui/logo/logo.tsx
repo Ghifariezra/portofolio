@@ -40,7 +40,7 @@ function Logo() {
 				) : (
 					logo ? (
 						<Image
-							src={logo.url}
+							src={logo.url ?? "/logo.webp"}
 							width={500}
 							height={500}
 							alt="logo"
