@@ -5,7 +5,7 @@ import type {
     SocialsResponse,
     ProfileResponse,
     CertificatesResponse
-} from "@/types/response/assets";
+} from "@/types/response/assets"; 
 
 const assetsService = new AssetsService();
 

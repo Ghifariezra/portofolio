@@ -8,7 +8,7 @@ import type { MenuItemType } from "@/types/menu/menu";
 import type {
     ResponsePaload,
     FormSchemaLogin
-} from "@/types/form/login";
+} from "@/types/form/login"; 
 
 export const useAuth = () => {
     const adminService = new AdminService();

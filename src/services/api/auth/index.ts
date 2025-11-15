@@ -2,7 +2,7 @@ import { AxiosError, AxiosInstance } from "axios";
 import csrfInterceptor from "@/services/api/csrf/interceptor";
 import { FormSchemaProject } from "@/types/form/project";
 import { FormSchemaBlog } from "@/types/form/blogs";
-
+ 
 export default class AdminService {
     private instance: AxiosInstance = csrfInterceptor;
     private buildFormData(type: "project" | "blog", data: FormSchemaBlog | FormSchemaProject) {

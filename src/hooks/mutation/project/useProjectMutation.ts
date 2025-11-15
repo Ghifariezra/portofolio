@@ -23,7 +23,7 @@ export const usePostProject = () => {
         isError: mutation.isError,
         error: mutation.error,
         mutate: mutation.mutateAsync
-    };
+    }; 
 };
 
 export const useDeleteProject = () => {

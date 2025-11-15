@@ -10,7 +10,7 @@ export interface BlogsItems {
     slug: string;
     publish_date: string;
     updated_at: string;
-}
+} 
 
 export type BlogsResponse = BlogsItems[];
 export interface BlogsContract {

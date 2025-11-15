@@ -14,7 +14,7 @@ import {
 	NoBlogsSkeleton,
 } from "@/app/_components/common/skeleton/blogs/blogs";
 
-export function CardBlogs() {
+export function CardBlogs() { 
 	const { blogsData } = useHomeContext();
 	const { blogs, isLoadingBlogs, childMotion } = blogsData;
 	

@@ -3,7 +3,7 @@ import csrfInterceptor from "@/services/api/csrf/interceptor";
 import type {
     ProjectBySlugResponse,
     ProjectResponse,
-} from "@/types/response/assets";
+} from "@/types/response/assets"; 
 
 export default class ProjectService {
     private instance: AxiosInstance = csrfInterceptor;

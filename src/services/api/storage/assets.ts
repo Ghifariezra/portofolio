@@ -5,7 +5,7 @@ import type {
     ProfileResponse,
     SkillsResponse,
     SocialsResponse
-} from "@/types/response/assets";
+} from "@/types/response/assets"; 
 
 export default class AssetsService {
     private instance: AxiosInstance = csrfInterceptor;

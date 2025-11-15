@@ -4,7 +4,7 @@ import { randomUUID } from "crypto";
 import type { FormSchemaProjectUpdate } from "@/types/form/project";
 import type { FormSchemaBlogUpdate } from "@/types/form/blogs";
 
-export class PortfolioService {
+export class PortfolioService { 
     private client;
     private bucket = "Portofolio";
     private expiresIn = 60 * 60 * 24 * 365;
