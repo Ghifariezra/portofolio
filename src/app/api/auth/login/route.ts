@@ -1,3 +1,4 @@
+import RateLimiter from "@/utilities/rateLimiter";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { verifyCsrfToken } from "@/utilities/csrf/csrf";
@@ -5,7 +6,20 @@ import { PortfolioService } from "@/services/db";
 import { verify } from "argon2";
 import { generateLoginToken } from "@/utilities/auth/login";
 
+const rateLimiter = new RateLimiter("login_attempt");
+
 export async function POST(req: Request) {
+    const xForwardedFor = req.headers.get('x-forwarded-for');
+    console.log(xForwardedFor);
+
+    const clientIP = xForwardedFor ? xForwardedFor.split(',')[0].trim() : 'unknown';
+
+    try {
+        await rateLimiter.checkConsumption(clientIP);
+    } catch {
+        return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+    }
+
     const csrfToken = (await cookies()).get("csrfToken")?.value || "";
     if (!csrfToken) {
         return NextResponse.json({ error: "Missing CSRF token" }, { status: 403 });
