@@ -1,14 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { 
-    BlogsRequest,
-    BlogBySlugRequest
- } from "@/services/api/blogs";
+import BlogService from "@/services/api/blogs";
 import type { BlogsResponse, BlogsItems } from "@/types/response/blogs";
+
+const blogsApi = new BlogService();
 
 export const useBlogsQuery = () => {
     const query = useQuery({
         queryKey: ["blogs"],
-        queryFn: BlogsRequest,
+        queryFn: blogsApi.getBlogs,
     });
 
     return {
@@ -23,7 +22,7 @@ export const useBlogsQuery = () => {
 export const useBlogBySlugQuery = ({ slug }: { slug: string }) => {
     const query = useQuery({
         queryKey: ["blog-by-slug", slug],
-        queryFn: () => BlogBySlugRequest({ slug }),
+        queryFn: () => blogsApi.getBlogBySlug(slug),
     });
 
     return {

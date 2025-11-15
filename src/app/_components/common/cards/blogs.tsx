@@ -17,7 +17,7 @@ import {
 export function CardBlogs() {
 	const { blogsData } = useHomeContext();
 	const { blogs, isLoadingBlogs, childMotion } = blogsData;
-
+	
 	if (isLoadingBlogs) {
 		return <BlogCardSkeleton />;
 	}

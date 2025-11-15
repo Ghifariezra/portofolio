@@ -1,3 +1,4 @@
+import { AxiosInstance } from "axios";
 import csrfInterceptor from "@/services/api/csrf/interceptor";
 import type {
     CertificatesResponse,
@@ -6,34 +7,38 @@ import type {
     SocialsResponse
 } from "@/types/response/assets";
 
-export const ProfileRequest = async (): Promise<ProfileResponse> => {
-    const res = await csrfInterceptor.get("/api/assets", {
-        params: { folder: "profile" },
-    });
+export default class AssetsService {
+    private instance: AxiosInstance = csrfInterceptor;
 
-    return res.data;
-};
+    async getProfile(): Promise<ProfileResponse> {
+        const res = await this.instance.get("/api/assets", {
+            params: { folder: "profile" },
+        });
 
-export const SkillsRequest = async (): Promise<SkillsResponse> => {
-    const res = await csrfInterceptor.get("/api/assets", {
-        params: { folder: "skills" },
-    });
+        return res.data;
+    }
 
-    return res.data;
-};
+    async getSkills(): Promise<SkillsResponse> {
+        const res = await this.instance.get("/api/assets", {
+            params: { folder: "skills" },
+        });
 
-export const SocialRequest = async (): Promise<SocialsResponse> => {
-    const res = await csrfInterceptor.get("/api/assets", {
-        params: { folder: "social-media" },
-    });
+        return res.data;
+    }
 
-    return res.data;
-};
+    async getSocials(): Promise<SocialsResponse> {
+        const res = await this.instance.get("/api/assets", {
+            params: { folder: "social-media" },
+        });
 
-export const CertificatesRequest = async (): Promise<CertificatesResponse> => {
-    const res = await csrfInterceptor.get("/api/assets", {
-        params: { folder: "certificates" },
-    });
+        return res.data;
+    }
 
-    return res.data;
-};
+    async getCertificates(): Promise<CertificatesResponse> {
+        const res = await this.instance.get("/api/assets", {
+            params: { folder: "certificates" },
+        });
+
+        return res.data;
+    }
+}

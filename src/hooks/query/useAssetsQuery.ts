@@ -1,21 +1,18 @@
-import {
-    ProfileRequest,
-    SkillsRequest,
-    SocialRequest,
-    CertificatesRequest
-} from "@/services/api/storage/assets";
+import AssetsService from "@/services/api/storage/assets";
+import { useQuery } from "@tanstack/react-query";
 import type {
     SkillsResponse,
     SocialsResponse,
     ProfileResponse,
     CertificatesResponse
 } from "@/types/response/assets";
-import { useQuery } from "@tanstack/react-query";
+
+const assetsService = new AssetsService();
 
 export const useProfileQuery = () => {
     const query = useQuery({
         queryKey: ["profile"],
-        queryFn: ProfileRequest,
+        queryFn: async () => await assetsService.getProfile(),
     });
 
     return {
@@ -30,7 +27,7 @@ export const useProfileQuery = () => {
 export const useSkillsQuery = () => {
     const query = useQuery({
         queryKey: ["skills"],
-        queryFn: SkillsRequest,
+        queryFn: async () => await assetsService.getSkills(),
     });
 
     return {
@@ -45,7 +42,7 @@ export const useSkillsQuery = () => {
 export const useSocialQuery = () => {
     const query = useQuery({
         queryKey: ["social-media"],
-        queryFn: SocialRequest,
+        queryFn: async () => await assetsService.getSocials(),
     });
 
     return {
@@ -60,7 +57,7 @@ export const useSocialQuery = () => {
 export const useCertificatesQuery = () => {
     const query = useQuery({
         queryKey: ["certificates"],
-        queryFn: CertificatesRequest,
+        queryFn: async () => await assetsService.getCertificates(),
     });
 
     return {

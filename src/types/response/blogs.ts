@@ -13,3 +13,7 @@ export interface BlogsItems {
 }
 
 export type BlogsResponse = BlogsItems[];
+export interface BlogsContract {
+    getBlogs: () => Promise<BlogsResponse>;
+    getBlogBySlug: (slug: string) => Promise<BlogsItems | null>;
+}

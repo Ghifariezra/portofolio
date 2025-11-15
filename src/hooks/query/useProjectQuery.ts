@@ -1,17 +1,16 @@
-import {
-    ProjectRequest,
-    ProjectBySlugRequest,
-} from "@/services/api/projects";
+import { useQuery } from "@tanstack/react-query";
+import ProjectService from "@/services/api/projects";
 import type {
     ProjectResponse,
     ProjectBySlugResponse,
 } from "@/types/response/assets";
-import { useQuery } from "@tanstack/react-query";
+
+const projectService = new ProjectService();
 
 export const useProjectQuery = () => {
     const query = useQuery({
         queryKey: ["projects"],
-        queryFn: ProjectRequest,
+        queryFn: async () => await projectService.getProjects(),
     });
 
     return {
@@ -26,7 +25,7 @@ export const useProjectQuery = () => {
 export const useProjectBySlugQuery = ({ slug }: { slug: string }) => {
     const query = useQuery({
         queryKey: ["project-by-slug", slug],
-        queryFn: () => ProjectBySlugRequest({ slug }),
+        queryFn: async () => await projectService.getProjectBySlug(slug),
     });
 
     return {

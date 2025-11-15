@@ -2,16 +2,16 @@ import {
     useMutation,
     useQueryClient
 } from "@tanstack/react-query";
-import { 
-    PostRequestBlog
-} from "@/services/api/auth/post";
+import AdminService from "@/services/api/auth";
 import type { FormSchemaBlog } from "@/types/form/blogs";
+
+const adminService = new AdminService();
 
 export const usePostBlog = () => {
     const qC = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: async (data: FormSchemaBlog) => PostRequestBlog(data),
+        mutationFn: async (data: FormSchemaBlog) => adminService.PostBlog(data),
         onSuccess: () => {
             qC.invalidateQueries({ queryKey: ["blogs"] });
             qC.invalidateQueries({ queryKey: ["blog-by-slug"] });

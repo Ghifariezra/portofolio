@@ -2,17 +2,16 @@ import {
     useMutation,
     useQueryClient
 } from "@tanstack/react-query";
-import { 
-    PostRequestProject,
-    DeleteRequestProject
-} from "@/services/api/auth/post";
+import AdminService from "@/services/api/auth";
 import type { FormSchemaProject } from "@/types/form/project";
+
+const adminService = new AdminService();
 
 export const usePostProject = () => {
     const qC = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: async (data: FormSchemaProject) => PostRequestProject(data),
+        mutationFn: async (data: FormSchemaProject) => adminService.PostProject(data),
         onSuccess: () => {
             qC.invalidateQueries({ queryKey: ["projects"] });
             qC.invalidateQueries({ queryKey: ["project-by-slug"] });
@@ -34,7 +33,7 @@ export const useDeleteProject = () => {
         mutationFn: async ({
             id,
             user_id
-        }: { id: string; user_id: string }) => DeleteRequestProject(id, user_id),
+        }: { id: string; user_id: string }) => adminService.DeleteProject(id, user_id),
         onSuccess: () => {
             qC.invalidateQueries({ queryKey: ["projects"] });
             qC.invalidateQueries({ queryKey: ["project-by-slug"] });

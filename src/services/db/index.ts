@@ -88,11 +88,11 @@ export class PortfolioService {
             data.map(async (project) => {
                 const url = await this.getSignedUrl(project.image);
                 const blurDataUrl = await toBase64(url);
-                return { 
-                    ...project, 
-                    image: url, 
+                return {
+                    ...project,
+                    image: url,
                     blurData: blurDataUrl
-                 };
+                };
             })
         );
 

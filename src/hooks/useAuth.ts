@@ -1,16 +1,17 @@
 import { useCallback, useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { LoginRequest, MeRequest, LogoutRequest } from "@/services/api/auth/login";
 import { useDirect } from "@/hooks/useDirect";
 import { schemaFormLogin } from "@/utilities/schema/form/login";
+import AdminService from "@/services/api/auth";
 import type { MenuItemType } from "@/types/menu/menu";
-import type { 
+import type {
     ResponsePaload,
     FormSchemaLogin
- } from "@/types/form/login";
+} from "@/types/form/login";
 
 export const useAuth = () => {
+    const adminService = new AdminService();
     const { goDashboard } = useDirect();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -31,7 +32,7 @@ export const useAuth = () => {
         setLoading(true);
         setError(null);
         try {
-            const res = await LoginRequest(values);
+            const res = await adminService.Login(values);
 
             if (res) {
                 goDashboard();
@@ -47,7 +48,7 @@ export const useAuth = () => {
 
     useEffect(() => {
         const fetchUser = async () => {
-            const data = await MeRequest();
+            const data = await adminService.Me();
             if (data) {
                 setPayload(data);
             }
@@ -56,7 +57,7 @@ export const useAuth = () => {
     }, []);
 
     const logout = useCallback(async () => {
-        await LogoutRequest();
+        await adminService.Logout();
     }, []);
 
     return { formLogin, onSubmit, loading, error, payload, menuItemsAuth, logout };
