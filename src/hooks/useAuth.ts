@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, useMemo } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useDirect } from "@/hooks/useDirect";
@@ -11,7 +11,6 @@ import type {
 } from "@/types/form/login"; 
 
 export const useAuth = () => {
-    const adminService = new AdminService();
     const { goDashboard } = useDirect();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -27,6 +26,8 @@ export const useAuth = () => {
             password: "",
         },
     });
+
+    const adminService = useMemo(() => new AdminService(), []);
 
     const onSubmit = useCallback(async (values: FormSchemaLogin) => {
         setLoading(true);
