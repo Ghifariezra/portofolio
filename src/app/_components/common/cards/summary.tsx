@@ -34,7 +34,7 @@ export function Summary() {
 			<div className="flex flex-col gap-4 glassess border-glassess p-4 rounded-2xl max-h-fit w-full">
 				<h1 className="text-xl">Total Blogs</h1>
 				<p className="text-8xl font-bold text-center">
-					{blogs.length}
+					{blogs ? blogs.length : 0}
 				</p>
 				<Button variant={"outline"} asChild>
 					<Link
