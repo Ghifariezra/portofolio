@@ -92,6 +92,9 @@ importers:
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      rate-limiter-flexible:
+        specifier: ^8.2.1
+        version: 8.2.1
       react:
         specifier: 19.1.0
         version: 19.1.0
@@ -2749,6 +2752,9 @@ packages:
   random-bytes@1.0.0:
     resolution: {integrity: sha512-iv7LhNVO047HzYR3InF6pUcUsPQiHTM1Qal51DcGSuZFBil1aBBWG5eHPNek7bvILMaYJ/8RU1e8w1AMdHmLQQ==}
     engines: {node: '>= 0.8'}
+
+  rate-limiter-flexible@8.2.1:
+    resolution: {integrity: sha512-QreyZSG7jJepD7wbMVG0wvkMx8MZaCKdnpUIffoQ/xavM7PKzpSfzrs6DISVb00LXckV1lQ3NSkc4xL3ZaUVLg==}
 
   react-dom@19.1.0:
     resolution: {integrity: sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==}
@@ -6116,6 +6122,8 @@ snapshots:
   queue-microtask@1.2.3: {}
 
   random-bytes@1.0.0: {}
+
+  rate-limiter-flexible@8.2.1: {}
 
   react-dom@19.1.0(react@19.1.0):
     dependencies:

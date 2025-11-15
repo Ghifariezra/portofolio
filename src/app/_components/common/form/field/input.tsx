@@ -87,12 +87,13 @@ export function FieldInput<T extends FieldValues>({
                                     onChange={(e) => handleFileChange?.(e, field)}
                                     required
                                 />
-                            ) : (
+                            ): (
                                 <Input
                                     type={type}
                                     placeholder={placeholder}
                                     {...field}
                                     required={required}
+                                    autoComplete={type === "password" ? "off" : "on"}
                                 />
                             )
                         }

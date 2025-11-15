@@ -11,50 +11,34 @@ import {
 } from "@/app/_components/ui/form";
 import { Input } from "@/app/_components/ui/input";
 import { useAuth } from "@/hooks/useAuth";
+import { FieldInput } from "./field/input";
 
 export function LoginForm() {
-	const { formLogin, onSubmit, loading, error } = useAuth();
+	const { formLogin, onSubmit, loading } = useAuth();
 
 	return (
 		<Form {...formLogin}>
 			<form
 				onSubmit={formLogin.handleSubmit(onSubmit)}
 				className="space-y-4">
-				<FormField
-					control={formLogin.control}
+				<FieldInput
+					form={formLogin}
 					name="username"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Username</FormLabel>
-							<FormControl>
-								<Input placeholder="Username" {...field} />
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					label="Username"
+					placeholder="Username"
+					required={true}
 				/>
-				<FormField
-					control={formLogin.control}
+				<FieldInput
+					form={formLogin}
 					name="password"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Password</FormLabel>
-							<FormControl>
-								<Input
-									type="password"
-									placeholder="********"
-									{...field}
-									autoComplete="off"
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
+					label="Password"
+					placeholder="********"
+					type="password"
+					required={true}
 				/>
-				{error && <p className="text-red-500 text-sm">{error}</p>}
 				<Button
 					type="submit"
-					className="w-full font-semibold"
+					className="w-full font-semibold cursor-pointer"
 					disabled={loading}>
 					{loading ? "Loading..." : "Login"}
 				</Button>

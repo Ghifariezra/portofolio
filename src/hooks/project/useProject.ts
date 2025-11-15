@@ -11,8 +11,8 @@ import { Projects } from "@/types/response/assets";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schemaFormProject } from "@/utilities/schema/form/project";
-import type { FormSchemaProject } from "@/types/form/project";
 import { toast } from "sonner";
+import type { FormSchemaProject } from "@/types/form/project";
 
 export function useProject() {
     const titleSection = "Projects";
