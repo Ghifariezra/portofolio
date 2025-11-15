@@ -95,7 +95,7 @@ export function CardAbout({
 								profile &&
 								!isProfileLoading && (
 									<Image
-										src={change ? profile.url : logo.url}
+									src={change ? profile.url ?? "/profile.png" : logo.url ?? "/logo.png"}
 										width={500}
 										height={500}
 										style={{
