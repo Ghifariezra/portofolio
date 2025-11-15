@@ -1,38 +1,24 @@
-import { useQuery } from "@tanstack/react-query";
+import AdminService from "@/services/api/auth";
 import ProjectService from "@/services/api/projects";
-import type {
-    ProjectResponse,
-    ProjectBySlugResponse,
-} from "@/types/response/assets";
+import { Query, Mutation } from "@/utilities/tanstack/Query";
+import type { FormSchemaProject, DeleteProject } from "@/types/form/project";
 
-const projectService = new ProjectService();
+export default class ProjectQueries extends ProjectService {
+    private adminService = new AdminService();
 
-export const useProjectQuery = () => {
-    const query = useQuery({
-        queryKey: ["projects"],
-        queryFn: async () => await projectService.getProjects(),
-    });
+    useProjectQuery() {
+        return Query("projects", () => this.getProjects());
+    }
 
-    return {
-        data: query.data as ProjectResponse,
-        isLoading: query.isLoading,
-        isError: query.isError,
-        error: query.error,
-        refetch: query.refetch,
-    };
-};
- 
-export const useProjectBySlugQuery = ({ slug }: { slug: string }) => {
-    const query = useQuery({
-        queryKey: ["project-by-slug", slug],
-        queryFn: async () => await projectService.getProjectBySlug(slug),
-    });
+    useProjectBySlugQuery({ slug }: { slug: string }) {
+        return Query("project-by-slug", () => this.getProjectBySlug(slug), slug);
+    }
 
-    return {
-        data: query.data as ProjectBySlugResponse,
-        isLoading: query.isLoading,
-        isError: query.isError,
-        error: query.error,
-        refetch: query.refetch,
-    };
-};
+    usePostProject() {
+        return Mutation(["projects", "project-by-slug"], (data: FormSchemaProject) => this.adminService.PostProject(data));
+    }
+
+    useDeleteProject() {
+        return Mutation(["projects", "project-by-slug"], ({ id, user_id }: DeleteProject) => this.adminService.DeleteProject(id, user_id));
+    }
+}

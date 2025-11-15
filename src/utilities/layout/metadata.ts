@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { PortfolioService } from "@/services/db";
+import type { Metadata } from "next";
 
 const client = new PortfolioService();
 

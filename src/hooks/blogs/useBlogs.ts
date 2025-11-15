@@ -1,15 +1,12 @@
-import { useState, useCallback, useRef } from "react";
-import {
-    useBlogsQuery
-} from "@/hooks/query/useBlogsQuery";
-import { usePostBlog } from "@/hooks/mutation/blogs/useBlogsMutation";
+import { useState, useCallback, useRef, useMemo } from "react";
+import BlogsQueries from "@/hooks/query/useBlogsQuery";
 import { easeIn, easeOut } from "motion/react";
 import { schemaFormBlog } from "@/utilities/schema/form/blogs";
-import type { FormSchemaBlog } from "@/types/form/blogs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import LZString from "lz-string";
+import type { FormSchemaBlog } from "@/types/form/blogs";
 
 export const useBlogs = () => {
     const [showPreview, setShowPreview] = useState(false);
@@ -29,10 +26,11 @@ export const useBlogs = () => {
         mode: "onChange",
     });
 
+    const blogsQueries = useMemo(() => new BlogsQueries(), []);
     const {
         data: blogs,
         isLoading: isLoadingBlogs,
-    } = useBlogsQuery();
+    } = blogsQueries.useBlogsQuery();
 
     const containerMotion = {
         hidden: { opacity: 0 },
@@ -95,7 +93,7 @@ export const useBlogs = () => {
         }
     }, [setPreviewUrl]);
 
-    const { mutate, isLoading } = usePostBlog();
+    const { mutate, isLoading } = blogsQueries.usePostBlog();
     const onSubmit = useCallback(async (values: FormSchemaBlog) => {
         // console.log(values);
 

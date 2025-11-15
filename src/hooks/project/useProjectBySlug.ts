@@ -1,7 +1,9 @@
-import { useProjectBySlugQuery } from "@/hooks/query/useProjectQuery";
+import ProjectQueries from "@/hooks/query/useProjectQuery";
+import { useMemo } from "react";
 
 export const useProjectBySlug = (slug: string) => {
-    const { data, isLoading, isError } = useProjectBySlugQuery({ slug });
+    const projectQueries = useMemo(() => new ProjectQueries(), []);
+    const { data, isLoading, isError } = projectQueries.useProjectBySlugQuery({ slug });
 
     return {
         data,

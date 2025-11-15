@@ -24,7 +24,7 @@ export function CardBlogs() {
 
 	return (
 		<motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-			{!isLoadingBlogs && blogs.length > 0 ? (
+			{!isLoadingBlogs && blogs && blogs.length > 0 ? (
 				<>
 					{blogs.flatMap((blog, index) => (
 						<motion.div

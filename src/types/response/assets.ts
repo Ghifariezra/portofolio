@@ -42,3 +42,15 @@ export type Projects = ProjectResponse["projects"];
 export type ProjectBySlugResponse = ProjectResponse["projects"][0];
 
 export type csrfToken = string | null;
+
+export interface ProjectContract {
+    getProjects(): Promise<ProjectResponse>;
+    getProjectBySlug(slug: string): Promise<ProjectBySlugResponse>;
+}
+
+export interface AssetsContract {
+    getProfile(): Promise<ProfileResponse>;
+    getSkills(): Promise<SkillsResponse>;
+    getSocials(): Promise<SocialsResponse>;
+    getCertificates(): Promise<CertificatesResponse>;
+}

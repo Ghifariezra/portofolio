@@ -9,3 +9,8 @@ export type FormSchemaProjectUpdate = FormSchemaProject & {
 
 export type Status = "default" | "individual" | "collaboration";
 export type Category = "default" | "data" | "web" | "ui/ux" | "telegram";
+
+export type DeleteProject = {
+    id: string;
+    user_id: string;
+};

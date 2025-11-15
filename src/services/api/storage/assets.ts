@@ -4,10 +4,11 @@ import type {
     CertificatesResponse,
     ProfileResponse,
     SkillsResponse,
-    SocialsResponse
-} from "@/types/response/assets"; 
+    SocialsResponse,
+    AssetsContract
+} from "@/types/response/assets";
 
-export default class AssetsService {
+export default class AssetsService implements AssetsContract {
     private instance: AxiosInstance = csrfInterceptor;
 
     async getProfile(): Promise<ProfileResponse> {

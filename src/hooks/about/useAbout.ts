@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 import { easeInOut } from "motion/react";
-import { useSkillsQuery, useSocialQuery } from "@/hooks/query/useAssetsQuery";
+import AssetsQueries from "@/hooks/query/useAssetsQuery";
 import { toast } from "sonner"
 
 export const useAbout = () => {
@@ -9,9 +9,9 @@ export const useAbout = () => {
 
     const [change, setChange] = useState(false);
     const [loadDownload, setLoadDownload] = useState(false);
-
-    const { data: skillsData, isLoading: isSkillsLoading } = useSkillsQuery();
-    const { data: socialsData, isLoading: isSocialLoading } = useSocialQuery();
+    const assetsQueries = useMemo(() => new AssetsQueries(), []);
+    const { data: skillsData, isLoading: isSkillsLoading } = assetsQueries.useSkillsQuery();
+    const { data: socialsData, isLoading: isSocialLoading } = assetsQueries.useSocialQuery();
 
     const skills = useMemo(() => skillsData?.assets?.skills ?? [], [skillsData]);
     const socials = useMemo(() => socialsData?.assets?.["social-media"] ?? [], [socialsData]);

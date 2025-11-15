@@ -1,35 +1,24 @@
-import { useQuery } from "@tanstack/react-query";
+import AdminService from "@/services/api/auth";
 import BlogService from "@/services/api/blogs";
-import type { BlogsResponse, BlogsItems } from "@/types/response/blogs";
+import { Query, Mutation } from "@/utilities/tanstack/Query";
+import type { FormSchemaBlog, BlogSlug, DeleteBlog } from "@/types/form/blogs";
 
-const blogsApi = new BlogService();
+export default class BlogsQueries extends BlogService {
+    private adminService = new AdminService();
 
-export const useBlogsQuery = () => {
-    const query = useQuery({
-        queryKey: ["blogs"],
-        queryFn: blogsApi.getBlogs,
-    });
-
-    return {
-        data: query.data as BlogsResponse,
-        isLoading: query.isLoading,
-        isError: query.isError,
-        error: query.error,
-        refetch: query.refetch,
+    useBlogsQuery() {
+        return Query("blogs", this.getBlogs);
     };
-};
 
-export const useBlogBySlugQuery = ({ slug }: { slug: string }) => {
-    const query = useQuery({
-        queryKey: ["blog-by-slug", slug],
-        queryFn: () => blogsApi.getBlogBySlug(slug),
-    });
+    useBlogBySlugQuery({ slug }: BlogSlug) {
+        return Query("blog-by-slug", () => this.getBlogBySlug(slug), slug);
+    };
 
-    return {
-        data: query.data as BlogsItems,
-        isLoading: query.isLoading,
-        isError: query.isError,
-        error: query.error,
-        refetch: query.refetch,
-    }
-};
+    usePostBlog() {
+        return Mutation(["blogs", "blog-by-slug"], (data: FormSchemaBlog) => this.adminService.PostBlog(data));
+    };
+
+    useDeleteBlog() {
+        return Mutation(["blogs", "blog-by-slug"], ({ id, user_id }: DeleteBlog) => this.adminService.DeleteProject(id, user_id));
+    };
+}

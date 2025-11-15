@@ -1,5 +1,5 @@
 import csrfInterceptor from "@/services/api/csrf/interceptor";
-import type { BlogsResponse, BlogsItems, BlogsContract } from "@/types/response/blogs"; 
+import type { BlogsResponse, BlogsItems, BlogsContract } from "@/types/response/blogs";
 
 export default class BlogService implements BlogsContract {
     async getBlogs(): Promise<BlogsResponse> {

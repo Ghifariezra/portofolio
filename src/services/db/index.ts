@@ -1,5 +1,5 @@
 import { toBase64 } from "@/utilities/base64/base64";
-import { supabase } from "@/utilities/supabase/client";
+import { supabase } from "@/lib/supabase/client";
 import { randomUUID } from "crypto";
 import type { FormSchemaProjectUpdate } from "@/types/form/project";
 import type { FormSchemaBlogUpdate } from "@/types/form/blogs";

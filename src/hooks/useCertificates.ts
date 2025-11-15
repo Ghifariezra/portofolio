@@ -1,10 +1,12 @@
-import { useState, useCallback, useEffect } from "react";
-import { useCertificatesQuery } from "@/hooks/query/useAssetsQuery";
+import { useState, useCallback, useEffect, useMemo } from "react";
+import AssetsQueries from "@/hooks/query/useAssetsQuery";
 import type { AssetItem } from "@/types/response/assets";
 
 export function useCertificates() {
-    const { data, isLoading, isError } = useCertificatesQuery();
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    const assetsQueries = useMemo(() => new AssetsQueries(), []);
+    const { data, isLoading, isError } = assetsQueries.useCertificatesQuery();
 
     const handleNext = useCallback((certificates: AssetItem[]) => {
         setCurrentIndex((prev) =>

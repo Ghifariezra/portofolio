@@ -1,10 +1,11 @@
 import { useMemo } from "react";
 import { easeIn, easeOut } from "motion/react";
-import { useProfileQuery } from "@/hooks/query/useAssetsQuery";
+import AssetsQueries from "@/hooks/query/useAssetsQuery";
 
 export function useLogo() {
     const logoName = "Ghifari Ezra Ramadhan";
-    const { data, isLoading: isProfileLoading } = useProfileQuery();
+    const assetsQueries = useMemo(() => new AssetsQueries(), []);
+    const { data, isLoading: isProfileLoading } = assetsQueries.useProfileQuery();
 
     const logo = useMemo(()=> {
         return {

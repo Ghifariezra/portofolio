@@ -5,11 +5,7 @@ import {
     useCallback,
     useRef
 } from "react";
-import { useProjectQuery } from "@/hooks/query/useProjectQuery";
-import { 
-    usePostProject,
-    useDeleteProject
- } from "@/hooks/mutation/project/useProjectMutation";
+import ProjectQueries from "@/hooks/query/useProjectQuery";
 import { easeIn, easeOut } from "motion/react";
 import { Projects } from "@/types/response/assets";
 import { useForm, useFieldArray } from "react-hook-form";
@@ -36,7 +32,8 @@ export function useProject() {
     const dropDownStatusRef = useRef<HTMLDivElement>(null);
     const dropDownCategoryRef = useRef<HTMLDivElement>(null);
 
-    const { data, isLoading: isProjectLoading } = useProjectQuery();
+    const projectQueries = useMemo(() => new ProjectQueries(), []);
+    const { data, isLoading: isProjectLoading } = projectQueries.useProjectQuery();
 
     const projects: Projects = useMemo(() => {
         if (!data) return [];
@@ -175,7 +172,7 @@ export function useProject() {
         name: "partner_social_media",
     });
 
-    const { mutate, isLoading} = usePostProject();
+    const { mutate, isLoading } = projectQueries.usePostProject();
 
     // 2. Define a submit handler.
     const onSubmit = useCallback(async (values: FormSchemaProject) => {
@@ -195,7 +192,7 @@ export function useProject() {
         }
     }, [form, handleReset, mutate, isLoading]);
 
-    const { mutate: mutateDelete, isLoading: isLoadingDelete } = useDeleteProject();
+    const { mutate: mutateDelete, isLoading: isLoadingDelete } = projectQueries.useDeleteProject();
     const handleDelete = useCallback(async (id: string, user_id: string) => {
         const deleteData = {
             id,
