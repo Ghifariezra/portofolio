@@ -45,7 +45,7 @@ export const useAuth = () => {
                 setLoading(false);
             }, 1000);
         }
-    }, [goDashboard]);
+    }, [goDashboard, adminService]);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -55,11 +55,11 @@ export const useAuth = () => {
             }
         };
         fetchUser();
-    }, []);
+    }, [adminService]);
 
     const logout = useCallback(async () => {
         await adminService.Logout();
-    }, []);
+    }, [adminService]);
 
     return { formLogin, onSubmit, loading, error, payload, menuItemsAuth, logout };
 };
