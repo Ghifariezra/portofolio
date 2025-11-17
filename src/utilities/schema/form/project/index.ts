@@ -27,7 +27,7 @@ const schemaFormProject = z.object({
         }),
     demo: z.string().optional(),
     status: z.enum(["individual", "collaboration", "default"]),
-    category: z.enum(["web", "data", "ui/ux", "telegram", "default"]),
+    category: z.enum(["web", "data", "ui/ux", "telegram", "default", "gui"]),
 });
 
 export { schemaFormProject };

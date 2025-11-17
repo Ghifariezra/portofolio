@@ -30,7 +30,7 @@ export default function ListProjects() {
 					? "default"
 					: (project.status as Status),
 			category: (
-				["default", "data", "web", "ui/ux", "telegram"] as const
+				["default", "data", "web", "ui/ux", "telegram", "gui"] as const
 			).includes(project.category as Category)
 				? (project.category as Category)
 				: "default",

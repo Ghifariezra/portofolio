@@ -265,6 +265,9 @@ export function ProjectForm() {
 											<SelectItem value="telegram">
 												Telegram
 											</SelectItem>
+											<SelectItem value="gui">
+												GUI
+											</SelectItem>
 										</SelectContent>
 									</Select>
 								</FormControl>

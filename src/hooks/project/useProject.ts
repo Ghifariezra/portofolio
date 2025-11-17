@@ -26,7 +26,7 @@ export function useProject() {
     const [openCategory, setOpenCategory] = useState(false);
     const dropDownData = useCallback((check: string): string[] => {
         if (check === "status") return ["Default", "Individual", "Collaboration"];
-        if (check === "category") return ["Default", "Web", "Data", "Telegram"];
+        if (check === "category") return ["Default", "Web", "Data", "Telegram", "GUI"];
         return [];
     }, []);
     const dropDownStatusRef = useRef<HTMLDivElement>(null);
