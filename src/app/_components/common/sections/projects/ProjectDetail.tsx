@@ -33,7 +33,6 @@ export function ProjectDetail({ slug }: { slug: string }) {
 						alt={project.title}
 						fill
 						priority
-						quality={100}
 						placeholder="blur"
 						blurDataURL={project.blurData}
 						className="object-cover"
@@ -48,6 +47,22 @@ export function ProjectDetail({ slug }: { slug: string }) {
 						{project.title}
 					</h1>
 					<p>{project.description}</p>
+
+					{/* Video Display */}
+					{project.video_url && (
+						<div className="flex flex-col gap-4 p-6 border-glassess rounded-2xl">
+							<h2 className="text-lg sm:text-2xl font-semibold">Video Preview</h2>
+							<iframe
+								className="aspect-video w-full rounded-md overflow-hidden border-glassess"
+								src={project.video_url}
+								title="YouTube video player"
+								frameBorder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+								referrerPolicy="strict-origin-when-cross-origin"
+								allowFullScreen>
+							</iframe>
+						</div>
+					)}
 				</div>
 			</div>
 		</motion.section>

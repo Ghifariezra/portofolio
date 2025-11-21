@@ -11,7 +11,7 @@ export const metadata = async () => metaHome();
 
 export default function RootLayout({ children }: Readonly<ChildrenProps>) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
 			<body
 				className={`${libertinusSerif.variable} antialiased font-headline tracking-tight`}>
 				<QueryProvider>

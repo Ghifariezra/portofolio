@@ -38,7 +38,9 @@ export function useProject() {
     const projects: Projects = useMemo(() => {
         if (!data) return [];
 
-        let filtered = data.projects;
+        let filtered = data.projects.sort((a, b) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
 
         if (defaultStatus.toLowerCase() !== "default") {
             filtered = filtered.filter(
@@ -153,6 +155,7 @@ export function useProject() {
             partner_team: [],
             partner_social_media: [],
             demo: "",
+            video_url: "",
             status: "default",
             category: "default",
         },

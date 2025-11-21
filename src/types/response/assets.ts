@@ -17,6 +17,7 @@ type ProjectItem = {
     imageUrl: string;
     blurData: string;
     demo: string;
+    video_url: string;
     status: "individual" | "collaboration" | "default";
     created_at: string;
     updated_at: string;

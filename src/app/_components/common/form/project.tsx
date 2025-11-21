@@ -285,6 +285,14 @@ export function ProjectForm() {
 					placeholder="https://example.com"
 					required={true}
 				/>
+
+				{/* Video Demo */}
+				<FieldInput
+					form={form}
+					name="video_url"
+					label="Video Demo"
+					placeholder="https://example.com"
+				/>
 				
 				<div className="flex gap-4 justify-end mt-8">
 					<div className="relative max-w-3xs w-full">

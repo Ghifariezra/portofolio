@@ -25,7 +25,8 @@ const schemaFormProject = z.object({
         .refine((file) => file.size <= MAX_FILE_SIZE, {
             message: "Image size should be less than 5 MB.",
         }),
-    demo: z.string().optional(),
+    demo: z.string().url().optional(),
+    video_url: z.string().optional(),
     status: z.enum(["individual", "collaboration", "default"]),
     category: z.enum(["web", "data", "ui/ux", "telegram", "default", "gui"]),
 });

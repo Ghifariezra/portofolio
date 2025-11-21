@@ -31,7 +31,6 @@ export function BlogDetail({ slug }: { slug: string }) {
 						alt={data.title}
 						fill
 						priority
-						quality={100}
 						placeholder="blur"
 						blurDataURL={data.blurData}
 						className="object-cover"

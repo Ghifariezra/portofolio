@@ -42,7 +42,6 @@ export function CardProjects() {
 								<Image
 									src={project.image}
 									alt={project.title}
-									sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
 									fill
 									placeholder="blur"
 									blurDataURL={project.blurData}
