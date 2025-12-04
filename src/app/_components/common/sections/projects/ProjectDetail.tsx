@@ -50,7 +50,7 @@ export function ProjectDetail({ slug }: { slug: string }) {
 
 					{/* Video Display */}
 					{project.video_url && (
-						<div className="flex flex-col gap-4 p-6 border-glassess rounded-2xl">
+						<div className="flex flex-col gap-4 rounded-2xl">
 							<h2 className="text-lg sm:text-2xl font-semibold">Video Preview</h2>
 							<iframe
 								className="aspect-video w-full rounded-md overflow-hidden border-glassess"
