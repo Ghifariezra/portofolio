@@ -179,7 +179,7 @@ export function useProject() {
 
     // 2. Define a submit handler.
     const onSubmit = useCallback(async (values: FormSchemaProject) => {
-        // console.log(values);
+        console.log(values);
 
         const res = await mutate(values);
 

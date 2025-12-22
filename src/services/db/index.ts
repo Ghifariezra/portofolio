@@ -146,6 +146,7 @@ export class PortfolioService {
             partner_team: data.partner_team,
             partner_social_media: data.partner_social_media,
             image: imagePath,
+            video_url: data.video_url
         };
 
         const { error } = await this.client.from("projects").insert(payload);

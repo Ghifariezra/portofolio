@@ -76,7 +76,8 @@ export async function POST(req: Request, { params }: SlugProps) {
                 category: rawData.category as Category,
                 partner_team: rawData.partner_team ? JSON.parse(rawData.partner_team as string) : [],
                 partner_social_media: rawData.partner_social_media ? JSON.parse(rawData.partner_social_media as string) : [],
-                image: img
+                image: img,
+                video_url: rawData.video_url as string
             };
 
             if (!dataProject) {
