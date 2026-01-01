@@ -111,7 +111,7 @@ export function CardAbout({
 							</motion.h1>
 							<motion.h2
 								className="text-lg font-semibold">
-								Fullstack Developer
+								Software Developer
 							</motion.h2>
 						</motion.div>
 						<DownloadCv className="sm:hidden flex pb-4" />
