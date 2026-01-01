@@ -44,7 +44,10 @@ export function CardAbout({
 						</motion.h1>
 						<motion.p
 							className="text-sm sm:text-base text-justify">
-							Aspiring Software Engineer currently studying Informatics at Universitas Pancasila. Leveraging previous work experience in data and creative sectors, I combine analytical thinking with a detail-oriented approach. I am now dedicated to deepening my core programming knowledge and ready to tackle development challenges with a strong growth mindset.
+							Informatics student at Universitas Pancasila aspiring to build a career as a Software Developer. 
+							I bring previous professional experience that has cultivated discipline and an analytical mindset. 
+							Currently focused on strengthening my command of programming fundamentals and software engineering principles, 
+							eager to learn and apply academic concepts to real-world development challenges.
 						</motion.p>
 					</motion.div>
 				)}
